@@ -14,4 +14,4 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 ![ClassDiagram](https://github.com/user-attachments/assets/cb3fd6c8-1ac7-4b96-801a-cb6541f0c964)
 
   Diagrama de Estado
-![image](https://github.com/user-attachments/assets/89f96717-59d6-45aa-b0db-cf2e4585b4a3)
+![stateDiagram](https://github.com/user-attachments/assets/1a55980d-6f38-427b-ad28-b8f0d0afc466)
