@@ -20,34 +20,33 @@ c1 --> Haciendo_Login : [Usuario Existe]
 state Navegando_en_App {
     [*] -down-> Decidiendo_Accion
     
-    state GestionarPublicaciones {
+    state GestionandoPublicaciones {
         state c3 <<choice>>
         [*] --> c3
         c3 --> SubiendoPublicacion : [Moderador Aprobó]
         c3 --> PublicacionRechazada : [Moderador Desaprobó]
     }
     
-    state GestionarEventos {
+    state GestionandoEventos {
         state c4 <<choice>>
         [*] --> c4
-        c4 -down-> CrearEvento : [Puede crear]
-        c4 -down-> SuscribirseEvento : [No Puede crear]
+        c4 -down-> CreandoEvento : [Puede crear]
+        c4 -down-> Suscribiendo_A_Evento : [No Puede crear]
     }
     
 
-    Decidiendo_Accion -down-> GestionarPublicaciones
-    Decidiendo_Accion -down-> VerNotificaciones
-    Decidiendo_Accion -down-> VerPublicaciones
-    Decidiendo_Accion -down-> VerCalendario
-    Decidiendo_Accion -down-> GestionarEventos
+    Decidiendo_Accion -down-> GestionandoPublicaciones
+    Decidiendo_Accion -down-> RevisandoNotificaciones
+    Decidiendo_Accion -down-> RevisandoPublicaciones
+    Decidiendo_Accion -down-> RevisandoCalendario
+    Decidiendo_Accion -down-> GestionandoEventos
     Decidiendo_Accion -down-> CerrarSesion
     
-    GestionarEventos -up-> Decidiendo_Accion
-    GestionarPublicaciones -up-> Decidiendo_Accion
-    VerNotificaciones -up-> Decidiendo_Accion
-    VerPublicaciones -up-> Decidiendo_Accion
-    VerCalendario -up-> Decidiendo_Accion
-
+    GestionandoEventos -up-> Decidiendo_Accion
+    GestionandoPublicaciones -up-> Decidiendo_Accion
+    RevisandoNotificaciones -up-> Decidiendo_Accion
+    RevisandoPublicaciones -up-> Decidiendo_Accion
+    RevisandoCalendario -up-> Decidiendo_Accion
 }
 
 CerrarSesion --> [*]
