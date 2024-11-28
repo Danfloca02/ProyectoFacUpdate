@@ -1,6 +1,5 @@
-title DiagrmaDeEstados_FacUpdate
+@startuml DiagrmaDeEstados_FacUpdate
 
-@startuml
 [*] --> IniciandoSesion
 
 state c1 <<choice>>
