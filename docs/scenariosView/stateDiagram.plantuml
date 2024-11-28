@@ -1,0 +1,56 @@
+title DiagrmaDeEstados_FacUpdate
+
+@startuml
+title DiagrmaDeEstados_FacUpdate
+
+[*] --> IniciandoSesion
+
+state c1 <<choice>>
+IniciandoSesion --> c1
+
+c1 --> Haciendo_SignUp : [Usuario No Existe]
+state c2 <<choice>>
+Haciendo_SignUp --> c2
+c2 --> Haciendo_Login : [Pertenece a la Facultad]
+Haciendo_Login --> Navegando_en_App
+c2 --> [*] : [No pertenece a la Facultad]
+
+c1 --> Haciendo_Login : [Usuario Existe]
+
+state Navegando_en_App {
+    [*] -down-> Decidiendo_Accion
+    
+    state GestionarPublicaciones {
+        state c3 <<choice>>
+        [*] --> c3
+        c3 --> SubiendoPublicacion : [Moderador Aprobó]
+        c3 --> PublicacionRechazada : [Moderador Desaprobó]
+    }
+    
+    state GestionarEventos {
+        state c4 <<choice>>
+        [*] --> c4
+        c4 -down-> CrearEvento : [Puede crear]
+        c4 -down-> SuscribirseEvento : [No Puede crear]
+    }
+    
+
+    Decidiendo_Accion -down-> GestionarPublicaciones
+    Decidiendo_Accion -down-> VerNotificaciones
+    Decidiendo_Accion -down-> VerPublicaciones
+    Decidiendo_Accion -down-> VerCalendario
+    Decidiendo_Accion -down-> GestionarEventos
+    Decidiendo_Accion -down-> CerrarSesion
+    
+    GestionarEventos -up-> Decidiendo_Accion
+    GestionarPublicaciones -up-> Decidiendo_Accion
+    VerNotificaciones -up-> Decidiendo_Accion
+    VerPublicaciones -up-> Decidiendo_Accion
+    VerCalendario -up-> Decidiendo_Accion
+
+}
+
+CerrarSesion --> [*]
+Navegando_en_App --> [*] : CerrarSesion
+
+@enduml

@@ -1,0 +1,119 @@
+title ModeloDeDominio_UML_Clases
+
+@startuml DomainModel
+
+abstract class Usuario {
+  -ID: String
+  -Nombre: String
+  -EmailInstitucional: String
+  -Foto: Image
+  -Estado: Boolean
+
+  
+}
+
+class Moderador {
+  -nivelPermisos: int
+  -areaModeracion: String
+
+  
+}
+
+class Estudiante {
+}
+
+class Profesor {
+  
+}
+
+class PersonalApoyo {
+  
+}
+
+class Facultad {
+  -ID: String
+  -Nombre: String
+  -Descripcion: String
+  -Ubicacion: String
+}
+
+class Carrera {
+  -ID: String
+  -Nombre: String
+  -Descripcion: String
+  -Coordinador: String
+}
+
+class Evento {
+  -ID: String
+  -Titulo: String
+  -Descripcion: String
+  -FechaHora: DateTime
+  -Tipo: String
+  -Estado: String
+}
+
+class Notificacion {
+  -ID: String
+  -Contenido: String
+  -Fecha: DateTime
+  -Tipo: String
+  -Estado: String
+}
+
+class Espacio {
+  -ID: String
+  -Nombre: String
+  -Tipo: String
+  -Capacidad: int
+  -Disponibilidad: Boolean
+}
+
+class Publicacion {
+  -ID: String
+  -Titulo: String
+  -Contenido: String
+  -Fecha: DateTime
+  -Estado: String
+  -Tipo: String
+}
+
+class Comentario {
+  -ID: String
+  -Contenido: String
+  -Fecha: DateTime
+  -Estado: String
+}
+
+class Calendario {
+  
+}
+
+' Relaciones
+Moderador -up-|> Usuario
+Profesor -up-|> Usuario
+Estudiante -right-|> Usuario
+PersonalApoyo -up-|> Usuario
+
+Usuario "1" -up- "0...*" Publicacion: crea >
+Usuario "1" -up- "0...*" Evento: participa >
+Usuario "1" -up- "0...*" Notificacion: recibe >
+Usuario "1" -up- "1" Calendario: revisa >
+
+Estudiante "*" -up- "1...2" Carrera: cursa >
+
+Facultad "1" *-down- "n" Carrera
+Facultad "1" *-down- "*" Usuario
+Facultad "1" *-up- "*" Espacio
+
+Evento "0...*" -left- "1...*" Usuario: creado por >
+Evento "*" -left- "1" Espacio: se realiza en >
+Evento "1" -- "1...*" Publicacion: genera >
+Evento "*" -down-o "1" Calendario
+
+Publicacion "1" -- "0...*" Comentario: tiene >
+Publicacion "1" -- "0...*" Notificacion: genera >
+
+Comentario "0...*" -down- "1" Usuario: crea <
+
+@enduml
