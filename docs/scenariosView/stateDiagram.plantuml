@@ -1,11 +1,11 @@
 @startuml DiagrmaDeEstados_FacUpdate
 
-[*] --> IniciandoSesion
+[*] --> Iniciando_Sesion
 
 state c1 <<choice>>
-IniciandoSesion --> c1
+Iniciando_Sesion --> c1
 
-c1 --> Haciendo_SignUp : [Usuario No Existe]
+c1 --> Haciendo_SignUp : [Usuario no existe]
 state c2 <<choice>>
 Haciendo_SignUp --> c2
 c2 --> Haciendo_Login : [Pertenece a la Facultad]
@@ -17,36 +17,36 @@ c1 --> Haciendo_Login : [Usuario Existe]
 state Navegando_en_App {
     [*] -down-> Decidiendo_Accion
     
-    state GestionandoPublicaciones {
+    state Gestionando_Publicaciones {
         state c3 <<choice>>
         [*] --> c3
-        c3 --> SubiendoPublicacion : [Moderador Aprobó]
-        c3 --> PublicacionRechazada : [Moderador Desaprobó]
+        c3 --> Subiendo_Publicacion : [Moderador Aprobó]
+        c3 --> Rechazando_Publicacion : [Moderador Desaprobó]
     }
     
-    state GestionandoEventos {
+    state Gestionando_Eventos {
         state c4 <<choice>>
         [*] --> c4
-        c4 -down-> CreandoEvento : [Puede crear]
+        c4 -down-> Creando_Evento : [Puede crear]
         c4 -down-> Suscribiendo_A_Evento : [No Puede crear]
     }
     
 
-    Decidiendo_Accion -down-> GestionandoPublicaciones
-    Decidiendo_Accion -down-> RevisandoNotificaciones
-    Decidiendo_Accion -down-> RevisandoPublicaciones
-    Decidiendo_Accion -down-> RevisandoCalendario
-    Decidiendo_Accion -down-> GestionandoEventos
-    Decidiendo_Accion -down-> CerrarSesion
+    Decidiendo_Accion --> Gestionando_Publicaciones
+    Decidiendo_Accion --> Revisando_Notificaciones
+    Decidiendo_Accion --> Revisando_Publicaciones
+    Decidiendo_Accion --> Revisando_Calendario
+    Decidiendo_Accion --> Gestionando_Eventos
+    Decidiendo_Accion --> Cerrando_Sesion: Cerrar Sesión
     
-    GestionandoEventos -up-> Decidiendo_Accion
-    GestionandoPublicaciones -up-> Decidiendo_Accion
-    RevisandoNotificaciones -up-> Decidiendo_Accion
-    RevisandoPublicaciones -up-> Decidiendo_Accion
-    RevisandoCalendario -up-> Decidiendo_Accion
+    Gestionando_Eventos -up-> Decidiendo_Accion
+    Gestionando_Publicaciones -up-> Decidiendo_Accion
+    Revisando_Notificaciones -up-> Decidiendo_Accion
+    Revisando_Publicaciones -up-> Decidiendo_Accion
+    Revisando_Calendario -up-> Decidiendo_Accion
 }
 
-CerrarSesion --> [*]
-Navegando_en_App --> [*] : CerrarSesion
+Cerrando_Sesion --> [*]
+Navegando_en_App --> [*] : Cerrar Sesión
 
 @enduml
