@@ -1,0 +1,29 @@
+
+@startuml diagrama_casos_uso
+
+' skinparam actorStyle awesome
+
+left to right direction
+
+:Usuario: as usuario
+
+
+
+package Sesion {
+    
+    usecase "UC2: Iniciar Sesión" as UC2
+    usecase "UC1: Registrarse" as UC1
+    usecase "UC10: Cerrar sesión" as UC10
+}
+
+
+usuario --> UC2
+
+usuario --> UC10
+
+
+
+UC2 .> UC1 : include
+
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml diagrama_casos_uso
+
+' skinparam actorStyle awesome
+left to right direction
+
+:Usuario: as usuario
+
+
+
+package Publicaciones {
+    
+    usecase "UC3: Hacer publicación" as UC3
+    usecase "UC4: Reaccionar a publicación" as UC4
+    
+    usecase "UC9: Eliminar comentario" as UC9
+    usecase "UC8: Eliminar publicación" as UC8
+    
+    
+}
+
+
+
+usuario --> UC8
+usuario --> UC9
+usuario --> UC3
+
+
+
+
+UC3 .> UC4 : extend
+
+@enduml
