@@ -21,4 +21,13 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 
 ###Diagrma de Casos de Uso
 
+![ucEventos](docs/scenariosView/uCasesDiagram/ucEventos.png)
+
+![ucPublicacion](docs/scenariosView/uCasesDiagram/ucPublicaciones.png)
+
+![ucSesion](docs/scenariosView/uCasesDiagram/ucSesion.png)
+
 ###VisionBoard
+
+[FacUpdate - VisionBoard](../../Users/danfl/Downloads/Team2_VisionBoard.pptx)
+
