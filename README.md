@@ -14,13 +14,12 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 ##MODELO DEL DOMINIO**
   
 ###Diagrama de Clases
-![ClassDiagram](https://github.com/user-attachments/assets/cb3fd6c8-1ac7-4b96-801a-cb6541f0c964)
+![DomainModel_ClassDiagram](https://github.com/user-attachments/assets/41d585af-ba22-479f-b57e-7262d0f98af7)
 
-###Diagrama de Estado
-![stateDiagram](https://github.com/user-attachments/assets/fb7b83cb-ff18-415c-8f97-052d4cccb179)
+###Diagrama de Estado!
+[dmStateDiagram](https://github.com/user-attachments/assets/d2c11982-3be7-417f-b64c-6cee1084bb29)
 
 ###Diagrma de Casos de Uso
-
 ![ucEventos](docs/scenariosView/uCasesDiagram/ucEventos.png)
 
 ![ucPublicacion](docs/scenariosView/uCasesDiagram/ucPublicaciones.png)
