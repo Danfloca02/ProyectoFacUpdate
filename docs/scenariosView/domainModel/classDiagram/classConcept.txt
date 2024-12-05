@@ -1,0 +1,75 @@
+Campus
+    
+    Relaciones:
+        Esta compuesta de PersonalApoyo
+        Esta compuesta de Facultad
+
+Facultad
+    
+    Relaciones:
+        Tiene Integrante
+        Esta compuesta de "1..*" Carrera
+
+PersonalApoyo
+    
+    Relaciones:
+        Compone Campus
+        Hereda a: Técnico, Personal_Administrativo, Obrero
+
+Integrante
+    
+    Relaciones:
+        Compone Facultad
+        Hereda a: Estudiante, Profesor
+        Participa en 0...* Eventos
+        Revisa 1 Calendario
+
+Evento
+    
+    Relaciones:
+        Hereda a: Taller, Seminario, studygroup
+        Esta compuesta de 1...* Integrante
+        Es organizado por 1...* Integrantes
+        Se publica en Calendario
+
+Club
+    
+    Relaciones:
+        Hereda a: Deportivo, Cultural, Esparcimiento
+        Agrega 1..* Temas de Interés
+
+Trabajo
+    
+    Relaciones:
+        Hereda a: Investigación, Proyecto, Experiencia
+        Es publicado por 1..* Profesores
+
+Estudiante
+    
+    Relaciones:
+        Tiene 1..* Temas de Interés
+        Participa en 0..* Eventos Institucionales
+        Participa en 0..* Clubs
+        Cursa 1...2 Carreras
+
+Personal_Administrativo
+    
+    Relaciones:
+        Organiza 0..* Eventos Institucionales
+
+Profesor
+
+    Relaciones:
+        Publica 0..* Trabajos
+
+Carrera
+    
+    Relaciones:
+        Es compuesta por Facultad
+        Es cursada por * Estudiantes
+
+Calendario
+    
+    Relaciones:
+        Es revisado por Integrante
+        Contiene publicaciones de 0..* Eventos

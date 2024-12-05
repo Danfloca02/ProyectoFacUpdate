@@ -1,0 +1,54 @@
+@startuml DomainModel_ClassDiagram
+
+abstract class Campus
+
+Campus *-down- PersonalApoyo
+Campus *-down- Facultad
+
+Facultad o-- Integrante : < pertenece
+Facultad *-- Carrera
+
+class "Personal Administrativo" as Personal_Administrativo
+
+PersonalApoyo <|-- Tecnico
+PersonalApoyo <|-- Personal_Administrativo
+PersonalApoyo <|-- Obrero
+
+Integrante <|-- Estudiante
+Integrante <|-- Profesor
+
+
+Evento <|-- Taller
+Evento <|-- Seminario
+Evento <|-- studygroup
+Evento *-- Integrante
+
+Club <|-- Deportivo
+Club <|-- Cultural
+Club <|-- Esparcimiento
+
+Trabajo <|-- Investigacion
+Trabajo <|-- Proyecto
+Trabajo <|-- Experiencia
+
+class "Tema de Interés" as Interes
+class "Evento Institucional" as Institucional
+
+Estudiante -right- "1..*" Interes : tiene >
+Estudiante "0..*" --> "0..*" Institucional : participa >
+Club o-- "1..*" Interes
+
+Integrante -- "0...*" Evento: participa >
+Estudiante "0..*" -- "0...*" Club: participa >
+Integrante -- "1" Calendario: revisa >
+
+Personal_Administrativo "1..*" -- "0..*" Institucional : organiza >
+
+Profesor "1..*" -- "0..*" Trabajo : Publica >
+
+Estudiante "*" -up- "1...2" Carrera : cursa >
+
+Evento "0..*" -- "1...*" Integrante : organizado por >
+Evento "0..*"--o Calendario : se publica en >
+
+@enduml

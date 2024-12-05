@@ -1,0 +1,69 @@
+@startuml DomainModel_stateDiagram
+
+' Estados iniciales posibles
+[*] --> IniciandoActividad
+
+state c1 <<choice>> : Tipo de\nUsuario?
+IniciandoActividad --> c1
+
+c1 -down-> PersonalAdmin_Inicia : [Personal\nAdministrativo]
+c1 -down-> Estudiante_Inicia : [Estudiante]
+c1 -down-> Profesor_Inicia : [Profesor]
+
+' Flujo Personal Administrativo
+state PersonalAdmin_Inicia {
+    [*] --> OrganizandoEventoInstitucional
+    OrganizandoEventoInstitucional --> SolicitandoApoyoEstudiantil
+}
+
+' Flujo Estudiante
+state Estudiante_Inicia {
+    state c3 <<choice>> : Idear/Participar
+    state c2 <<choice>> : Tipo de\nActividad?
+    state c5 <<choice>> : Tipo de\nActividad?
+    state c6 <<choice>> : [Hay/No Hay evento]
+    state c7 <<choice>> : [Hay/No Hay Club]
+
+    [*] --> c3
+    
+    c3 -down-> c2 : [Idear]
+    c2 -down-> IdeandoClub : [Club]
+    c2 -down-> IdeandoEvento : [Evento]
+
+    c3 -down-> c5 : [Participar]
+    c5 -down-> c6 : [Evento]
+    c6 -down-> ParticipandoEvento : [Hay evento disponible]
+    c6 -down-> IdeandoEvento : [No hay]
+
+    c5 -down-> c7 : [Club]
+    c7 -down-> ParticipandoClub : [Hay Club disponible]
+    c7 -down-> IdeandoClub : [No hay]
+
+    IdeandoEvento --> ValidandoEvento
+    IdeandoClub --> CreandoClub
+    CreandoClub --> PublicandoClub
+    ParticipandoClub --> [*]
+    ParticipandoEvento --> [*]
+    PublicandoClub --> [*]
+}
+
+' Flujo Profesor
+state Profesor_Inicia {
+    state c4 <<choice>> : Tipo de\nActividad?
+    [*] --> c4
+    c4 -down-> IdeandoEventoProf : [Evento]
+    c4 -down-> IdeandoTrabajo : [Trabajo]
+    
+    IdeandoEventoProf --> ValidandoEventoProf
+    IdeandoTrabajo --> PublicandoTrabajo
+}
+
+' Estados finales comunes
+ValidandoEvento --> PublicandoEvento
+SolicitandoApoyoEstudiantil --> PublicandoEvento
+ValidandoEventoProf --> PublicandoEvento
+PublicandoEvento --> ActualizandoCalendario
+PublicandoTrabajo --> [*]
+ActualizandoCalendario --> [*]
+
+@enduml
