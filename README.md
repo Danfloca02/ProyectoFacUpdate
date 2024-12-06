@@ -11,13 +11,15 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 | 30821017  | Sabrina         | Herrera Martínez |
 | 31080238  | Carlos Alejandro| Miranda Brito    |
 
-##MODELO DEL DOMINIO**
+##MODELO DEL DOMINIO
   
 ###Diagrama de Clases
 ![DomainModel_ClassDiagram](https://github.com/user-attachments/assets/41d585af-ba22-479f-b57e-7262d0f98af7)
 
 ###Diagrama de Estado!
 [dmStateDiagram](https://github.com/user-attachments/assets/d2c11982-3be7-417f-b64c-6cee1084bb29)
+
+##MODELO DE CASOS DE USO
 
 ###Diagrma de Casos de Uso
 ![ucEventos](docs/scenariosView/uCasesDiagram/ucEventos.png)
@@ -26,7 +28,20 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 
 ![ucSesion](docs/scenariosView/uCasesDiagram/ucSesion.png)
 
-###VisionBoard
+###Diagrama de Estados
+![ucStateDiagram](https://github.com/user-attachments/assets/6eadb588-e0ff-4ef4-b9c7-dbfd434835b5)
 
+###VisionBoard
 [FacUpdate - VisionBoard](../../Users/danfl/Downloads/Team2_VisionBoard.pptx)
 
+###ESQUEMA DE PANTALLAS
+
+[URL FIGMA: https://www.figma.com/design/TRyo6UMPosKdJIfEJnekTG/Esquema-de-Pantallas-FacUpdate?node-id=0-1&t=pNRDqKXMZxMyGxf3-1]
+
+![Sign up](https://github.com/user-attachments/assets/630c458d-24d3-4171-8d69-7b70e511d4e1)
+![Sign up (1)](https://github.com/user-attachments/assets/a33696eb-96db-4cc2-873a-a43d40b0f85b)
+![Log in](https://github.com/user-attachments/assets/7a1fe441-e690-4e88-af26-1161ff9151fd)
+![Log in (with data)](https://github.com/user-attachments/assets/992df78d-6d7d-4649-a871-5d84516ef59f)
+![Log in (with data 2)](https://github.com/user-attachments/assets/aea01649-3f33-4bfd-a13f-418a99fd949f)
+![Inicio](https://github.com/user-attachments/assets/1beebb1a-8a72-46ff-9092-29c056dc2c1c)
+![Calendario](https://github.com/user-attachments/assets/b9b50285-8dd4-4ba9-85c2-d70a3d0f0aff)
