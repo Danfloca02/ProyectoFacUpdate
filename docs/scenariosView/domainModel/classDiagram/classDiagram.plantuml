@@ -2,8 +2,8 @@
 
 abstract class Campus
 
-Campus *-down- PersonalApoyo
-Campus *-down- Facultad
+Campus o-down- PersonalApoyo
+Campus o-down- Facultad
 
 Facultad o-- Integrante : < pertenece
 Facultad *-- Carrera

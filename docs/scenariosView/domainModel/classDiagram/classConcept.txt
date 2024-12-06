@@ -1,8 +1,8 @@
 Campus
     
     Relaciones:
-        Esta compuesta de PersonalApoyo
-        Esta compuesta de Facultad
+        Tiene PersonalApoyo
+        Tiene Facultad
 
 Facultad
     
