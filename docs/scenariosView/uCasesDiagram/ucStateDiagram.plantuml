@@ -1,0 +1,54 @@
+@startuml DiagramaEstados_BasadoEnUC
+
+state "Opening App" as start
+
+[*] --> start
+
+state "Registrando" as signup
+state "Iniciando Sesion" as login
+state c1 <<choice>> 
+start --> login
+login --> c1
+c1 -down-> InApp : [Usuario ya esta registrado]
+c1 -down-> signup : [Usuario no esta registrado]
+signup -up-> login
+
+state InApp {
+    
+    state "Dicidiendo acción a realizar en la App" as choosing
+    state "Solicitando Subir Publicación" as upload
+    state "Subiendo publicación" as uploaded
+    state "Interactuando con Publicación" as reacting
+    state c2 <<choice>>
+    state "Sugiriendo Evento" as tryEvent
+    state c3 <<choice>>
+    state "Cargando Evento a Calendario" as addEvent
+    state "Suscribiendose a Evento" as sus
+    state "Borrando Publicación" as deleteP
+    state "Eliminando Comentario" as deleteC
+    state "Cerrando Sesión" as close
+
+
+    [*] --> choosing
+    
+    choosing -down-> upload
+    upload -down-> c2
+    c2 -down-> uploaded : [Los Moderadores aprobaron]
+    uploaded -up-> choosing
+    c2 -up-> choosing : [Los Moderadores rechazaron] 
+
+    choosing -down-> reacting
+
+    choosing -down-> tryEvent
+    c3 --> addEvent : [El Usuario puede subir evento]
+    addEvent -up-> choosing
+    c3 -up-> choosing : [No puede subir evento]
+
+    choosing -down-> sus
+    choosing -down-> deleteP
+    choosing -down-> deleteC
+
+    choosing -down-> close
+}
+
+@enduml
