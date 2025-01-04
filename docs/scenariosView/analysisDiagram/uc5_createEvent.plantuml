@@ -1,0 +1,17 @@
+@startuml diagramaUC5
+skinparam ClassAttributeIconSize 0
+skinparam ClassBorderThickness 2
+
+class "InterfazCrearEvento" <<interface>>
+class "FormularioEvento" <<interface>>
+class "ControladorEvento" <<control>>
+class "Evento" <<entity>>
+class "Calendario" <<entity>>
+class "Integrante" <<entity>>
+
+InterfazCrearEvento -- FormularioEvento : displayForm
+FormularioEvento -- ControladorEvento : sendForm
+ControladorEvento -- Evento : updateEvents
+ControladorEvento -- Calendario : updateCalendar
+ControladorEvento -- Integrante : notifyMembers
+@enduml

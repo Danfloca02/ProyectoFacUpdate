@@ -1,0 +1,15 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam ClassBorderThickness 2
+
+class "InterfazLogin" <<interface>>
+class "FormularioLogin" <<interface>>
+class "ControladorAutenticacion" <<control>>
+class "Usuario" <<entity>>
+class "SesionUsuario" <<entity>>
+
+InterfazLogin -- FormularioLogin : displayForm
+FormularioLogin -- ControladorAutenticacion : sendForm
+ControladorAutenticacion -- Usuario : authenticateUser
+ControladorAutenticacion -- SesionUsuario : open_or_reject
+@enduml
