@@ -1,0 +1,18 @@
+@startuml uc2_login
+
+left to right direction
+
+actor ": Usuario" as user
+boundary ": UI" as vis
+entity ": Base de datos" as mod
+control ": Sistema" as con
+
+vis --> user : 1: Mostrar pantalla de inicio
+con --> user : 2: Solicita datos de identificacion
+user --> con : 3: Inserta datos
+con --> mod : 4: Envía datos
+mod --> con : 5: Verifica datos
+con --> vis : 6: Da acceso
+vis --> user : 7: Muestra pantalla de inicio
+
+@enduml
