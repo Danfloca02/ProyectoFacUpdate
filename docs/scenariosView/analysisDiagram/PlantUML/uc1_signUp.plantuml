@@ -1,4 +1,4 @@
-@startuml LOGIN_collaboration_diagram
+@startuml uc1_signUp
 
 left to right direction
 
