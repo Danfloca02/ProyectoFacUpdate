@@ -1,18 +1,22 @@
-@startuml uc1_signUp
+@startuml uc1_login
 
 left to right direction
 
 actor ": Usuario" as user
-boundary ": UI" as vis
+
 entity ": Base de datos" as mod
+boundary ": UI" as vis
 control ": Sistema" as con
 
-(vis) --> user : 1: Mostrar pantalla de inicio
-(con) --> user : 2: Solicita datos de identificacion
-user --> (con) : 3: Inserta datos
-(con) --> (mod) : 4: Envía datos
-(mod) --> (con) : 5: Verifica datos
-(con) --> (vis) : 6: Da acceso
-(vis) --> user : 7: Muestra pantalla de inicio
+vis --> user : 1: Mostrar pantalla de inicio de sesion
+vis --> user : 10: Muestra pantalla de inicio de sesion
+user --> con : 2: Selecciona crear cuenta
+con --> vis : 3: Procesa Orden
+vis --> user : 4: Muestra pantalla de registro
+con --> user : 5: Solicita datos
+user --> con : 6: Inserta datos
+con --> mod : 7: Redirige Informacion
+mod --> con : 8: Verifica datos y almacena en sistema
+con --> vis : 9: Confirma creacion de cuenta
 
 @enduml
