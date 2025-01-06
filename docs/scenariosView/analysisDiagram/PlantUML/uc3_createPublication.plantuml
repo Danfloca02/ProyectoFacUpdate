@@ -1,29 +1,15 @@
-@startuml uc3_createPublication
+@startuml diagramaUC3
+skinparam ClassAttributeIconSize 0
+skinparam ClassBorderThickness 2 
 
-left to right direction
+class "InterfazCrearPublicacion" <<interface>>
+class "FormularioPublicacion" <<interface>>
+class "ControladorPublicacion" <<control>>
+class "Publicacion" <<entity>>
+class "Integrante" <<entity>>
 
-actor ": Usuario" as user
-
-entity ": Base de datos" as mod
-boundary ": UI" as vis
-control ": Sistema" as con
-
-vis --> user : 1: Mostrar pantalla principal
-user --> con : 2: Selecciona crear publicación
-con --> mod : 3: Solicita acceder a contenido del usuario
-mod --> vis : 4: Da acceso a datos del usuario
-vis --> user : 5: Muestra pantalla de creacion de publicación
-user --> con : 6: Selecciona contenido a publicar
-con --> mod : 7: Solicita confirmacion
-mod --> con : 8: Procesa contenido de publicación
-con --> vis : 9: Confirma proceso
-vis --> user : 10: Muestra contenido a publicar
-user --> vis : 11: Añade descripcion
-vis --> user : 12: Muestra vista previa
-user --> con : 13: Confirma publicación
-con --> mod : 14: Solicita publicar contenido
-mod --> con : 15: Procesa publicación
-con --> vis : 16: Confirma publicación
-vis --> user : 17: Muestra publicación realizada
-
+InterfazCrearPublicacion -- FormularioPublicacion : displayForm
+FormularioPublicacion -- ControladorPublicacion : sendForm
+ControladorPublicacion -- Publicacion : uploadPublication
+ControladorPublicacion -- Integrante : showUserPublications
 @enduml

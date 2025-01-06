@@ -1,22 +1,15 @@
-@startuml uc1_login
+@startuml diagramaUC1
+skinparam classAttributeIconSize 0
+skinparam ClassBorderThickness 2
 
-left to right direction
+class "InterfazRegistro" <<interface>>
+class "FormularioRegistro" <<interface>>
+class "ControladorRegistro" <<control>>
+class "Integrante" <<entity>>
+class "Perfil" <<interface>>
 
-actor ": Usuario" as user
-
-entity ": Base de datos" as mod
-boundary ": UI" as vis
-control ": Sistema" as con
-
-vis --> user : 1: Mostrar pantalla de inicio de sesion
-vis --> user : 10: Muestra pantalla de inicio de sesion
-user --> con : 2: Selecciona crear cuenta
-con --> vis : 3: Procesa Orden
-vis --> user : 4: Muestra pantalla de registro
-con --> user : 5: Solicita datos
-user --> con : 6: Inserta datos
-con --> mod : 7: Redirige Informacion
-mod --> con : 8: Verifica datos y almacena en sistema
-con --> vis : 9: Confirma creacion de cuenta
-
+InterfazRegistro -- FormularioRegistro : displayForm
+FormularioRegistro -- ControladorRegistro : sendForm
+ControladorRegistro -- Integrante : addUserToDB
+ControladorRegistro -- Perfil : displayProfile
 @enduml
