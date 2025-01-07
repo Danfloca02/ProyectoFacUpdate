@@ -1,15 +1,19 @@
-@startuml diagramaUC1
-skinparam classAttributeIconSize 0
-skinparam ClassBorderThickness 2
+@startuml uc1_signUp
 
-class "InterfazRegistro" <<interface>>
-class "FormularioRegistro" <<interface>>
-class "ControladorRegistro" <<control>>
-class "Integrante" <<entity>>
-class "Perfil" <<interface>>
+left to right direction
 
-InterfazRegistro -- FormularioRegistro : displayForm
-FormularioRegistro -- ControladorRegistro : sendForm
-ControladorRegistro -- Integrante : addUserToDB
-ControladorRegistro -- Perfil : displayProfile
+actor ": Usuario" as user
+
+entity ": Base de datos" as mod
+boundary ": UI" as vis
+control ": Sistema" as con
+
+vis --> user
+user --> con
+con --> vis
+con --> user
+con --> mod
+mod --> con 
+
+
 @enduml

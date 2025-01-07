@@ -1,15 +1,19 @@
-@startuml diagramaUC3
-skinparam ClassAttributeIconSize 0
-skinparam ClassBorderThickness 2 
+@startuml uc3_createPublication
 
-class "InterfazCrearPublicacion" <<interface>>
-class "FormularioPublicacion" <<interface>>
-class "ControladorPublicacion" <<control>>
-class "Publicacion" <<entity>>
-class "Integrante" <<entity>>
+left to right direction
 
-InterfazCrearPublicacion -- FormularioPublicacion : displayForm
-FormularioPublicacion -- ControladorPublicacion : sendForm
-ControladorPublicacion -- Publicacion : uploadPublication
-ControladorPublicacion -- Integrante : showUserPublications
+actor ": Usuario" as user
+
+entity ": Base de datos" as mod
+boundary ": UI" as vis
+control ": Sistema" as con
+
+vis --> user
+user --> con
+con --> mod
+mod --> vis 
+mod --> con 
+con --> vis 
+user --> vis
+
 @enduml

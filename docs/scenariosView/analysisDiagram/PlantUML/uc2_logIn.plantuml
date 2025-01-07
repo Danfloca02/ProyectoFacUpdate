@@ -1,15 +1,18 @@
-@startuml diagramaUC2
-skinparam classAttributeIconSize 0
-skinparam ClassBorderThickness 2
+@startuml uc2_login
 
-class "InterfazLogin" <<interface>>
-class "FormularioLogin" <<interface>>
-class "ControladorAutenticacion" <<control>>
-class "Integrante" <<entity>>
-class "SesionIntegrante" <<entity>>
+left to right direction
 
-InterfazLogin -- FormularioLogin : displayForm
-FormularioLogin -- ControladorAutenticacion : sendForm
-ControladorAutenticacion -- Integrante : authenticateUser
-ControladorAutenticacion -- SesionIntegrante : open_or_reject
+actor ": Usuario" as user
+boundary ": UI" as vis
+entity ": Base de datos" as mod
+control ": Sistema" as con
+
+vis --> user
+con --> user
+user --> con
+con --> mod 
+mod --> con 
+con --> vis 
+
+
 @enduml

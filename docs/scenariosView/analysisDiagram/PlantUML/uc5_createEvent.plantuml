@@ -1,17 +1,17 @@
-@startuml diagramaUC5
-skinparam ClassAttributeIconSize 0
-skinparam ClassBorderThickness 2
+@startuml uc4_createEvent
 
-class "InterfazCrearEvento" <<interface>>
-class "FormularioEvento" <<interface>>
-class "ControladorEvento" <<control>>
-class "Evento" <<entity>>
-class "Calendario" <<entity>>
-class "Integrante" <<entity>>
+left to right direction
 
-InterfazCrearEvento -- FormularioEvento : displayForm
-FormularioEvento -- ControladorEvento : sendForm
-ControladorEvento -- Evento : updateEvents
-ControladorEvento -- Calendario : updateCalendar
-ControladorEvento -- Integrante : notifyMembers
+actor ": Docente / Colaborador" as user
+boundary ": UI" as vis
+entity ": Base de datos" as mod
+control ": Sistema" as con
+
+user --> con
+con --> mod 
+mod --> con 
+con --> vis 
+vis --> user
+mod --> vis
+
 @enduml
