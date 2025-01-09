@@ -1,0 +1,39 @@
+@startuml diagrama_casos_uso
+
+' skinparam actorStyle awesome
+left to right direction
+
+:Usuario: as usuario
+:Profesor: as profesor
+
+:Personal Apoyo: as personal_apoyo
+:Moderador: as moderador
+
+moderador <|-right- personal_apoyo
+usuario <|-left- moderador
+moderador <|-left- profesor
+
+
+package Eventos {
+    usecase "UC5: Crear evento" as UC5
+    usecase "UC6: Eliminar evento" as UC6
+    usecase "UC7: Suscribirse a evento" as UC7
+}
+
+
+usuario --> UC7
+
+
+
+moderador --> UC5
+moderador --> UC6
+
+
+
+
+
+
+
+
+
+@enduml
