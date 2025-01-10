@@ -32,9 +32,10 @@ package "facupdate.eventManagement" as calendar {
 
 core <-down- ui : extract from
 core -left-> data : get, uses, updates
+users .. data
+users --> calendar : uses, update
 users -right- ui : request, display
 users -left-> content : creates, approves, react 
-users --> calendar : uses, update
 
 User <|-- Teacher
 User <|-- Collaborator
