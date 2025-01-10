@@ -1,0 +1,85 @@
+@startuml class_diagram
+
+skinparam classAttributeIconSize 0
+skinparam classFontSize 14
+
+class User {
+  -username: String
+  -password: String
+  -email: String
+  -name: String
+  -lastName: String
+  +signUp(userData: UserData): boolean
+  +logIn(username: String, password: String): boolean
+  +createPublication(content: Content, description: String): Publication
+  +createEvent(eventData: EventData): Event
+}
+
+class Teacher {
+}
+
+class Collaborator {
+}
+
+class System {
+  +processOrder(order: Order): void
+  +accessCalendar(): Calendar
+  +createEvent(eventData: EventData): Event
+  +createPublication(content: Content, description: String): Publication
+  +verifyLoginData(username: String, password: String): boolean
+  +registerUser(userData: UserData): boolean
+}
+
+class Database {
+  +loadCalendarData(): CalendarData
+  +storeEvent(event: Event): boolean
+  +storePublication(publication: Publication): boolean
+  +verifyUserData(username: String, password: String): boolean
+  +storeUserData(userData: UserData): boolean
+}
+
+class UserInterface {
+  +showMainScreen(): void
+  +showCalendarScreen(calendarData: CalendarData): void
+  +showEventCreationScreen(): void
+  +showPublicationCreationScreen(): void
+  +showLoginScreen(): void
+  +showRegistrationScreen(): void
+  +showPublicationPreview(publication: Publication): void
+}
+
+class Publication {
+  -content: Content
+  -description: String
+  -timestamp: DateTime
+  -author: User
+}
+
+class Event {
+  -title: String
+  -description: String
+  -date: DateTime
+  -location: String
+  -organizer: User
+}
+
+class Calendar {
+  -events: List<Event>
+  +addEvent(event: Event): void
+  +removeEvent(event: Event): void
+  +getEvents(): List<Event>
+}
+
+User <|-- Teacher
+User <|-- Collaborator
+User -- "0..*" Publication: creates >
+User -- "0..*" Event: creates >
+System -- Database: uses >
+System -- UserInterface: controls >
+System -- Calendar: manages >
+Database -- "0..*" Publication: stores >
+Database -- "0..*" Event: stores >
+Database -- "0..*" User: stores >
+Calendar -- "0..*" Event: contains >
+
+@enduml

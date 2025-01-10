@@ -1,0 +1,43 @@
+@startuml package_diagram
+
+skinparam FontSize 14
+skinparam PackageBorderThickness 2
+
+package "facupdate.users" as users {
+    class User
+    class Teacher
+    class Collaborator
+}
+
+package "facupdate.core" as core {
+    class System
+}
+
+package "facupdate.data" as data {
+    class Database
+}
+
+package "facupdate.ui" as ui {
+    class UserInterface
+}
+
+package "facupdate.contentDisplay" as content {
+    class Publication
+}
+
+package "facupdate.eventManagement" as calendar {
+    class Calendar
+    class Event
+}
+
+core <-down- ui : extract from
+core -left-> data : get, uses, updates
+users -right- ui : request, display
+users -left-> content : creates, approves, react 
+users --> calendar : uses, update
+
+User <|-- Teacher
+User <|-- Collaborator
+Event -- Calendar : is added to > 
+
+@enduml

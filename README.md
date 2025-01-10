@@ -45,3 +45,37 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 ![Log in (with data 2)](https://github.com/user-attachments/assets/aea01649-3f33-4bfd-a13f-418a99fd949f)
 ![Inicio](https://github.com/user-attachments/assets/1beebb1a-8a72-46ff-9092-29c056dc2c1c)
 ![Calendario](https://github.com/user-attachments/assets/b9b50285-8dd4-4ba9-85c2-d70a3d0f0aff)
+
+##MODELO DE ANÁLISIS
+
+###DIAGRAMAS POR CASOS DE USO PRIORITARIO
+
+####DIAGRAMA DE CLASES
+
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc1_signUp.png)
+
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc2_logIn.png) 
+
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc3_createPublication.png) 
+
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc5_createEvent.png)
+
+
+####DIAGRAMA DE COLABORACION
+
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc1_signUp.png) 
+
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc2_login.png) 
+
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc3_createPublication.png) 
+
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc4_createEvent.png)
+
+###DIAGRAMA DE CLASES
+
+![alt text](docs/logicalView/analysisView/classAnalysis/classDiagram/classDiagram/class_diagram.png)
+
+###DIAGRAMA DE PAQUETES
+
+![alt text](docs/logicalView/analysisView/packageAnalysis/packageDiagram/package_diagram.png)
+
