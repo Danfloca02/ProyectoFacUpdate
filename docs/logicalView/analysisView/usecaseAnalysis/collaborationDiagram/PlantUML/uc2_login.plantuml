@@ -2,17 +2,22 @@
 
 left to right direction
 
-actor ": Usuario" as user
-boundary ": UI" as vis
-entity ": Base de datos" as mod
-control ": Sistema" as con
+actor ": User" as user
+boundary ": SignInFrame" as vis
+entity ": Member" as mod
+control ": SignInController" as con
+
+note right of con
+    5.1 es un flujo alterno, 
+    si los datos son rechazados
+end note
 
 vis --> user : 1: Mostrar pantalla de inicio
-con --> user : 2: Solicita datos de identificacion
-user --> con : 3: Inserta datos
-con --> mod : 4: Envía datos
-mod --> con : 5: Verifica datos
-con --> vis : 6: Da acceso
-vis --> user : 7: Muestra pantalla de inicio
+user --> con : 2: Solicitar Iniciar Sesión
+con --> mod : 3: Comprobar existencia de datos del Usuario 
+mod --> con : 4: Resultado de validación de datos 
+con --> vis : 5: Enviar Pantalla principal
+con --> vis : 5.1: Enviar Pantalla SignUp
+vis --> user : 6: Mostrar Pantalla resultante
 
 @enduml

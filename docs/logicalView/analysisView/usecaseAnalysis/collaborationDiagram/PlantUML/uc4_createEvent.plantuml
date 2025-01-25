@@ -2,24 +2,23 @@
 
 left to right direction
 
-actor ": Docente / Colaborador" as user
-boundary ": UI" as vis
-entity ": Base de datos" as mod
-control ": Sistema" as con
+actor ": User" as user
+boundary ": CreateEventFrame" as vis
+entity ": Profesor" as mod
+entity ": EventApprover" as ea
+entity ": Calendar" as cal
+control ": newEventController" as con
 
-user --> con : 1: Selecciona la pestaña calendario
-con --> mod : 2: Procesa la orden
-mod --> con : 3: Carga los datos del calendario
-con --> vis : 4: Da acceso a la pantalla de calendario
-vis --> user : 5: Muestra pantalla de calendario junto a eventos disponibles
-user --> con : 6: Selecciona la opción de crear evento
-con --> mod : 7: Solicita acceder a contenido para crear evento
-mod --> vis : 8: Da acceso a datos
-vis --> user : 9: Muestra pantalla de creación de evento
-user --> con : 10: Inserta datos del evento
-con --> mod : 11: Envía datos
-mod --> con : 12: Verifica datos
-con --> vis : 13: confirma el evento
-vis --> user : 14: Muestra pantalla de calendario con evento creado
+vis --> user : 1: Muestra al usuario la pantalla Crear Evento
+user --> con : 2: Envía los datos del evento
+con --> mod : 3: Solicita comprobar si el usuario es profesor
+mod --> con : 4: Dar respuesta y acceso
+con --> ea : 5: Solicita si el evento cumple las condiciones para aprovar
+ea --> con : 6: Aprueba las condiciones
+con --> cal : 7: Solicitar disponibilidad y agregación de evento
+cal --> con : 8: Comunicar estatus de evento
+con --> vis : 9: Envíar pantalla con Pop-up
+vis --> user : 10: Mostrar pantalla con mensaje de evento (Aprobado/Rechazado)
+vis --> user : 11: Mostrar pantalla principal
 
 @enduml
