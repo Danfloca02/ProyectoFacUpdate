@@ -11,30 +11,30 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 | 30821017  | Sabrina         | Herrera Martínez |
 | 31080238  | Carlos Alejandro| Miranda Brito    |
 
-##MODELO DEL DOMINIO
+## MODELO DEL DOMINIO
   
-###Diagrama de Clases
+### Diagrama de Clases
 ![DomainModel_ClassDiagram](https://github.com/user-attachments/assets/dcf76253-6501-45c2-94f1-017a58aa64de)
 
-###Diagrama de Estado!
+### Diagrama de Estado!
 [dmStateDiagram](https://github.com/user-attachments/assets/d2c11982-3be7-417f-b64c-6cee1084bb29)
 
-##MODELO DE CASOS DE USO
+## MODELO DE CASOS DE USO
 
-###Diagrma de Casos de Uso
+### Diagrma de Casos de Uso
 ![ucEventos](docs/scenariosView/uCasesDiagram/ucEventos.png)
 
 ![ucPublicacion](docs/scenariosView/uCasesDiagram/ucPublicaciones.png)
 
 ![ucSesion](docs/scenariosView/uCasesDiagram/ucSesion.png)
 
-###Diagrama de Estados
+### Diagrama de Estados
 ![ucStateDiagram](https://github.com/user-attachments/assets/6eadb588-e0ff-4ef4-b9c7-dbfd434835b5)
 
-###VisionBoard
+### VisionBoard
 [FacUpdate - VisionBoard](../../Users/danfl/Downloads/Team2_VisionBoard.pptx)
 
-###ESQUEMA DE PANTALLAS
+### ESQUEMA DE PANTALLAS
 
 [URL FIGMA: https://www.figma.com/design/TRyo6UMPosKdJIfEJnekTG/Esquema-de-Pantallas-FacUpdate?node-id=0-1&t=pNRDqKXMZxMyGxf3-1]
 
@@ -46,36 +46,44 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 ![Inicio](https://github.com/user-attachments/assets/1beebb1a-8a72-46ff-9092-29c056dc2c1c)
 ![Calendario](https://github.com/user-attachments/assets/b9b50285-8dd4-4ba9-85c2-d70a3d0f0aff)
 
-##MODELO DE ANÁLISIS
+## MODELO DE ANÁLISIS
 
-###DIAGRAMAS POR CASOS DE USO PRIORITARIO
+### DIAGRAMA DE PAQUETES
 
-####DIAGRAMA DE CLASES
+![alt text](docs/logicalView/analysisView/packageAnalysis/packageDiagram/package_diagram.png)
 
-![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc1_signUp.png)
-
-![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc2_logIn.png) 
-
-![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc3_createPublication.png) 
-
-![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc5_createEvent.png)
-
-
-####DIAGRAMA DE COLABORACION
-
-![alt text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc1_signUp.png) 
-
-![alt text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc2_login.png) 
-
-![alt text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc3_createPublication.png) 
-
-![alt text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc4_createEvent.png)
-
-###DIAGRAMA DE CLASES
+### DIAGRAMA DE CLASES
 
 ![alt text](docs/logicalView/analysisView/classAnalysis/classDiagram/classDiagram/class_diagram.png)
 
-###DIAGRAMA DE PAQUETES
+### DIAGRAMAS POR CASOS DE USO PRIORITARIO
 
-![alt text](docs/logicalView/analysisView/packageAnalysis/packageDiagram/package_diagram.png)
+#### DIAGRAMA DE CLASES
+
+##### UC1-Sign Up
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc1_signUp.png)
+
+##### UC2-LogIn
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc2_logIn.png) 
+
+##### UC3-CreatePublication
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc3_createPublication.png) 
+
+##### UC5-Create Event
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc5_createEvent.png)
+
+#### DIAGRAMA DE COLABORACION
+
+##### UC1-Sign Up
+![image](https://github.com/user-attachments/assets/00b3f20c-f533-406d-accd-dfcc78f8f004)
+
+##### UC2-LogIn
+![image](https://github.com/user-attachments/assets/7c8ee984-dcb9-462b-a0be-51579b1f9ecb)
+
+
+##### UC3-Create Publication
+![image](https://github.com/user-attachments/assets/3025a130-7f66-4ca2-8aa0-d4bfc6b79daa)
+
+##### UC5-Create Event
+![image](https://github.com/user-attachments/assets/c8cd8de3-894a-477d-b464-e3770898d4b2)
 
