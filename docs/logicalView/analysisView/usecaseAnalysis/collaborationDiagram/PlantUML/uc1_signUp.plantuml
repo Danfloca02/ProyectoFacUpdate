@@ -2,16 +2,21 @@
 
 left to right direction
 
-actor ": Usuario" as user
+actor ": User" as user
 
 entity ": Member" as mod
 boundary ": SignUpFrame" as vis
+boundary ": MainFrame" as main
 control ": SignUpController" as con
 
-vis --> user : 1: Mostrar pantalla de Registro
-user --> con : 2: Envia datos de registro
-con --> mod : 3: Validar / Registrar datos
-con --> vis : 4: Solicitar Pantalla indice
-vis --> user : 5: Mostrar Pantalla índice
+user --> con : 1: requestSignUp()
+con --> vis : 2: requestDisplay (Frame signUpFrame)
+vis --> user : 3: showFrame (Frame signUpFrame)
+user --> con : 4: sendNewUserData (Member user)
+con --> mod : 5: askNewUserValidation (Member User)
+mod --> mod : 6: validateData (Member user) / registerData (Member user)
+mod --> con : 7: reportNewUser() 
+con --> main : 8: askDisplay (Frame mainFrame)
+main --> user : 9: showFrame (Frame mainFrame)
 
 @enduml

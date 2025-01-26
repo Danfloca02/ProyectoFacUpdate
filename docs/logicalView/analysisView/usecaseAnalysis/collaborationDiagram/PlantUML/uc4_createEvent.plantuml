@@ -3,22 +3,26 @@
 left to right direction
 
 actor ": User" as user
-boundary ": CreateEventFrame" as vis
-entity ": Profesor" as mod
-entity ": EventApprover" as ea
+boundary ": NewEventFrame" as vis
+boundary ": MainFrame" as main
+entity ": EventApprover" as mod
 entity ": Calendar" as cal
-control ": newEventController" as con
+control ": NewEventController" as con
 
-vis --> user : 1: Muestra al usuario la pantalla Crear Evento
-user --> con : 2: Envía los datos del evento
-con --> mod : 3: Solicita comprobar si el usuario es profesor
-mod --> con : 4: Dar respuesta y acceso
-con --> ea : 5: Solicita si el evento cumple las condiciones para aprovar
-ea --> con : 6: Aprueba las condiciones
-con --> cal : 7: Solicitar disponibilidad y agregación de evento
-cal --> con : 8: Comunicar estatus de evento
-con --> vis : 9: Envíar pantalla con Pop-up
-vis --> user : 10: Mostrar pantalla con mensaje de evento (Aprobado/Rechazado)
-vis --> user : 11: Mostrar pantalla principal
+user --> con : 1: requestNewEvent()
+con --> vis : 2: askDisplay (Frame newEventFrame)
+vis --> user : 3: showFrame (Frame newEventFrame)
+user --> con : 4: newEvent (Event event)
+con --> mod : 5: askValidateUser (Member user)
+mod --> mod : 6: validateUserPermissions(Member user) / 7: validateEventData(Event event)
+mod --> con : 7: reportValidation()
+con --> cal : 8: askUpdateCalendar(Event event)
+cal --> cal : 9: addEventToCalendar(Event event)
+cal --> con : 10: reportCalendarUpdate()
+con --> vis : 11: askDisplay (Frame newEventFrame, PopUp approved)
+con --> vis : 11.1: askDisplay (Frame newEventFrame, PopUp rejected)
+vis --> user : 12: showFrame (Frame newEventFrame, PopUp approved)
+con -up-> main : 13: askDisplay (Frame mainFrame)
+main --> user : 14: showFrame (Frame mainFrame)
 
 @enduml

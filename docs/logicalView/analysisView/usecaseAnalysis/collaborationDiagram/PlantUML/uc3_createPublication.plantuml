@@ -5,24 +5,27 @@ left to right direction
 actor ": User" as user
 
 entity ": PublicationApprover" as mod
-entity ": PublicationWarehouse" as pw
-boundary ": CreatePubFrame" as vis
+boundary ": newPublicationFrame" as vis
+boundary ": MainFrame" as main
 control ": PublicationController" as con
 
 note right of con
-    6.1 Es una acción en 
+    8.1 Es una acción en 
     caso de que se rechace 
     la publicación 
 end note
 
-vis --> user : 1: Mostrar pantalla Crear Publicación
-user --> con : 2: Enviar datos de publicación creada
-con --> mod : 3: Solicita aprobación de la publicación
-mod --> con : 4: Envía respuesta (Aprobada / Rechazada)
-con --> pw : 5: Envia publicacion a cargar en base de datos
-con --> vis : 6: Envía pantalla con Mensaje "Publicación Aprobada"
-con --> vis : 6.1: Envía pantalla con Mensaje "Publicación Rechazada"
-vis --> user : 7: Muestra pantalla con mensaje correspondiente
-Vis --> user : 8: Muestra pantalla Principal
+user --> con : 1: requestCreatePublication()
+con --> vis : 2: askDisplay (Frame newPublicationFrame)
+vis --> user : 3: showFrame (Frame newPublicationFrame)
+user --> con : 4: newPublication (Publicacion newPub)
+con --> mod : 5: askValidatePublication (Publicacion newPub)
+mod --> mod : 6: validatePublication (Publicacion newPub)
+mod --> con : 7: reportPublicationStatus()
+con --> vis : 8: askDisplay (Frame newPublicationFrame, PopUp approved)
+con --> vis : 8.1: askDisplay (Frame newPublicationFrame, PopUp rejected)
+vis --> user : 9: showFrame (Frame newPublicationFrame, PopUp approved)
+con -up-> main : 10: askDisplay (Frame mainFrame)
+main --> user : 11: showFrame (Frame mainFrame)
 
 @enduml

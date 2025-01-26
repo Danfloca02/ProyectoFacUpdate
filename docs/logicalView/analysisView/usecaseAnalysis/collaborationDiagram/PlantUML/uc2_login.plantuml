@@ -3,21 +3,33 @@
 left to right direction
 
 actor ": User" as user
-boundary ": SignInFrame" as vis
 entity ": Member" as mod
 control ": SignInController" as con
+boundary ": SignInFrame" as vis
+boundary ": MainFrame" as main
+boundary ": SignUpFrame" as sup
 
 note right of con
-    5.1 es un flujo alterno, 
+    8.2 es un flujo alterno, 
     si los datos son rechazados
 end note
 
-vis --> user : 1: Mostrar pantalla de inicio
-user --> con : 2: Solicitar Iniciar Sesión
-con --> mod : 3: Comprobar existencia de datos del Usuario 
-mod --> con : 4: Resultado de validación de datos 
-con --> vis : 5: Enviar Pantalla principal
-con --> vis : 5.1: Enviar Pantalla SignUp
-vis --> user : 6: Mostrar Pantalla resultante
+note right of sup 
+    9.2 es la pantalla en
+    caso de rechazo
+end note
+
+
+user --> con : 1: requestLogIn()
+con --> vis : 2: askDisplay (Frame signInFrame)
+vis --> user : 3: showFrame (Frame signInFrame)
+user --> con : 4: sendUserData(String username, String password)
+con --> mod : 5: askUserValidation(Member user)
+mod --> mod : 6: authUserData(Member user) 
+mod --> con : 7: sendValidationStatus() 
+con --> main : 8.1: askDisplay (Frame mainFrame)
+con --> sup : 8.2: askDisplay (Frame signUpFrame)
+main --> user : 9.1: showFrame (Frame mainFrame)
+sup --> user : 9.2: showFrame (Frame signUpFrame)
 
 @enduml
