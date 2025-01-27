@@ -9,12 +9,13 @@ entity ": EventApprover" as mod
 entity ": Calendar" as cal
 control ": NewEventController" as con
 
-user --> con : 1: requestNewEvent()
-con --> vis : 2: askDisplay (Frame newEventFrame)
-vis --> user : 3: showFrame (Frame newEventFrame)
-user --> con : 4: newEvent (Event event)
-con --> mod : 5: askValidateUser (Member user)
-mod --> mod : 6: validateUserPermissions(Member user) / 7: validateEventData(Event event)
+user --> vis : 1: requestNewEvent()
+vis --> user : 2: showFrame (Frame newEventFrame)
+user --> vis : 3: newEvent (Event event)
+vis --> con : 4: sendInputData (Event event)
+user --> con : 3: newEvent (Event event)
+con --> mod : 4: askValidateUser (Member user)
+mod --> mod : 5: validateUserPermissions(Member user) / 6: validateEventData(Event event)
 mod --> con : 7: reportValidation()
 con --> cal : 8: askUpdateCalendar(Event event)
 cal --> cal : 9: addEventToCalendar(Event event)
