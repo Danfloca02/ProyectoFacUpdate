@@ -2,16 +2,28 @@
 
 left to right direction
 
-actor ": Docente / Colaborador" as user
-boundary ": UI" as vis
-entity ": Base de datos" as mod
-control ": Sistema" as con
+actor ": User" as user
+boundary ": NewEventFrame" as vis
+boundary ": MainFrame" as main
+entity ": EventApprover" as mod
+entity ": Calendar" as cal
+control ": NewEventController" as con
 
-user --> con
-con --> mod 
-mod --> con 
+user --> vis
+vis --> user 
+user --> vis 
+vis --> con 
+user --> con 
+con --> mod
+mod --> mod
+mod --> con
+con --> cal
+cal --> cal
+cal --> con 
+con --> vis
 con --> vis 
 vis --> user
-mod --> vis
+con -up-> main
+main --> user 
 
 @enduml

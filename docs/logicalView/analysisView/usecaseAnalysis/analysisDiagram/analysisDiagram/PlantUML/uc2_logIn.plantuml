@@ -2,16 +2,33 @@
 
 left to right direction
 
-actor ": Usuario" as user
-boundary ": UI" as vis
-entity ": Base de datos" as mod
-control ": Sistema" as con
+actor ": User" as user
+entity ": Member" as mod
+control ": SignInController" as con
+boundary ": SignInFrame" as vis
+boundary ": MainFrame" as main
+boundary ": SignUpFrame" as sup
 
-vis --> user
-con --> user
-user --> con
+note right of con
+    Flujo alterno, 
+    si los datos son rechazados
+end note
+
+note right of sup 
+    Pantalla en
+    caso de rechazo
+end note
+
+user --> vis
+vis --> user 
+user --> vis 
+vis --> con
 con --> mod 
+mod --> mod 
 mod --> con 
-con --> vis 
+con --> main 
+con --> sup 
+main --> user 
+sup --> user
 
 @enduml

@@ -2,17 +2,21 @@
 
 left to right direction
 
-actor ": Usuario" as user
+actor ": User" as user
 
-entity ": Base de datos" as mod
-boundary ": UI" as vis
-control ": Sistema" as con
+entity ": Member" as mod
+boundary ": SignUpFrame" as vis
+boundary ": MainFrame" as main
+control ": SignUpController" as con
 
-vis --> user
-user --> con
-con --> vis
-con --> user
-con --> mod
-mod --> con 
+user --> vis 
+vis --> user 
+user --> vis 
+vis --> con
+con --> mod 
+mod --> mod 
+mod --> con
+con --> main
+main --> user
 
 @enduml

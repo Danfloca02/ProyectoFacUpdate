@@ -2,18 +2,24 @@
 
 left to right direction
 
-actor ": Usuario" as user
+actor ": User" as user
 
-entity ": Base de datos" as mod
-boundary ": UI" as vis
-control ": Sistema" as con
+entity ": PublicationApprover" as mod
+boundary ": NewPublicationFrame" as vis
+boundary ": MainFrame" as main
+control ": PublicationController" as con
 
-vis --> user
-user --> con
+user --> vis
+vis --> user 
+user --> vis
+vis --> con 
 con --> mod
-mod --> vis 
+mod --> mod
 mod --> con 
 con --> vis 
-user --> vis
+con --> vis 
+vis --> user
+con -up-> main 
+main --> user
 
 @enduml

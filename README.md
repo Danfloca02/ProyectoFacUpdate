@@ -59,23 +59,24 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 ### DIAGRAMAS POR CASOS DE USO PRIORITARIO
 
 #### DIAGRAMA DE CLASES
-
+ 
 ##### UC1-Sign Up
-![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc1_signUp.png)
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc1_signUp.png) 
 
 ##### UC2-LogIn
-![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc2_logIn.png) 
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc2_login.png)
 
 ##### UC3-CreatePublication
 ![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc3_createPublication.png) 
 
 ##### UC5-Create Event
-![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc5_createEvent.png)
+![alt text](docs/logicalView/analysisView/usecaseAnalysis/analysisDiagram/analysisDiagram/Images/uc4_createEvent.png)
 
 #### DIAGRAMA DE COLABORACION
 
 ##### UC1-Sign Up
 ![text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc1_signUp.png)
+
 ##### UC2-LogIn
 ![alt text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc2_login.png)
 
