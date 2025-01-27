@@ -1,4 +1,4 @@
-@startuml uc4_createEvent
+@startuml uc5_createEvent
 
 left to right direction
 
@@ -13,17 +13,17 @@ user --> vis : 1: requestNewEvent()
 vis --> user : 2: showFrame (Frame newEventFrame)
 user --> vis : 3: newEvent (Event event)
 vis --> con : 4: sendInputData (Event event)
-user --> con : 3: newEvent (Event event)
-con --> mod : 4: askValidateUser (Member user)
-mod --> mod : 5: validateUserPermissions(Member user) / 6: validateEventData(Event event)
-mod --> con : 7: reportValidation()
-con --> cal : 8: askUpdateCalendar(Event event)
-cal --> cal : 9: addEventToCalendar(Event event)
-cal --> con : 10: reportCalendarUpdate()
-con --> vis : 11: askDisplay (Frame newEventFrame, PopUp approved)
-con --> vis : 11.1: askDisplay (Frame newEventFrame, PopUp rejected)
-vis --> user : 12: showFrame (Frame newEventFrame, PopUp approved)
-con -up-> main : 13: askDisplay (Frame mainFrame)
-main --> user : 14: showFrame (Frame mainFrame)
+user --> con : 5: newEvent (Event event)
+con --> mod : 6: askValidateUser (Member user)
+mod --> mod : 7: validateUserPermissions(Member user) / 8: validateEventData(Event event)
+mod --> con : 9: reportValidation()
+con --> cal : 10: askUpdateCalendar(Event event)
+cal --> cal : 11: addEventToCalendar(Event event)
+cal --> con : 12: reportCalendarUpdate()
+con --> vis : 13: askDisplay (Frame newEventFrame, PopUp approved)
+con --> vis : 13.1: askDisplay (Frame newEventFrame, PopUp rejected)
+vis --> user : 14: showFrame (Frame newEventFrame, PopUp approved)
+con -up-> main : 15: askDisplay (Frame mainFrame)
+main --> user : 16: showFrame (Frame mainFrame)
 
 @enduml

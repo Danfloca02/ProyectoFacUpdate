@@ -50,11 +50,11 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 
 ### DIAGRAMA DE PAQUETES
 
-![alt text](docs/logicalView/analysisView/packageAnalysis/packageDiagram/package_diagram.png)
+![alt text](docs/logicalView/analysisView/packageAnalysis/package_diagram.png)
 
 ### DIAGRAMA DE CLASES
 
-![alt text](docs/logicalView/analysisView/classAnalysis/classDiagram/classDiagram/class_diagram.png)
+![alt text](docs/logicalView/analysisView/classAnalysis/class_diagram.png)
 
 ### DIAGRAMAS POR CASOS DE USO PRIORITARIO
 

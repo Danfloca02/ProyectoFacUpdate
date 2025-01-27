@@ -3,83 +3,126 @@
 skinparam classAttributeIconSize 0
 skinparam classFontSize 14
 
-class User {
-  -username: String
-  -password: String
-  -email: String
-  -name: String
-  -lastName: String
-  +signUp(userData: UserData): boolean
-  +logIn(username: String, password: String): boolean
-  +createPublication(content: Content, description: String): Publication
-  +createEvent(eventData: EventData): Event
+
+'Entities
+class Member {
+    -username: String
+    -password: String
+    -userData: Object
+    +validateData(Member): boolean
+    +registerData(Member): void
+    +authUserData(Member): boolean
 }
 
-class Teacher {
-}
+note right of Member
+  Clase que representa a los usuarios
+  del sistema y sus datos
+end note
 
-class Collaborator {
-}
-
-class System {
-  +processOrder(order: Order): void
-  +accessCalendar(): Calendar
-  +createEvent(eventData: EventData): Event
-  +createPublication(content: Content, description: String): Publication
-  +verifyLoginData(username: String, password: String): boolean
-  +registerUser(userData: UserData): boolean
-}
-
-class Database {
-  +loadCalendarData(): CalendarData
-  +storeEvent(event: Event): boolean
-  +storePublication(publication: Publication): boolean
-  +verifyUserData(username: String, password: String): boolean
-  +storeUserData(userData: UserData): boolean
-}
-
-class UserInterface {
-  +showMainScreen(): void
-  +showCalendarScreen(calendarData: CalendarData): void
-  +showEventCreationScreen(): void
-  +showPublicationCreationScreen(): void
-  +showLoginScreen(): void
-  +showRegistrationScreen(): void
-  +showPublicationPreview(publication: Publication): void
-}
-
-class Publication {
-  -content: Content
-  -description: String
-  -timestamp: DateTime
-  -author: User
-}
-
-class Event {
-  -title: String
-  -description: String
-  -date: DateTime
-  -location: String
-  -organizer: User
+class EventApprover {
+    +validateUserPermissions(Member): boolean
+    +validateEventData(Event): boolean
+    +reportValidation(): boolean
 }
 
 class Calendar {
-  -events: List<Event>
-  +addEvent(event: Event): void
-  +removeEvent(event: Event): void
-  +getEvents(): List<Event>
+    -events: List<Event>
+    +addEventToCalendar(Event): void
+    +reportCalendarUpdate(): boolean
 }
 
-User <|-- Teacher
-User <|-- Collaborator
-User -- "0..*" Publication: creates >
-User -- "0..*" Event: creates >
-System -- Database: uses >
-System -- UserInterface: controls >
-System -- Calendar: manages >
-Database -- "0..*" Publication: stores >
-Database -- "0..*" Event: stores >
-Database -- "0..*" User: stores >
-Calendar -- "0..*" Event: contains >
+class PublicationApprover {
+    +validatePublication(Publication): boolean
+    +reportPublicationStatus(): boolean
+}
+
+'Controllers
+class SignUpController {
+    +sendInputData(Member): void
+    +askNewUserValidation(Member): boolean
+    +reportNewUser(): boolean
+    +askDisplay(Frame): void
+}
+
+class SignInController {
+    +sendInputData(String, String): void
+    +askUserValidation(Member): boolean
+    +sendValidationStatus(): boolean
+    +askDisplay(Frame): void
+}
+
+class PublicationController {
+    +sendInputData(Publication): void
+    +askValidatePublication(Publication): boolean
+    +reportPublicationStatus(): boolean
+    +askDisplay(Frame, PopUp): void
+}
+
+class NewEventController {
+    +sendInputData(Event): void
+    +askValidateUser(Member): boolean
+    +askUpdateCalendar(Event): void
+    +askDisplay(Frame, PopUp): void
+}
+
+'Interfaces
+class SignUpFrame {
+    +showFrame(Frame): void
+    +fillNewUserData(Member): void
+}
+
+class SignInFrame {
+    +showFrame(Frame): void
+    +fillUserData(String, String): void
+}
+
+class MainFrame {
+    +showFrame(Frame): void
+}
+
+class NewPublicationFrame {
+    +showFrame(Frame, PopUp): void
+    +newPublication(Publication): void
+}
+
+class NewEventFrame {
+    +showFrame(Frame, PopUp): void
+    +newEvent(Event): void
+}
+
+'Additional Classes needed
+class Event {
+    -eventData: Object
+    -date: Date
+    -description: String
+}
+
+class Publication {
+    -content: Object
+    -date: Date
+    -author: Member
+}
+
+'Relaciones
+Member "1" -- "*" Publication : creates >
+Member "1" -- "*" Event : creates >
+Calendar "1" -- "*" Event : contains >
+PublicationApprover -- Publication : validates >
+EventApprover -- Event : validates >
+
+SignUpController -- Member : manages >
+SignInController -- Member : authenticates >
+PublicationController -- Publication : manages >
+NewEventController -- Event : manages >
+
+SignUpFrame -- SignUpController : uses >
+SignInFrame -- SignInController : uses >
+NewPublicationFrame -- PublicationController : uses >
+NewEventFrame -- NewEventController : uses >
+
+MainFrame -- SignUpController : displays <
+MainFrame -- SignInController : displays <
+MainFrame -- PublicationController : displays <
+MainFrame -- NewEventController : displays <
 
 @enduml

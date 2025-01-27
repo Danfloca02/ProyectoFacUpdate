@@ -3,42 +3,40 @@
 skinparam FontSize 14
 skinparam PackageBorderThickness 2
 
-package "facupdate.users" as users {
-    class User
-    class Teacher
-    class Collaborator
-}
-
-package "facupdate.core" as core {
-    class System
-}
-
-package "facupdate.data" as data {
-    class Database
-}
-
-package "facupdate.ui" as ui {
-    class UserInterface
-}
-
-package "facupdate.contentDisplay" as content {
-    class Publication
-}
-
-package "facupdate.eventManagement" as calendar {
+package "facupdate.entity" as model {
+    class Member
+    class EventApprover
     class Calendar
-    class Event
+    class PublicationApprover
 }
 
-core <-down- ui : extract from
-core -left-> data : get, uses, updates
-users .. data
-users --> calendar : uses, update
-users -right- ui : request, display
-users -left-> content : creates, approves, react 
+package "facupdate.view" as frame {
+    class SignUpFrame
+    class SignInFrame
+    class MainFrame
+    class NewPublicationFrame
+    class NewEventFrame
+}
 
-User <|-- Teacher
-User <|-- Collaborator
-Event -- Calendar : is added to > 
+package "facupdate.controller" as control {
+    class SignUpController
+    class SignInController
+    class PublicationController
+    class NewEventController
+}
+
+Member -- EventApprover
+EventApprover -- Calendar
+Member -- PublicationApprover
+
+SignInFrame -- MainFrame
+SignInFrame -- SignUpFrame
+SignUpFrame -- MainFrame
+MainFrame -- NewPublicationFrame
+MainFrame -- NewEventFrame
+
+frame --> control : > send user actions
+control -up-> model : > request validation and exchange data 
+model --> control : > send requests responses
 
 @enduml
