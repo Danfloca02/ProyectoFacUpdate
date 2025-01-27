@@ -75,14 +75,14 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 #### DIAGRAMA DE COLABORACION
 
 ##### UC1-Sign Up
-![signup](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc1_signUp.png)
-
+![text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc1_signUp.png)
 ##### UC2-LogIn
-![login](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc2_login.png)
+![text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc2_login.png) 
 
 ##### UC3-Create Publication
-![newPublication](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc3_createPublication.png)
+![text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc3_createPublication.png)
 
 ##### UC5-Create Event
-![newEvent](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc4_createEvent.png)
-
+![text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc4_createEvent.png) 
+ 
+ 
