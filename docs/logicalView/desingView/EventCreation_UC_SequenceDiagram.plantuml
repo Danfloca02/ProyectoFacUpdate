@@ -1,0 +1,48 @@
+@startuml EventCreation_UC_SequenceDiagram
+actor User
+boundary App
+control System
+actor Moderator
+database Calendar
+
+activate User
+
+User -> App : Enters in the event creation menu
+
+activate App
+
+App --> User : Shows the fields of the event creation menu
+User -> App : Sets a title
+User -> App : Sets a description
+User -> App : Sets a location
+User -> App : Sets a date
+User -> App : Sets a amount of places
+User -> App : Add multimedia content
+App -> System : Sends the entered data
+
+activate System
+
+System -> System : Verifies the entered data
+System -> Moderator : Ask for approval
+
+activate Moderator
+
+Moderator -> Moderator : Evaluates the event
+
+alt approved event
+    Moderator --> System : Approves the event
+    System -> Calendar : Saves the event data
+    System -> System : Creates a post for the event
+    System --> App : Publishes the event
+    App --> User : Notifies the successful event publication
+else rejected event
+    Moderator --> System : Rejects the event
+    System --> App : Sends failure message
+    App --> User : Notifies the failed event publication
+end
+
+deactivate User
+deactivate App
+deactivate System
+deactivate Moderator
+@enduml

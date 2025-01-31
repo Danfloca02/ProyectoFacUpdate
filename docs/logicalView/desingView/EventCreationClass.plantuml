@@ -1,0 +1,36 @@
+@startuml EventCreationUC_Class
+class User{
+    - username: String
+    - id: int
+    - password: String
+
+    + makeEvent(name: String, date: Date, place: String, description: String): Event
+    + subscribeEvent(eventID: int): void
+    + unsubscribeEvent(eventID: int): void
+    + getSubscribedEvents(): List<Event>
+}
+
+class Calendar{
+    - events: List<Event>
+    + addEvent(event: Event): void
+    + delateEvent(event: Event): void
+    + getEvents(): List<Event>
+}
+
+class Event {
+    - EventID : int
+    - userID : int
+    - name: String
+    - date: Date
+    - place: String
+    - description: String
+    - subscribedUsers: List<User>
+    + getSubscribedUsers() List<User>
+    + addUser(userID: int): void
+    + delateUser(userID: int): void
+}
+
+User -- "0...*  " Event: make >
+Event"0...*  " --o Calendar
+User -- "0...*  " Event: subscribe >
+@enduml
