@@ -1,0 +1,10 @@
+@startuml DeploymentDiagram
+actor User
+node PC as "Personal Computer" {
+    file FacUpdate.jar
+    file database.txt
+}
+User - PC
+
+FacUpdate.jar - database.txt
+@enduml
