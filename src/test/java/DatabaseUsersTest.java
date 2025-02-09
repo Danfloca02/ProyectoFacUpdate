@@ -1,5 +1,7 @@
-package test;
-import main.Data.DatabaseUsers;
+
+import Data.DatabaseUsers;
+
+
 
 public class DatabaseUsersTest {
 

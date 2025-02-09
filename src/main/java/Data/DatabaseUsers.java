@@ -1,3 +1,9 @@
+package Data;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 /**
  *
  * @author CARLOS_MIRANDA
@@ -5,18 +11,15 @@
 
 
 
+import Model.Teacher;
+import Model.User;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
-//imports from proyect
-
-import main.Data.FileGestor;
-import main.Model.Teacher;
-import main.Model.User;
-import main.Model.UserFactory;
+import Model.UserFactory;
 
 
 
@@ -29,7 +32,7 @@ public class DatabaseUsers {
     
     private DatabaseUsers(){
         filegestor = new FileGestor();
-        userFactory = UserFactory.GetInstance();
+        userFactory = new UserFactory();
         path = "./USERS.txt";
     }
     public static DatabaseUsers GetInstance(){

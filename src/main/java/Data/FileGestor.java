@@ -1,3 +1,11 @@
+package Data;
+
+
+
+/**
+ *
+ * @author CARLOS_MIRANDA
+ */
 
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -7,10 +15,6 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 
-/**
- *
- * @author CARLOS_MIRANDA
- */
 public class FileGestor {
     public File openFile(String path){
         //opens the file, and create it if doesn't exist 

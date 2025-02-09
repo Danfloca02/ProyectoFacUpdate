@@ -1,0 +1,8 @@
+Data\FileGestor.class
+Model\User.class
+Model\UserFactory.class
+Data\DatabaseUsers.class
+FacUpdate.class
+Model\Student.class
+Model\Teacher.class
+Model\Career.class

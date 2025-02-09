@@ -1,4 +1,4 @@
-
+package Model;
 /**
  *
  * @author CARLOS_MIRANDA
