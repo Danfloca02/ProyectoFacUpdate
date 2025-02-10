@@ -20,19 +20,19 @@ import java.util.Scanner;
 
 
 import Model.UserFactory;
+import java.io.BufferedWriter;
 
 
 
 //code:
 public class DatabaseUsers {
     private static DatabaseUsers instance;
-    private static UserFactory userFactory;
     private static FileGestor filegestor;
     private static String path;
     
     private DatabaseUsers(){
         filegestor = new FileGestor();
-        userFactory = new UserFactory();
+        
         path = "./USERS.txt";
     }
     public static DatabaseUsers GetInstance(){
@@ -44,10 +44,37 @@ public class DatabaseUsers {
     public boolean createNewUser(User user){
         if(user == null){return false;}
         
-        if(user instanceof Teacher){
+        User a = userSearchByID(user.ID);
+        if(a == null){
+            StringBuilder niuUser = new StringBuilder();
+            niuUser.append(user.ID);
+            niuUser.append(" ");
+            if(user instanceof Teacher){
+                niuUser.append("TEACHER");
+            }
+            else{
+                niuUser.append("STUDENT");
+            }
+            niuUser.append(" ");
+            niuUser.append(user.userName);
+            niuUser.append(" ");
+            niuUser.append(user.Email);
+            niuUser.append(" ");
+            niuUser.append(user.Password);
+            niuUser.append(" ");
+            niuUser.append(user.Kareer.name());
             
+            String newUser = niuUser.toString();
+            
+            try(BufferedWriter bw = filegestor.getBufferedWriter(path, true)){
+                bw.write(newUser);
+                bw.newLine();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+            return true;
         }
-        return true;
+        return false;
     }
     
     
@@ -57,21 +84,21 @@ public class DatabaseUsers {
         String data = userSearch(String.valueOf(ID), "ID");
         if(data == null)return null;
         String[] parts = data.split(" ");
-        User ret = userFactory.createUser(parts[1], Long.parseLong(parts[0]), parts[2], parts[3], parts[4], parts[5]);
+        User ret = UserFactory.createUser(parts[1], Long.parseLong(parts[0]), parts[2], parts[3], parts[4], parts[5]);
         return ret;
     }
     public User userSearchByEMAIL(String EMAIL){
         String data = userSearch(EMAIL, "EMAIL");
         if(data == null)return null;
         String[] parts = data.split(" ");
-        User ret = userFactory.createUser(parts[1], Long.parseLong(parts[0]), parts[2], parts[3], parts[4], parts[5]);
+        User ret = UserFactory.createUser(parts[1], Long.parseLong(parts[0]), parts[2], parts[3], parts[4], parts[5]);
         return ret;
     }
     public User userSearchByUSERNAME(String USERNAME){
         String data = userSearch(USERNAME, "USERNAME");
         if(data == null)return null;
         String[] parts = data.split(" ");
-        User ret = userFactory.createUser(parts[1], Long.parseLong(parts[0]), parts[2], parts[3], parts[4], parts[5]);
+        User ret = UserFactory.createUser(parts[1], Long.parseLong(parts[0]), parts[2], parts[3], parts[4], parts[5]);
         return ret;
     }
     public List<User> getUserList(){
@@ -83,7 +110,7 @@ public class DatabaseUsers {
             while (br.hasNextLine()) {
                 String line = br.nextLine();
                 String[] parts = line.split(" ");
-                ret.add(userFactory.createUser(parts[1], Long.parseLong(parts[0]), parts[2], parts[3], parts[4], parts[5]));
+                ret.add(UserFactory.createUser(parts[1], Long.parseLong(parts[0]), parts[2], parts[3], parts[4], parts[5]));
             }
         }catch (IOException e) {
             System.err.println("Esto no deberia fallar, y fallo");

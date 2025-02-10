@@ -21,7 +21,7 @@ public class FileGestor {
         File file = new File(path);
         try{
             if(file.createNewFile()){
-                System.out.print(file.getName());
+                
             }
         }catch(IOException e){
             e.printStackTrace();
@@ -37,7 +37,7 @@ public class FileGestor {
     public BufferedWriter getBufferedWriter(String path, boolean mode) throws IOException{
         //return a bufferedReader with the path specified
         File rd = openFile(path);
-        BufferedWriter rt = new BufferedWriter(new FileWriter(rd));
+        BufferedWriter rt = new BufferedWriter(new FileWriter(path, mode));
         return rt;
     }
     public Scanner getScanner(String path) throws IOException{
