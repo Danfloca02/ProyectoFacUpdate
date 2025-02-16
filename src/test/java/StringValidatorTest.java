@@ -15,7 +15,7 @@ import Model.UserFactory;
 public class StringValidatorTest {
     public static void main(String[] args) {
         
-        User user = UserFactory.createUser("STUDENT", 31080238, "CARLOS_11", "Carlos@gmail.com", "Oo11.2", "COMPUTACION");
+        User user = UserFactory.createUser("STUDENT", 14861479, "Yarlinbrito", "yarlinbrito@gmail.com", "Yarlin.123", "COMPUTACION");
         System.out.println(StringValidator.validateEmail(user.Email));
         System.out.println(StringValidator.validatePassword(user.Password));
         System.out.println(StringValidator.validateUsername(user.userName));

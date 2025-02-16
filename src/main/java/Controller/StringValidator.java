@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public class StringValidator {
         public static boolean validateUsername(String username) {
-            String regex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z0-9._%+-]{6,20}$";
+            String regex = "^(?=.*[A-Za-z])[A-Za-z0-9._%+-]{3,20}$";
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(username);
 

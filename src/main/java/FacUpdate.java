@@ -1,3 +1,10 @@
+
+import Controller.ViewController;
+
+
+
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
@@ -9,6 +16,8 @@
 public class FacUpdate {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        ViewController VC = ViewController.GetInstance();
+        VC.StartFacUpdate();
+        
     }
 }

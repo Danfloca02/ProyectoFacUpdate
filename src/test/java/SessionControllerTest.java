@@ -15,7 +15,7 @@ import Model.UserFactory;
 public class SessionControllerTest {
     static SesionController test = SesionController.GetInstance();
     public static void main(String[] args) {
-        User a = UserFactory.createUser("STUDENT", 31080238, "CARLOS_11", "Carlos@gmail.com", "Oo11.2", "COMPUTACION");
+        User a = UserFactory.createUser("STUDENT", 31080238, "CARLOS_11", "Carlos@gmail.com", "Carlos.11", "COMPUTACION");
         System.out.println(loginTest(Long.toString(a.ID), a.Password));
         System.out.println(loginTest(a.Email,a.Password));
         System.out.println(loginTest(a.userName,a.Password));
