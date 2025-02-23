@@ -88,7 +88,7 @@ public class DatabasePublications {
         try(Scanner br = filegestor.getScanner(path)){
             while (br.hasNextLine()) {
                 ret.add(readEventWithStructure(br));
-                System.out.println(ret.getFirst().getTitulo());
+                System.out.println(ret.get(ret.size()-1).getTitulo());
                 
             }
             
