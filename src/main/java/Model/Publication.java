@@ -40,7 +40,7 @@ class Comment {
 public class Publication {
     private long PUBLICATION_ID;
     private long AUTOR_ID;
-    private String autorName;
+    
     private String text;
     private int likes;
     private List<Comment> comments;
@@ -48,10 +48,10 @@ public class Publication {
     private LocalDateTime date;
     // Variable para la imagen (falta)
 
-    public Publication(long PUBLICATION_ID, long AUTOR_ID, String autorName, String text) {
+    public Publication(long PUBLICATION_ID, long AUTOR_ID, String text) {
         this.PUBLICATION_ID = PUBLICATION_ID;
         this.AUTOR_ID = AUTOR_ID;
-        this.autorName = autorName;
+        
         this.text = text;
         this.likes = 0;
         this.comments = new ArrayList();
@@ -65,10 +65,6 @@ public class Publication {
 
     public long getAUTOR_ID () {
         return this.AUTOR_ID;
-    }
-
-    public String getAutorName () {
-        return this.autorName;
     }
 
     public String getText () {
@@ -85,5 +81,9 @@ public class Publication {
 
     public List<Long> getUsersWhoReacted () {
         return this.usersWhoReacted;
+    }
+    
+    public void setPUBLICATION_ID(long id){
+        this.PUBLICATION_ID = id;
     }
 }

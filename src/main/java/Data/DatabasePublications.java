@@ -45,11 +45,11 @@ public class DatabasePublications {
         List<Publication> publications =  getPublicationList();
         long id = 0;
         if(!publications.isEmpty()){
-            id = publications.get(publications.size() - 1).getPUBLICATIONID();
+            id = publications.get(publications.size() - 1).getPUBLICATION_ID();
         }
         
         id++;
-        publication.setEventID(id);
+        publication.setPUBLICATION_ID(id);
         System.out.println(id);
         publications.add(publication);
         savePublications(publications);
@@ -59,7 +59,7 @@ public class DatabasePublications {
         List<Publication> publications = this.getPublicationList();
         boolean found = false;
         for(Publication publication : publications){
-            if(PublicationID == publication.getPUBLICATIONID()){
+            if(PublicationID == publication.getPUBLICATION_ID()){
                 publications.remove(publication);
                 found = true;
                 break;
@@ -73,7 +73,7 @@ public class DatabasePublications {
         List<Publication> publications = this.getPublicationList();
         boolean found = false;
         for(Publication publication : publications){
-            if(PublicationID == publication.getPUBLICATIONID()){
+            if(PublicationID == publication.getPUBLICATION_ID()){
                 publication = newData;
                 found = true;
                 break;
@@ -88,7 +88,7 @@ public class DatabasePublications {
         try(Scanner br = filegestor.getScanner(path)){
             while (br.hasNextLine()) {
                 ret.add(readEventWithStructure(br));
-                System.out.println(ret.get(ret.size()-1).getTitulo());
+                
                 
             }
             
