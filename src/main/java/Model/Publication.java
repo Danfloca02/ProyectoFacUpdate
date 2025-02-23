@@ -48,6 +48,30 @@ public class Publication {
     private LocalDateTime date;
     // Variable para la imagen (falta)
 
+    public void setAUTOR_ID(long AUTOR_ID) {
+        this.AUTOR_ID = AUTOR_ID;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void setUsersWhoReacted(List<Long> usersWhoReacted) {
+        this.usersWhoReacted = usersWhoReacted;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
     public Publication(long PUBLICATION_ID, long AUTOR_ID, String text) {
         this.PUBLICATION_ID = PUBLICATION_ID;
         this.AUTOR_ID = AUTOR_ID;
