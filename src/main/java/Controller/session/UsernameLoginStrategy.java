@@ -5,7 +5,8 @@
 package Controller.session;
 
 import Controller.StringValidator;
-import static Controller.session.SesionController.DB;
+
+import Data.DatabaseUsers;
 import Model.User;
 
 /**
@@ -13,8 +14,10 @@ import Model.User;
  * @author USER
  */
 public class UsernameLoginStrategy implements LoginStrategy{
+    private DatabaseUsers DB;
     @Override
     public boolean authenticate(String data, String Password){
+        DB = DatabaseUsers.GetInstance();
         User session = DB.userSearchByUSERNAME(data);
         // Verifica si la búsqueda del usuario por ID retornó nulo
         if (session == null) return false;

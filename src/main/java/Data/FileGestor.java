@@ -44,5 +44,9 @@ public class FileGestor {
         File rd = openFile(path);
         return (new Scanner(rd));
     }
+    public void CleanFile(String path) throws IOException{
+        FileWriter fw = new FileWriter(path, false);
+        fw.write("");       
+    }
     
 }

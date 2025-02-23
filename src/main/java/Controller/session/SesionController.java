@@ -17,8 +17,8 @@ import Model.UserFactory;
 
         
 public class SesionController {
-    static SesionController instance;
-    static DatabaseUsers DB;
+    private static SesionController instance;
+    private static DatabaseUsers DB;
     
     private SesionController(){
         DB = DatabaseUsers.GetInstance();
