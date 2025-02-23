@@ -5,7 +5,6 @@
 package Model;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,101 +12,78 @@ import java.util.List;
  *
  * @author USER
  */
-public class Publication {
-    private long PUBLICATIONID;
-    private String titulo;
-    private long autor;
-    private String place;
-    private LocalDateTime fecha;
-    private String descripcion;
-    private int maxCapacity;
-    private List<Long> participants;
 
-    public Publication(long EVENTID,String titulo, int autor,String place, LocalDateTime fecha, String descripcion, int maxCapacity, List<Long> participants) {
-        this.PUBLICATIONID = EVENTID;
-        this.titulo = titulo;
-        this.fecha = fecha;
-        this.place = place;
-        this.autor = autor;
-        this.descripcion = descripcion;
-        this.maxCapacity = maxCapacity;
-        this.participants = participants;
+class Comment {
+    private long autorID;
+    private String autorName;
+    private String text;
+
+    public Comment(long autorID, String autorName, String text) {
+        this.autorID = autorID;
+        this.autorName = autorName;
+        this.text = text;
     }
-    public Publication(long EVENTID, String titulo, int autor, String place,LocalDateTime fecha, String descripcion, int maxCapacity) {
-        this.PUBLICATIONID = EVENTID;
-        this.titulo = titulo;
-        this.fecha = fecha;
-        this.place = place;
-        this.autor = autor;
-        this.descripcion = descripcion;
-        this.maxCapacity = maxCapacity;
-        participants = new ArrayList<>();
+
+    public long getAutorID () {
+        return this.autorID;
     }
-    public Publication(){
-        this.PUBLICATIONID = 0;
-        this.titulo = "";
-        this.fecha = LocalDateTime.of(1,1,1,1,1);
-        this.place = "";
-        this.autor = 0;
-        this.descripcion = "";
-        this.maxCapacity = 0;
-        participants = new ArrayList<>();
+
+    public String getAutorName () {
+        return this.autorName;
     }
-    public String getTitulo() {
-        return titulo;
+
+    public String getText () {
+        return this.text;
     }
-    public LocalDateTime getFecha() {
-        return fecha;
+}
+
+public class Publication {
+    private long PUBLICATION_ID;
+    private long AUTOR_ID;
+    private String autorName;
+    private String text;
+    private int likes;
+    private List<Comment> comments;
+    private List<Long> usersWhoReacted;
+    private LocalDateTime date;
+    // Variable para la imagen (falta)
+
+    public Publication(long PUBLICATION_ID, long AUTOR_ID, String autorName, String text) {
+        this.PUBLICATION_ID = PUBLICATION_ID;
+        this.AUTOR_ID = AUTOR_ID;
+        this.autorName = autorName;
+        this.text = text;
+        this.likes = 0;
+        this.comments = new ArrayList();
+        this.usersWhoReacted = new ArrayList();
+        this.date = LocalDateTime.now();
     }
-    public String getDescripcion() {
-        return descripcion;
+
+    public long getPUBLICATION_ID () {
+        return this.PUBLICATION_ID;
     }
-    public String getPlace() {
-        return place;
+
+    public long getAUTOR_ID () {
+        return this.AUTOR_ID;
     }
-    public Integer getMaxCapacity() {
-        return maxCapacity;
+
+    public String getAutorName () {
+        return this.autorName;
     }
-    public List<Long> getParticipants() {
-        return participants;
+
+    public String getText () {
+        return this.text;
     }
-    public long getPUBLICATIONID(){
-        return PUBLICATIONID;
+
+    public int getLikes () {
+        return this.likes;
     }
-    public long getAutorID(){
-        return autor;
+
+    public List<Comment> getComments () {
+        return this.comments;
     }
-    
-    public void setTitulo(String line){
-        this.titulo = line;
-    }
-    public void setEventID(long line){
-        this.PUBLICATIONID = line;
-    }
-    public void setFecha(LocalDateTime fecha){
-        this.fecha = fecha;
-    }
-    public void setAutorID(Long line){
-        this.autor = line;
-    }
-    public void setDescription(String line){
-        this.descripcion = line;
-    }
-    public void setMaxCapacity(int line){
-        this.maxCapacity = line;
-    }
-    public void setParticipants(List<Long> a){
-        this.participants = a;
-    }
-    public void setPlace(String line){
-        place = line;
-    }
-    public boolean addParticipant(Long participant) {
-        if (this.participants.size() < this.maxCapacity) {
-            this.participants.add(participant);
-            maxCapacity--;
-            return true;
-        } 
-        return false;
+
+    public List<Long> getUsersWhoReacted () {
+        return this.usersWhoReacted;
     }
 }
