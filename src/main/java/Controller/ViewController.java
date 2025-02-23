@@ -11,13 +11,15 @@ import View.*;
  * @author USER
  */
 public class ViewController {
-    public static ViewController instance;
+    private static ViewController instance;
     public LoginView LOGINVIEW;
     public RegisterView REGISTERVIEW;
+    public PrincipalFeed PRINCIPALFEED;
     
     private ViewController(){
         LOGINVIEW = LoginView.GetInstance();
         REGISTERVIEW = RegisterView.GetInstance();
+        PRINCIPALFEED = PrincipalFeed.GetInstance();
     }
     public static ViewController GetInstance(){
         if(instance==null)instance = new ViewController();
@@ -33,6 +35,14 @@ public class ViewController {
     }
     public void RegisterToLogin(){
         REGISTERVIEW.setVisible(false);
+        LOGINVIEW.setVisible(true);
+    }
+    public void LoginToPrincipalFeed(){
+        LOGINVIEW.setVisible(false);
+        PRINCIPALFEED.setVisible(true);
+    }
+    public void PrincipalFeedToLogin(){
+        PRINCIPALFEED.setVisible(false);
         LOGINVIEW.setVisible(true);
     }
 }

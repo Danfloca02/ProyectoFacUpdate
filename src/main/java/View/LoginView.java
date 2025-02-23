@@ -225,6 +225,7 @@ public class LoginView extends javax.swing.JFrame {
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
         if(SC.login(DataUser.getText(), PasswordUsser.getText())){
             System.out.println("HAZ ACCEDIDO");
+            ViewController.GetInstance().LoginToPrincipalFeed();
         }
         else{
             System.out.println("ERROR, LA CUENTA NO EXISTE O LOS DATOS SON INCORRECTOS");

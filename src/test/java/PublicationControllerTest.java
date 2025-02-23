@@ -1,6 +1,7 @@
 
 import Controller.Publications.PublicationController;
 import Data.FileGestor;
+import Model.Comment;
 import Model.Publication;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -16,24 +17,36 @@ import java.util.List;
  * @author USER
  */
 public class PublicationControllerTest {
-    private static PublicationController CC = PublicationController.GetInstance();
+    private static PublicationController PC = PublicationController.GetInstance();
     //long EVENTID, String titulo, int autor, String place,LocalDateTime fecha, String descripcion, int maxCapacity
     
     
     public static void main(String[] args) {
         
+        Comment C1 = new Comment();
+        C1.setAutorID(31080013);C1.setText("BRUTAL");
         
-        CC.addPublication(0, "PRUEBA1", 31080238, "Plaza Langosta", LocalDateTime.of(2025, 2, 22,0,0),"prueba1", 18);
-        CC.addPublication(0, "PRUEBA2", 31080238, "Parrilleras", LocalDateTime.of(2025, 2, 22,0,0),"prueba2", 2);
-        CC.addPublication(0, "PRUEBA3", 31080238, "Parrilleras", LocalDateTime.of(2025, 2, 22,0,0),"prueba3", 2);
-        System.out.print("ESCRIBIO");
+        //TestAddPublication();
         
-        List<Publication> a = CC.getPublications();
-        for(Publication e : a){
-            System.out.print(e.getPUBLICATIONID());
-            System.out.print(" ");
-            System.out.println(e.getTitulo());
+        
+        
+        
+        
+        List<Publication> lista = PC.getPublications();
+        for(Publication p : lista){
+            System.out.println(p.toString());
         }
-        
+    }
+    
+    public static void TestAddPublication(){
+        PC.addPublication(31080238, "Test1 Test1 Espacios", "C:/AppData/Terraria");
+        PC.addPublication(31080238, "Test2", "C:/AppData/Minecraft");
+        PC.addPublication(31080238, "Test3", "C:/AppData/Sky");
+    }
+    public static void TestAddLike(long PublicationID, long UserID){
+        PC.AddLike(PublicationID, UserID);
+    }
+    public static void TestAddComment(long PublicationID, Comment comm){
+        PC.AddComment(PublicationID, comm);
     }
 }

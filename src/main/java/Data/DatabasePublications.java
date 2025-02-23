@@ -11,8 +11,8 @@ package Data;
 
 
 
+import Model.Comment;
 import Model.Publication;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,7 @@ import java.util.Scanner;
 
 import java.io.BufferedWriter;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 
@@ -41,8 +42,9 @@ public class DatabasePublications {
         }
         return instance;
     }
-    public boolean createNewPublication(Publication publication){
+    public Publication createNewPublication(Publication publication){
         List<Publication> publications =  getPublicationList();
+        
         long id = 0;
         if(!publications.isEmpty()){
             id = publications.get(publications.size() - 1).getPUBLICATION_ID();
@@ -50,10 +52,16 @@ public class DatabasePublications {
         
         id++;
         publication.setPUBLICATION_ID(id);
-        System.out.println(id);
+        
+        /*
+        CODIGO QUE COPIE LA IMAGEN A LA DIRECCION ./IMAGENES/
+        Y QUE LE DE UN NUEVO NOMBRE QUE SEA EL ID DE LA PUBLICACION
+        */
+        
+        
         publications.add(publication);
         savePublications(publications);
-        return true;           
+        return publication;           
     }
     public boolean deletePublication (Long PublicationID){
         List<Publication> publications = this.getPublicationList();
@@ -72,9 +80,9 @@ public class DatabasePublications {
     public boolean ModifyPublication(Long PublicationID, Publication newData){
         List<Publication> publications = this.getPublicationList();
         boolean found = false;
-        for(Publication publication : publications){
-            if(PublicationID == publication.getPUBLICATION_ID()){
-                publication = newData;
+        for(int i = 0; i < publications.size(); i++){
+            if(PublicationID.equals(publications.get(i).getPUBLICATION_ID())){
+                publications.set(i, newData);
                 found = true;
                 break;
             }
@@ -87,7 +95,8 @@ public class DatabasePublications {
         
         try(Scanner br = filegestor.getScanner(path)){
             while (br.hasNextLine()) {
-                ret.add(readEventWithStructure(br));
+                
+                ret.add(readWithStructure(br));
                 
                 
             }
@@ -95,7 +104,7 @@ public class DatabasePublications {
         }catch (IOException e) {
             System.err.println("Esto no deberia fallar, y fallo");
         }
-        System.out.println(ret.size());
+        
         return ret;
     }
     public void savePublications(List<Publication> publications){
@@ -107,138 +116,164 @@ public class DatabasePublications {
         
         try(BufferedWriter bw = filegestor.getBufferedWriter(path, true)){
             for(Publication event : publications){
-                writeWithStructure(bw, event);
+                writeWithStructure(event);
             }
         }catch(IOException e){
             e.printStackTrace();
         }
     }
-    private void writeWithStructure(BufferedWriter bw, Publication publication) throws IOException{
-        /*
-        bw.write("#I");bw.newLine();
-        bw.write(Long.toString((long) publication.getEVENTID()));bw.newLine();
-        bw.write("#T");bw.newLine();
-        bw.write(publication.getTitulo());bw.newLine();
-        bw.write("#F");bw.newLine();
-        String fecha = Integer.toString(publication.getFecha().getYear()) + " " + Integer.toString(publication.getFecha().getMonthValue()) + " " + Integer.toString(publication.getFecha().getDayOfMonth());
-        bw.write(fecha);bw.newLine();
-        bw.write("#PL");bw.newLine();
-        bw.write(publication.getPlace());bw.newLine();
-        bw.write("#A");bw.newLine();
-        bw.write(Long.toString((long)publication.getAutorID()));bw.newLine();
-        bw.write("#D");bw.newLine();
-        bw.write(publication.getDescripcion());bw.newLine();
-        /*
-        //falla
-        bw.write("#M ");
-        bw.write(Integer.toString((int)publications.getMaxCapacity()));
-        bw.newLine();
-        //por alguna razon imprime M (endl) M <valorReal>
-        
-        bw.write("#P");bw.newLine();
-        List<Long> a = publication.getParticipants();
-        for(long id : a){
-            bw.write(Long.toString((long) id));bw.write(" ");
+    private void writeWithStructure(Publication publication) throws IOException{
+        //escribir los datos iniciales
+        try(BufferedWriter bw = filegestor.getBufferedWriter(path, true)){
+            bw.write(Long.toString(publication.getPUBLICATION_ID()));
+            bw.newLine();
+            bw.write(Long.toString(publication.getAUTOR_ID()));
+            bw.newLine();
+            bw.write("<\n");
+            bw.write(publication.getText());
+            bw.write("\n>\n");
+            LocalDateTime fech = publication.getDate();
+            String fecha = Integer.toString(fech.getYear()) + " " + Integer.toString(fech.getMonthValue()) + " " + Integer.toString(fech.getDayOfMonth());
+            bw.write(fecha);
+            bw.newLine();
+            bw.write(publication.getImage_path());
+            bw.newLine();
+        }catch(IOException e){
+            e.printStackTrace();
         }
-        bw.newLine();
-        */
-    }
-    private Publication readEventWithStructure(Scanner bw){
-        /*
-        Publication event = new Publication();
-        
-        //leer EventID
-        String line = bw.nextLine(); 
-        if(!line.equals("#I"))return null;
-        line = bw.nextLine();
-        event.setEventID(Long.parseLong(line));
-        
-        //leer TITLE
-        line = bw.nextLine();
-        if(!"#T".equals(line))return null;
-        line = bw.nextLine();
-        event.setTitulo(line);
-        
-        //leer FECHA
-        line = bw.nextLine();
-        if(!"#F".equals(line))return null;
-        line = bw.nextLine();
-        String separado[] = line.split(" ");
-        LocalDateTime fecha = LocalDateTime.of(Integer.parseInt(separado[0]), Integer.parseInt(separado[1]), Integer.parseInt(separado[1]),0,0);
-        event.setFecha(fecha);
-        
-        //leer Place
-        line = bw.nextLine();
-        if(!"#PL".equals(line))return null;
-        line = bw.nextLine();
-        event.setPlace(line);
-        
-        //leer AutorID
-        line = bw.nextLine();
-        if(!"#A".equals(line))return null;
-        line = bw.nextLine();
-        event.setAutorID(Long.valueOf(line));
-        
-        //leer Description
-        line = bw.nextLine();
-        if(!"#D".equals(line))return null;
-        String description = "";
-        
-        while(!line.contains("#P")){
-            line = bw.nextLine();
-            description += line;
-            description += "\n";
+        //escribir likes y comentarios
+        try(BufferedWriter bw = filegestor.getBufferedWriter(path, true)){
+            //escribir los likes
             
-        }
-        event.setDescription(description);
-        /*
-        //leer MaxCapacity
-        separado = line.split(" ");
-        event.setMaxCapacity(Integer.parseInt(separado[1]));
-        */
-        //leer inscritos
-        /*line = bw.nextLine();
-        if(!"#P".equals(line))return null;
+            bw.write(Integer.toString(publication.getLikes()));
+            bw.newLine();
+            if(publication.getLikes() > 0){
+                List<Long> a = publication.getUsersWhoReacted();
+                for(long id : a){
+                    bw.write(Long.toString(id));
+                    bw.write(" ");
+                }
+                bw.newLine();
+            }
+            
+            
+            //escribir los comentarios
+            List<Comment> comments = publication.getComments();
+            int commentsSize = comments.size();
+            bw.write(Integer.toString(commentsSize));
+            bw.newLine();
+            for(Comment com : comments){
+                String line = Long.toString(com.getAutorID());
+                bw.write(line);
+                bw.newLine();
+                bw.write("<\n");
+                line = com.getText();
+                bw.write(line);
+                bw.write("\n>\n");                
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }       
+    }
+    private Publication readWithStructure(Scanner scan){
+        if(!scan.hasNext())return null;
+        Publication ret = new Publication();
         
-        line = bw.nextLine();
-        List<Long> participants = new ArrayList<>();
-        if(line.equals("")){
-        }
-        else{
-            separado = line.split(" ");
-            for(String s : separado){
-                participants.add(Long.valueOf(s));
+        long aux = scan.nextLong();
+        ret.setPUBLICATION_ID(aux);
+        aux = scan.nextLong();
+        ret.setAUTOR_ID(aux);
+        scan.nextLine(); // consume la linea
+        
+        StringBuilder descripcion = new StringBuilder();
+        if (scan.next().equals("<")) {
+            while (scan.hasNext()) {
+                String linea = scan.nextLine();
+                if (linea.contains(">")) {
+                    break;
+                }
+                descripcion.append(linea);
             }
         }
+        ret.setText(descripcion.toString());
         
-        event.setParticipants(participants);
+        int aux2 = scan.nextInt();
+        int aux3 = scan.nextInt();
+        int aux4 = scan.nextInt();
+        ret.setDate(LocalDateTime.of(aux2,aux3,aux4, 0,0));
+        
+        scan.nextLine();
+        
+        ret.setImage_path(scan.nextLine());
+        
+        //leer los likes
+        aux2 = scan.nextInt();
+        List<Long> uwl = new ArrayList<>();
+        if(aux2>0){
+            for(int i = 0; i < aux2; i++){
+                aux = scan.nextLong();
+                uwl.add(aux);
+            }  
+        }
+        
+        ret.setLikes(aux2);
+        ret.setUsersWhoReacted(uwl);
         
         
-        return event;
-        */
-        return null;
+        //leer los comentarios
+        aux2 = scan.nextInt();
+        List<Comment> comentarios = new ArrayList<>();
+        if(aux2 > 0){
+            for(int i = 0; i < aux2; i++){
+                Comment Caux = new Comment();
+                Caux.setAutorID(scan.nextLong());
+                //se lee el contenido del comentario
+                StringBuilder Cdescripcion = new StringBuilder();
+                if (scan.next().equals("<")) {
+                    while (scan.hasNext()) {
+                        String linea = scan.nextLine();
+                        if (linea.contains(">")) {
+                            Cdescripcion.append(linea, 0, linea.indexOf(">"));
+                            break;
+                        }
+                        Cdescripcion.append(linea);
+                    }
+                }
+                Caux.setText(Cdescripcion.toString());
+            
+                //se aniade el comentario
+                comentarios.add(Caux);
+            }
+        }
+        else{
+            scan.nextLine();
+        }
+        
+        ret.setComments(comentarios);
+        
+        return ret;
     }
 
     
 
 //file structure:
     /*
-    #I
-    EVENTID
-    #T
-    TITLE
-    #F
-    AAAA MM DD
-    #PL
-    PLACE
-    #A
-    AUTORID
-    #D
-    "DESCRIPTION"
-    #M
-    MAXPARTICIPANTS
-    #P
-    PARTICIPANTS
+    Publication ID <long>
+    Autor ID <long>
+    <
+    descripcion <string> (esta entre < > y puede tener varias lineas
+    >
+    AAAA MM DD <string>
+    imagepath <strign>
+    NumberOfLikes
+    list of UsersIDWhoLiked
+    NumberOfComments
+    list of Comments
+    (each comment is Comment Autor ID
+                    <
+                    text
+                    >
+    )
     */
     
     

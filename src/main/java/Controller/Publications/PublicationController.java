@@ -1,6 +1,7 @@
 package Controller.Publications;
 
 import Data.DatabasePublications;
+import Model.Comment;
 import java.time.LocalDateTime;
 
 import java.util.List;
@@ -10,25 +11,27 @@ import Model.User;
 public class PublicationController {
     private static PublicationController instance;
     private DatabasePublications DB;
-    public List<Publication> eventos;
+    public List<Publication> publications;
 
     private PublicationController() {
         DB = DatabasePublications.GetInstance();
         loadPublications();
     }
     private void loadPublications(){
-        eventos = DB.getPublicationList();
+        publications = DB.getPublicationList();
     }
     public static PublicationController GetInstance(){
         if(instance == null)instance = new PublicationController();
         return instance;
     }
     
-    public void addPublication(String titulo, int autor, String descripcion) {
+    public Publication addPublication(long AutorID, String descripcion, String image_path) {
         //long PUBLICATION_ID, long AUTOR_ID, String autorName, String text
-        Publication publication = new Publication(0, autor, descripcion);
-        DB.createNewPublication(publication);
+        Publication publication = new Publication(0, AutorID, descripcion, image_path);
+        publication = DB.createNewPublication(publication);
         loadPublications();
+        return publication;
+        
     }
     public void deletePublication(Publication event){
         DB.deletePublication(event.getPUBLICATION_ID());
@@ -36,28 +39,36 @@ public class PublicationController {
     }
 
     public List<Publication> getPublications() {
-        return eventos;
+        return publications;
     }
-    /*
-    public void subscribeUser(Publication event, User user){
-        event.addParticipant(user.ID);
-        DB.ModifyPublication(event.getPUBLICATION_ID(), event);
+    
+    public void AddComment(long PublicationID, Comment comment){
+        Publication p = searchPublication(PublicationID);
+        List<Comment> publicationComments = p.getComments();
+        publicationComments.add(comment);
+        p.setComments(publicationComments);
+        DB.ModifyPublication(PublicationID, p);
         loadPublications();
     }
-    */
-    public void printPublications() {
-        //solo para probar las cosas mas rapido
-        for (Publication evento : eventos) {
-            /*
-            System.out.println("Nombre E: " + evento.getTitulo());
-            System.out.println("Fecha: " + evento.getFecha());
-            System.out.println("Descripcion: " + evento.getDescripcion());
-            System.out.println("Capacidad Max: " + evento.getMaxCapacity());
-            System.out.println("Participantes: " + evento.getParticipants());
-            System.out.println("---------------------------");
-            */
-        }
+    public void AddLike(long PublicationID, long UserID){
+        Publication p = searchPublication(PublicationID);
+        List<Long> publicationReacts = p.getUsersWhoReacted();
+        publicationReacts.add(UserID);
+        p.setUsersWhoReacted(publicationReacts);
+        System.out.println(p.getLikes());
+        DB.ModifyPublication(PublicationID, p);
+        loadPublications();
     }
+    public Publication searchPublication(long ID){
+        for(Publication p : publications){
+            if(p.getPUBLICATION_ID() == ID){
+                return p;
+            }
+        }
+        return null;
+    }
+    
+    
 
 }
 

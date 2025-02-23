@@ -12,6 +12,7 @@ package Controller.session;
 
 import Controller.StringValidator;
 import Data.DatabaseUsers;
+import Model.User;
 import Model.UserFactory;
 
 
@@ -19,9 +20,11 @@ import Model.UserFactory;
 public class SesionController {
     private static SesionController instance;
     private static DatabaseUsers DB;
+    public static User ActualSesion;
     
     private SesionController(){
         DB = DatabaseUsers.GetInstance();
+        ActualSesion = null;
     }
     
     public static SesionController GetInstance(){
@@ -49,7 +52,18 @@ public class SesionController {
         if(strategy == null){
             return false;
         }
-        return strategy.authenticate(data, password);
+        boolean log =  strategy.authenticate(data, password);
+        if(log){
+            if (strategy instanceof IDLoginStrategy) {
+                ActualSesion = DB.userSearchByID(Long.parseLong(data));
+            } else if (strategy instanceof UsernameLoginStrategy) {
+                ActualSesion = DB.userSearchByUSERNAME(data);
+            } else if (strategy instanceof EmailLoginStrategy) {
+                ActualSesion = DB.userSearchByEMAIL(data);
+            }
+            return true;
+        }
+        return false;
     }
     public boolean register(String AccountType, String Email, String Password, String ID, String Username){
         

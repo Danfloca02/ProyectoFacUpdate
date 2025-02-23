@@ -1,0 +1,44 @@
+1
+31080238
+<
+Test1 Test1 Espacios
+>
+2025 2 23
+C:/AppData/Terraria
+0
+1
+31080013
+<
+BRUTAL
+>
+2
+31080238
+<
+Test2
+>
+2025 2 23
+C:/AppData/Minecraft
+1
+31080013 
+3
+31080013
+<
+BRUTAL
+>
+31080013
+<
+BRUTAL
+>
+31080013
+<
+BRUTAL
+>
+3
+31080238
+<
+Test3
+>
+2025 2 23
+C:/AppData/Sky
+0
+0
