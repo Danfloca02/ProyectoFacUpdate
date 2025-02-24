@@ -1,2 +1,4 @@
 31080238 STUDENT Carlos_11 carlosmirandaucv@gmail.com Carlos.11 COMPUTACION
 14861479 STUDENT Yarlinbrito yarlinbrito@gmail.com Yarlin.123 COMPUTACION
+12345678 STUDENT PRUEBA_11 correoprueba@gmail.com Prueba.11 COMPUTACION
+1234567 STUDENT PRUEBA_2 Prueba2@gmail.com Prueba.2 COMPUTACION

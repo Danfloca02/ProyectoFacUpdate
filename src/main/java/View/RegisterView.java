@@ -290,6 +290,8 @@ public class RegisterView extends javax.swing.JFrame {
         
         if(SC.register(AccountType, Email, Password, ID, Username)){
             System.out.println("TE REGISTRASTE CON USUARIO: " + Username + "Y CONTRASEÑA: " + Password);
+            ClearFields();
+            ViewController.GetInstance().RegisterToLogin();
         }
         else{
             System.out.println("ERROR, LA CUENTA YA EXISTE O LOS DATOS SON INVALIDOS");
