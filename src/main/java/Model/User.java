@@ -15,6 +15,9 @@ public abstract class User {
     public String Password;
     public String Email;
     public Career Kareer;
+
+    public User() {
+    }
     
     public User(long id,String usernm, String email, String password, String caree){
         ID = id;

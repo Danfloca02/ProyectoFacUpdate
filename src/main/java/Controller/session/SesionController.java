@@ -33,7 +33,9 @@ public class SesionController {
         }
         return instance;
     }
-    
+    public User SearchUserByID(Long id){
+        return DB.userSearchByID(id);
+    }
     public boolean login(String data, String password){
         
         LoginStrategy strategy = null;
