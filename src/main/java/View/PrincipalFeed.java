@@ -4,10 +4,17 @@
  */
 package View;
 import Controller.Publications.PublicationController;
+import Controller.ViewController;
 import Controller.session.SesionController;
 import Model.Publication;
 import Model.User;
+import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 /**
  *
  * @author USER
@@ -25,35 +32,57 @@ public class PrincipalFeed extends javax.swing.JFrame {
         initComponents();
         PC = PublicationController.GetInstance();
         SC = SesionController.GetInstance();
-        LoadPublications();
-        UpdateActualView();
-        
     }
     
     public static PrincipalFeed GetInstance(){
         if(instance == null)instance = new PrincipalFeed();
         return instance;
     }
+    public void OpenFeed(){
+        LoadPublications();
+        SetPublication(0);
+        UpdateActualView();
+    }
     private void LoadPublications(){
         actualFeed = PC.getPublications();
-        if(!actualFeed.isEmpty())actualView = actualFeed.get(0);
+    }
+    private void SetPublication(int index){
+        actualView = actualFeed.get(index);
     }
     private void NextPublication(){
         int index = actualFeed.indexOf(actualView);
         index = (index + 1) % actualFeed.size();
         actualView = actualFeed.get(index);
     }
+    private void PrevPublication(){
+        int index = actualFeed.indexOf(actualView);
+        index = (index - 1 + actualFeed.size()) % actualFeed.size();
+        actualView = actualFeed.get(index);
+    }
     private void UpdateActualView(){
         if(actualView == null){
-            
             return;
         }
         String name = SC.SearchUserByID(actualView.getAUTOR_ID()).userName;
         PublicationUsername.setText(name);
         DescriptionBox.setText(actualView.getText());
-        
+        updateLikeButton(actualView.getUsersWhoReacted().contains(SC.ActualSession.ID));
+        ChangeImage(actualView.getImage_path());
     }
-
+    
+    void ChangeImage(String path){
+        try {
+            File imageFile = new File(path);
+            ImageIcon imageIcon = new ImageIcon(imageFile.getAbsolutePath());Image image = imageIcon.getImage();
+            Image resizedImage = image.getScaledInstance(428, 279, Image.SCALE_SMOOTH);
+            imageIcon = new ImageIcon(resizedImage);
+            
+            IMAGE_VIEWER.setIcon(imageIcon);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,21 +103,22 @@ public class PrincipalFeed extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        InicioButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         canvas1 = new java.awt.Canvas();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        IMAGE_VIEWER = new javax.swing.JLabel();
         PublicationUsername = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        DescriptionBox = new javax.swing.JLabel();
-        jScrollBar1 = new javax.swing.JScrollBar();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        DescriptionBox = new javax.swing.JTextArea();
         jButton25 = new javax.swing.JButton();
-        jButton26 = new javax.swing.JButton();
-        jButton27 = new javax.swing.JButton();
-        jButton28 = new javax.swing.JButton();
+        LikeButton = new javax.swing.JButton();
+        nextPublicationButton = new javax.swing.JButton();
+        PrevPublicationButton = new javax.swing.JButton();
 
         jButton3.setText("Calendario");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -132,11 +162,11 @@ public class PrincipalFeed extends javax.swing.JFrame {
 
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Inicio");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        InicioButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        InicioButton.setText("Inicio");
+        InicioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                InicioButtonActionPerformed(evt);
             }
         });
 
@@ -183,50 +213,52 @@ public class PrincipalFeed extends javax.swing.JFrame {
         );
 
         jPanel5.setBackground(new java.awt.Color(229, 229, 229));
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
+        jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+
+        IMAGE_VIEWER.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 429, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(IMAGE_VIEWER, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 280, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(IMAGE_VIEWER, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
         );
 
         PublicationUsername.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
         PublicationUsername.setText("Usuario");
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
+        jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jPanel6.setToolTipText("");
 
-        DescriptionBox.setText("Aqui aparecera el texto de la descripcion ");
-        DescriptionBox.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        DescriptionBox.setEditable(false);
+        DescriptionBox.setBackground(new java.awt.Color(255, 255, 255));
+        DescriptionBox.setColumns(20);
+        DescriptionBox.setLineWrap(true);
+        DescriptionBox.setRows(5);
+        jScrollPane1.setViewportView(DescriptionBox);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(DescriptionBox, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 273, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 86, Short.MAX_VALUE))
-                    .addComponent(DescriptionBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGap(0, 146, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
         );
 
         jButton25.setBackground(new java.awt.Color(0, 0, 0));
@@ -241,39 +273,39 @@ public class PrincipalFeed extends javax.swing.JFrame {
             }
         });
 
-        jButton26.setBackground(new java.awt.Color(0, 0, 0));
-        jButton26.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton26.setForeground(new java.awt.Color(255, 255, 255));
-        jButton26.setText("me gusta");
-        jButton26.setInheritsPopupMenu(true);
-        jButton26.setPreferredSize(new java.awt.Dimension(108, 23));
-        jButton26.addActionListener(new java.awt.event.ActionListener() {
+        LikeButton.setBackground(new java.awt.Color(0, 0, 0));
+        LikeButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        LikeButton.setForeground(new java.awt.Color(255, 255, 255));
+        LikeButton.setText("me gusta");
+        LikeButton.setInheritsPopupMenu(true);
+        LikeButton.setPreferredSize(new java.awt.Dimension(108, 23));
+        LikeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton26ActionPerformed(evt);
+                LikeButtonActionPerformed(evt);
             }
         });
 
-        jButton27.setBackground(new java.awt.Color(204, 204, 204));
-        jButton27.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton27.setText(">");
-        jButton27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        jButton27.setInheritsPopupMenu(true);
-        jButton27.setPreferredSize(new java.awt.Dimension(108, 23));
-        jButton27.addActionListener(new java.awt.event.ActionListener() {
+        nextPublicationButton.setBackground(new java.awt.Color(204, 204, 204));
+        nextPublicationButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        nextPublicationButton.setText(">");
+        nextPublicationButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        nextPublicationButton.setInheritsPopupMenu(true);
+        nextPublicationButton.setPreferredSize(new java.awt.Dimension(108, 23));
+        nextPublicationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton27ActionPerformed(evt);
+                nextPublicationButtonActionPerformed(evt);
             }
         });
 
-        jButton28.setBackground(new java.awt.Color(204, 204, 204));
-        jButton28.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton28.setText("<");
-        jButton28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        jButton28.setInheritsPopupMenu(true);
-        jButton28.setPreferredSize(new java.awt.Dimension(108, 23));
-        jButton28.addActionListener(new java.awt.event.ActionListener() {
+        PrevPublicationButton.setBackground(new java.awt.Color(204, 204, 204));
+        PrevPublicationButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        PrevPublicationButton.setText("<");
+        PrevPublicationButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        PrevPublicationButton.setInheritsPopupMenu(true);
+        PrevPublicationButton.setPreferredSize(new java.awt.Dimension(108, 23));
+        PrevPublicationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton28ActionPerformed(evt);
+                PrevPublicationButtonActionPerformed(evt);
             }
         });
 
@@ -283,7 +315,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(99, 99, 99)
-                .addComponent(jButton1)
+                .addComponent(InicioButton)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -317,7 +349,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
                                                 .addGap(18, 18, 18)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(LikeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
                                                         .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(0, 0, Short.MAX_VALUE))
@@ -329,9 +361,9 @@ public class PrincipalFeed extends javax.swing.JFrame {
                                                         .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(PrevPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(19, 19, 19)))
-                                                .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addComponent(nextPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addComponent(jSeparator1))
                         .addGap(22, 22, 22))))
         );
@@ -344,7 +376,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(InicioButton)
                     .addComponent(jButton2)
                     .addComponent(jButton4))
                 .addGap(10, 10, 10)
@@ -361,14 +393,14 @@ public class PrincipalFeed extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LikeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(71, 71, 71)
                         .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                            .addComponent(nextPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PrevPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -398,7 +430,8 @@ public class PrincipalFeed extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+        SC.CloseSession();
+        ViewController.GetInstance().PrincipalFeedToLogin();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -409,25 +442,53 @@ public class PrincipalFeed extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void InicioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioButtonActionPerformed
+        LoadPublications();
+        SetPublication(0);
+    }//GEN-LAST:event_InicioButtonActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton25ActionPerformed
 
-    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton26ActionPerformed
+    private void LikeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LikeButtonActionPerformed
+        boolean isLiked = actualView.getUsersWhoReacted().contains(SC.ActualSession.ID);
+        if(isLiked){
+            PC.DeleteLike(actualView.getPUBLICATION_ID(), SC.ActualSession.ID);
+            
+        }
+        else{
+            PC.AddLike(actualView.getPUBLICATION_ID(), SC.ActualSession.ID);
+            
+        }
+        updateLikeButton(!isLiked);
+        int ind = actualFeed.indexOf(actualView);
+        LoadPublications();
+        SetPublication(ind);
+        
+        
+        
+    }//GEN-LAST:event_LikeButtonActionPerformed
+    private void updateLikeButton(boolean isLiked){
+        if(isLiked){
+            LikeButton.setBorder(new LineBorder(Color.RED, 3));
+            LikeButton.setBackground(Color.RED);
+            
+        }
+        else{
+            LikeButton.setBorder(new LineBorder(Color.BLACK, 3));
+            LikeButton.setBackground(Color.BLACK);
+        }
+    }
+    private void nextPublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextPublicationButtonActionPerformed
+        NextPublication();
+        UpdateActualView();
+    }//GEN-LAST:event_nextPublicationButtonActionPerformed
 
-    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton27ActionPerformed
-
-    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton28ActionPerformed
+    private void PrevPublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevPublicationButtonActionPerformed
+        PrevPublication();
+        UpdateActualView();
+    }//GEN-LAST:event_PrevPublicationButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -467,18 +528,18 @@ public class PrincipalFeed extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel DescriptionBox;
+    private javax.swing.JTextArea DescriptionBox;
+    private javax.swing.JLabel IMAGE_VIEWER;
+    private javax.swing.JButton InicioButton;
+    private javax.swing.JButton LikeButton;
+    private javax.swing.JButton PrevPublicationButton;
     private javax.swing.JLabel PublicationUsername;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private java.awt.Canvas canvas1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton27;
-    private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -488,10 +549,11 @@ public class PrincipalFeed extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;
+    private javax.swing.JButton nextPublicationButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,7 +26,7 @@ public class PublicationControllerTest {
         Comment C1 = new Comment();
         C1.setAutorID(31080013);C1.setText("BRUTAL");
         
-        //TestAddPublication();
+        TestAddPublication();
         
         
         
@@ -39,9 +39,8 @@ public class PublicationControllerTest {
     }
     
     public static void TestAddPublication(){
-        PC.addPublication(31080238, "Test1 Test1 Espacios", "C:/AppData/Terraria");
-        PC.addPublication(31080238, "Test2", "C:/AppData/Minecraft");
-        PC.addPublication(31080238, "Test3", "C:/AppData/Sky");
+        
+        PC.addPublication(31080238, "Hice el proyecto de ingenieria", "C:\\Users\\USER\\OneDrive\\Imágenes\\ProyectoIngenieria.png");
     }
     public static void TestAddLike(long PublicationID, long UserID){
         PC.AddLike(PublicationID, UserID);

@@ -239,7 +239,7 @@ public class LoginView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_EnterButtonMouseClicked
     
-    private void ClearFields(){
+    public void ClearFields(){
         DataUser.setText("Cedula, Usuario o correo electronico");
         PasswordUsser.setText("contraseña");
     }

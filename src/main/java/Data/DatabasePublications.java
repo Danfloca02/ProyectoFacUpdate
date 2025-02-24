@@ -13,14 +13,19 @@ package Data;
 
 import Model.Comment;
 import Model.Publication;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import java.io.BufferedWriter;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import javax.imageio.ImageIO;
 
 
 
@@ -53,6 +58,8 @@ public class DatabasePublications {
         id++;
         publication.setPUBLICATION_ID(id);
         
+        String newPath = SaveImage(publication.getImage_path(), publication.getPUBLICATION_ID());
+        publication.setImage_path(newPath);
         /*
         CODIGO QUE COPIE LA IMAGEN A LA DIRECCION ./IMAGENES/
         Y QUE LE DE UN NUEVO NOMBRE QUE SEA EL ID DE LA PUBLICACION
@@ -62,6 +69,41 @@ public class DatabasePublications {
         publications.add(publication);
         savePublications(publications);
         return publication;           
+    }
+    private String SaveImage(String OriginPath, long publicationID) {
+        File sourceFile = new File(OriginPath);
+        String destinationDirectory = "Images/";
+        String newFileName = publicationID + ".png";
+        String pathDestiny = destinationDirectory + newFileName;
+
+        // Verificar si el archivo de origen existe
+        if (!sourceFile.exists()) {
+            System.out.println("La imagen de origen no existe.");
+            return null;
+        }
+
+        try {
+            // Leer la imagen de origen
+            BufferedImage image = ImageIO.read(sourceFile);
+            if (image == null) {
+                System.out.println("El archivo de origen no es una imagen válida.");
+                return null;
+            }
+
+            // Crear el directorio de destino si no existe
+            Files.createDirectories(Paths.get(destinationDirectory));
+
+            // Escribir la imagen en el destino como PNG
+            File destinationFile = new File(pathDestiny);
+            ImageIO.write(image, "png", destinationFile);
+
+            System.out.println("Imagen guardada en: " + pathDestiny);
+            return pathDestiny;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        
     }
     public boolean deletePublication (Long PublicationID){
         List<Publication> publications = this.getPublicationList();

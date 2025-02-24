@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import Model.Publication;
 import Model.User;
+import java.util.Collections;
 
 public class PublicationController {
     private static PublicationController instance;
@@ -19,6 +20,7 @@ public class PublicationController {
     }
     private void loadPublications(){
         publications = DB.getPublicationList();
+        Collections.reverse(publications);
     }
     public static PublicationController GetInstance(){
         if(instance == null)instance = new PublicationController();
@@ -55,10 +57,20 @@ public class PublicationController {
         List<Long> publicationReacts = p.getUsersWhoReacted();
         publicationReacts.add(UserID);
         p.setUsersWhoReacted(publicationReacts);
-        System.out.println(p.getLikes());
+        
         DB.ModifyPublication(PublicationID, p);
         loadPublications();
     }
+    public void DeleteLike(long PublicationID, long UserID){
+        Publication p = searchPublication(PublicationID);
+        List<Long> publicationReacts = p.getUsersWhoReacted();
+        publicationReacts.remove(UserID);
+        p.setUsersWhoReacted(publicationReacts);
+        
+        DB.ModifyPublication(PublicationID, p);
+        loadPublications();
+    }
+    
     public Publication searchPublication(long ID){
         for(Publication p : publications){
             if(p.getPUBLICATION_ID() == ID){

@@ -20,12 +20,13 @@ import Model.UserFactory;
 public class SesionController {
     private static SesionController instance;
     private static DatabaseUsers DB;
-    public static User ActualSesion;
+    public User ActualSession;
     
     private SesionController(){
         DB = DatabaseUsers.GetInstance();
-        ActualSesion = null;
+        ActualSession = null;
     }
+    
     
     public static SesionController GetInstance(){
         if(instance == null){
@@ -35,6 +36,9 @@ public class SesionController {
     }
     public User SearchUserByID(Long id){
         return DB.userSearchByID(id);
+    }
+    public void CloseSession(){
+        ActualSession = null;
     }
     public boolean login(String data, String password){
         
@@ -57,11 +61,11 @@ public class SesionController {
         boolean log =  strategy.authenticate(data, password);
         if(log){
             if (strategy instanceof IDLoginStrategy) {
-                ActualSesion = DB.userSearchByID(Long.parseLong(data));
+                ActualSession = DB.userSearchByID(Long.parseLong(data));
             } else if (strategy instanceof UsernameLoginStrategy) {
-                ActualSesion = DB.userSearchByUSERNAME(data);
+                ActualSession = DB.userSearchByUSERNAME(data);
             } else if (strategy instanceof EmailLoginStrategy) {
-                ActualSesion = DB.userSearchByEMAIL(data);
+                ActualSession = DB.userSearchByEMAIL(data);
             }
             return true;
         }
