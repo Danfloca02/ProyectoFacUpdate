@@ -101,6 +101,7 @@ java.io.File
 java.io.IOException
 java.util.ArrayList
 java.util.Scanner
+javax.swing
 
 ### Instrucciones de ejecución
 
