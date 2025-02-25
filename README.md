@@ -86,4 +86,24 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 ##### UC5-Create Event
 ![text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc4_createEvent.png) 
  
- 
+## MODELO DE IMPLEMENTEACIÓN
+
+### Dependencias externas del programa
+java.util.List
+java.util.LocalDateTime
+java.util.regex.Matcher
+java.util.regex.Pattern
+java.io.BufferedWriter
+java.io.BufferedReader
+java.io.FileWriter
+java.io.FileReader
+java.io.File
+java.io.IOException
+java.util.ArrayList
+java.util.Scanner
+
+### Instrucciones de ejecución
+
+Para ejecutar el programa, es necesario partir del archivo java/FacUpdate.java, el cual contiene al método main que inicializa en realizar un login or registro dependiendo de la validación de los datos.
+
+
