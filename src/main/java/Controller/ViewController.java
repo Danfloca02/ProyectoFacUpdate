@@ -39,10 +39,12 @@ public class ViewController {
     }
     public void LoginToPrincipalFeed(){
         LOGINVIEW.setVisible(false);
+        PRINCIPALFEED.OpenFeed();
         PRINCIPALFEED.setVisible(true);
     }
     public void PrincipalFeedToLogin(){
         PRINCIPALFEED.setVisible(false);
+        LOGINVIEW.ClearFields();
         LOGINVIEW.setVisible(true);
     }
 }

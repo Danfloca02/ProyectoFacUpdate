@@ -16,6 +16,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class FileGestor {
+    public FileGestor(){
+        
+    }
     public File openFile(String path){
         //opens the file, and create it if doesn't exist 
         File file = new File(path);

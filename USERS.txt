@@ -1,5 +1,2 @@
 31080238 STUDENT Carlos_11 carlosmirandaucv@gmail.com Carlos.11 COMPUTACION
 14861479 STUDENT Yarlinbrito yarlinbrito@gmail.com Yarlin.123 COMPUTACION
-28314837 STUDENT Danfloca02 danfloca02@gmail.com Daniel2307 COMPUTACION
-28314838 STUDENT Danfloca02 danfloca02@gmail.com Daniel2307 COMPUTACION
-28314839 STUDENT Danfloca02 danfloca02@gmail.com 2307Daniel COMPUTACION

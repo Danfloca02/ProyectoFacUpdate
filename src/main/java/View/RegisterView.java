@@ -56,15 +56,15 @@ public class RegisterView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 30)); // NOI18N
-        jLabel1.setText("    FacUpdate");
+        jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 35)); // NOI18N
+        jLabel1.setText("FacUpdate");
 
         EmailUser.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         EmailUser.setForeground(new java.awt.Color(153, 153, 153));
-        EmailUser.setText("Correo electrónico");
-        EmailUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        EmailUser.setText("  Correo electrónico");
+        EmailUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
         EmailUser.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 EmailUserFocusGained(evt);
@@ -80,7 +80,7 @@ public class RegisterView extends javax.swing.JFrame {
         });
 
         RegisterButton.setBackground(new java.awt.Color(0, 0, 0));
-        RegisterButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        RegisterButton.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         RegisterButton.setForeground(new java.awt.Color(255, 255, 255));
         RegisterButton.setText("Registrarse");
         RegisterButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, new java.awt.Color(153, 153, 153), null, null));
@@ -92,8 +92,8 @@ public class RegisterView extends javax.swing.JFrame {
 
         PasswordUser.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         PasswordUser.setForeground(new java.awt.Color(153, 153, 153));
-        PasswordUser.setText("Contraseña");
-        PasswordUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        PasswordUser.setText("  Contraseña");
+        PasswordUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
         PasswordUser.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 PasswordUserFocusGained(evt);
@@ -110,8 +110,8 @@ public class RegisterView extends javax.swing.JFrame {
 
         IDUser.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         IDUser.setForeground(new java.awt.Color(153, 153, 153));
-        IDUser.setText("Cédula");
-        IDUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        IDUser.setText("  Cédula");
+        IDUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
         IDUser.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 IDUserFocusGained(evt);
@@ -128,8 +128,8 @@ public class RegisterView extends javax.swing.JFrame {
 
         UsernameUser.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         UsernameUser.setForeground(new java.awt.Color(153, 153, 153));
-        UsernameUser.setText("Nombre de Usuario");
-        UsernameUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        UsernameUser.setText("  Nombre de usuario");
+        UsernameUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
         UsernameUser.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 UsernameUserFocusGained(evt);
@@ -145,7 +145,8 @@ public class RegisterView extends javax.swing.JFrame {
         });
 
         AccountTypeUser.setModel(new javax.swing.SpinnerListModel(new String[] {"Estudiante", "Profesor"}));
-        AccountTypeUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        AccountTypeUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
+        AccountTypeUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         AccountTypeUser.setFocusable(false);
         AccountTypeUser.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -154,7 +155,7 @@ public class RegisterView extends javax.swing.JFrame {
         });
 
         jSpinner2.setModel(new javax.swing.SpinnerListModel(new String[] {"Computacion", "Fisica", "Quimica", "Matematica", "Biologia", "Geoquimica"}));
-        jSpinner2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jSpinner2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -163,14 +164,14 @@ public class RegisterView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(EmailUser)
                     .addComponent(RegisterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PasswordUser)
                     .addComponent(IDUser)
                     .addComponent(UsernameUser)
-                    .addComponent(AccountTypeUser)
-                    .addComponent(jSpinner2))
+                    .addComponent(jSpinner2)
+                    .addComponent(AccountTypeUser))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -196,12 +197,12 @@ public class RegisterView extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("¿Ya tienes una cuenta?");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jButton2.setText("Entrar");
         jButton2.setBorder(null);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -217,9 +218,9 @@ public class RegisterView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,9 +258,9 @@ public class RegisterView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(205, Short.MAX_VALUE)
+                .addContainerGap(206, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,6 +290,8 @@ public class RegisterView extends javax.swing.JFrame {
         
         if(SC.register(AccountType, Email, Password, ID, Username)){
             System.out.println("TE REGISTRASTE CON USUARIO: " + Username + "Y CONTRASEÑA: " + Password);
+            ClearFields();
+            ViewController.GetInstance().RegisterToLogin();
         }
         else{
             System.out.println("ERROR, LA CUENTA YA EXISTE O LOS DATOS SON INVALIDOS");

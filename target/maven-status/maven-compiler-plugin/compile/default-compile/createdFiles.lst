@@ -1,7 +1,0 @@
-Model\UserFactory.class
-Model\Student.class
-Model\Career.class
-Data\FileGestor.class
-Data\DatabaseUsers.class
-Model\Teacher.class
-Model\User.class

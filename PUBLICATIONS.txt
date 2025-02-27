@@ -1,44 +1,20 @@
 1
 31080238
 <
-Test1 Test1 Espacios
+Ya cree el ducto para respirar en mi lago, cosa superCientifica.
 >
-2025 2 23
-C:/AppData/Terraria
+2025 2 24
+Images/1.png
+3
+12345678 1234567 31080238 
 0
-1
-31080013
-<
-BRUTAL
->
 2
 31080238
 <
-Test2
+Hice el proyecto de ingenieria
 >
-2025 2 23
-C:/AppData/Minecraft
+2025 2 24
+Images/2.png
 1
-31080013 
-3
-31080013
-<
-BRUTAL
->
-31080013
-<
-BRUTAL
->
-31080013
-<
-BRUTAL
->
-3
-31080238
-<
-Test3
->
-2025 2 23
-C:/AppData/Sky
-0
+31080238 
 0

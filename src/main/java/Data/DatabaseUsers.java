@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+import Data.FileGestor;
 
 import Model.UserFactory;
 import java.io.BufferedWriter;
@@ -27,8 +27,8 @@ import java.io.BufferedWriter;
 //code:
 public class DatabaseUsers {
     private static DatabaseUsers instance;
-    private static FileGestor filegestor;
-    private static String path;
+    private FileGestor filegestor;
+    private String path;
     
     private DatabaseUsers(){
         filegestor = new FileGestor();
@@ -36,11 +36,10 @@ public class DatabaseUsers {
         path = "./USERS.txt";
     }
     public static DatabaseUsers GetInstance(){
-        if(instance == null){
-            instance = new DatabaseUsers();
-        }
+        if(instance == null)instance = new DatabaseUsers();
         return instance;
     }
+    
     public boolean createNewUser(User user){
         if(user == null){return false;}
         
