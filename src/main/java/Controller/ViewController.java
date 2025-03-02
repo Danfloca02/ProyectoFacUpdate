@@ -15,11 +15,14 @@ public class ViewController {
     public LoginView LOGINVIEW;
     public RegisterView REGISTERVIEW;
     public PrincipalFeed PRINCIPALFEED;
+    public CreatePublicationView CREATEPUBLICATION;
+    public UserView USERVIEW;
     
     private ViewController(){
         LOGINVIEW = LoginView.GetInstance();
         REGISTERVIEW = RegisterView.GetInstance();
         PRINCIPALFEED = PrincipalFeed.GetInstance();
+        USERVIEW = UserView.GetInstance();
     }
     public static ViewController GetInstance(){
         if(instance==null)instance = new ViewController();
@@ -44,6 +47,25 @@ public class ViewController {
     }
     public void PrincipalFeedToLogin(){
         PRINCIPALFEED.setVisible(false);
+        LOGINVIEW.ClearFields();
+        LOGINVIEW.setVisible(true);
+    }
+    public void OpenCreatePublication(){
+        CREATEPUBLICATION = new CreatePublicationView();
+        CREATEPUBLICATION.setVisible(true);
+    }
+    public void UserToFeed(){
+        USERVIEW.setVisible(false);
+        PRINCIPALFEED.OpenFeed();
+        PRINCIPALFEED.setVisible(true);
+    }
+    public void FeedToUser(){
+        PRINCIPALFEED.setVisible(false);
+        USERVIEW.load();
+        USERVIEW.setVisible(true);  
+    }
+    public void UserToLogin(){
+        USERVIEW.setVisible(false);
         LOGINVIEW.ClearFields();
         LOGINVIEW.setVisible(true);
     }

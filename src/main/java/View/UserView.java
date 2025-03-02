@@ -7,6 +7,7 @@ import Controller.Publications.PublicationController;
 import Controller.ViewController;
 import Controller.session.SesionController;
 import Model.Publication;
+import Model.Teacher;
 import Model.User;
 import java.awt.Color;
 import java.awt.Image;
@@ -19,70 +20,41 @@ import javax.swing.border.LineBorder;
  *
  * @author USER
  */
-public class PrincipalFeed extends javax.swing.JFrame {
-    private static PrincipalFeed instance;
-    private Publication actualView;
-    private List<Publication> actualFeed;
+public class UserView extends javax.swing.JFrame {
+    private static UserView instance;
+    
+    
     private SesionController SC;
-    private PublicationController PC;
+    
     /**
      * Creates new form PrincipalFeed
      */
-    private PrincipalFeed() {
+    private UserView() {
         initComponents();
-        PC = PublicationController.GetInstance();
         SC = SesionController.GetInstance();
     }
-    
-    public static PrincipalFeed GetInstance(){
-        if(instance == null)instance = new PrincipalFeed();
+    public static UserView GetInstance(){
+        if(instance == null)instance = new UserView();
         return instance;
     }
-    public void OpenFeed(){
-        LoadPublications();
-        SetPublication(0);
-        UpdateActualView();
-    }
-    private void LoadPublications(){
-        actualFeed = PC.getPublications();
-    }
-    private void SetPublication(int index){
-        actualView = actualFeed.get(index);
-    }
-    private void NextPublication(){
-        int index = actualFeed.indexOf(actualView);
-        index = (index + 1) % actualFeed.size();
-        actualView = actualFeed.get(index);
-    }
-    private void PrevPublication(){
-        int index = actualFeed.indexOf(actualView);
-        index = (index - 1 + actualFeed.size()) % actualFeed.size();
-        actualView = actualFeed.get(index);
-    }
-    private void UpdateActualView(){
-        if(actualView == null){
-            return;
+    
+    public void load(){
+        
+        School.setText(SC.ActualSession.Kareer.toString());
+        Email.setText(SC.ActualSession.Email);
+        ID.setText(Long.toString(SC.ActualSession.ID));
+        Password.setText(SC.ActualSession.Password);
+        Username.setText(SC.ActualSession.userName);
+        if(SC.ActualSession instanceof Teacher){
+            UserType.setText("Docente");
         }
-        String name = SC.SearchUserByID(actualView.getAUTOR_ID()).userName;
-        PublicationUsername.setText(name);
-        DescriptionBox.setText(actualView.getText());
-        updateLikeButton(actualView.getUsersWhoReacted().contains(SC.ActualSession.ID));
-        ChangeImage(actualView.getImage_path());
+        else{
+            UserType.setText("Estudiante");
+        }
+        
+        //
     }
     
-    void ChangeImage(String path){
-        try {
-            File imageFile = new File(path);
-            ImageIcon imageIcon = new ImageIcon(imageFile.getAbsolutePath());Image image = imageIcon.getImage();
-            Image resizedImage = image.getScaledInstance(428, 279, Image.SCALE_SMOOTH);
-            imageIcon = new ImageIcon(resizedImage);
-            
-            IMAGE_VIEWER.setIcon(imageIcon);
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,19 +79,16 @@ public class PrincipalFeed extends javax.swing.JFrame {
         InicioButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
         canvas1 = new java.awt.Canvas();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        IMAGE_VIEWER = new javax.swing.JLabel();
-        PublicationUsername = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        DescriptionBox = new javax.swing.JTextArea();
-        jButton25 = new javax.swing.JButton();
-        LikeButton = new javax.swing.JButton();
-        nextPublicationButton = new javax.swing.JButton();
-        PrevPublicationButton = new javax.swing.JButton();
+        Username = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        UserType = new javax.swing.JLabel();
+        School = new javax.swing.JLabel();
+        ID = new javax.swing.JLabel();
+        Email = new javax.swing.JLabel();
+        Password = new javax.swing.JLabel();
+        CreatePublicationButton = new javax.swing.JButton();
 
         jButton3.setText("Calendario");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -198,126 +167,49 @@ public class PrincipalFeed extends javax.swing.JFrame {
             }
         });
 
-        jButton10.setBackground(new java.awt.Color(0, 0, 0));
-        jButton10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setText("Salir");
-        jButton10.setInheritsPopupMenu(true);
-        jButton10.setPreferredSize(new java.awt.Dimension(108, 23));
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        ExitButton.setBackground(new java.awt.Color(0, 0, 0));
+        ExitButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        ExitButton.setForeground(new java.awt.Color(255, 255, 255));
+        ExitButton.setText("Salir");
+        ExitButton.setInheritsPopupMenu(true);
+        ExitButton.setPreferredSize(new java.awt.Dimension(108, 23));
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                ExitButtonActionPerformed(evt);
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(229, 229, 229));
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
+        Username.setFont(new java.awt.Font("Segoe UI Symbol", 1, 20)); // NOI18N
+        Username.setText("Username");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 36, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 36, Short.MAX_VALUE)
-        );
+        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        jPanel5.setBackground(new java.awt.Color(229, 229, 229));
-        jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        UserType.setText("jLabel4");
+        UserType.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        UserType.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        IMAGE_VIEWER.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        School.setText("jLabel4");
+        School.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(IMAGE_VIEWER, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(IMAGE_VIEWER, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
-        );
+        ID.setText("jLabel4");
+        ID.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        PublicationUsername.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
-        PublicationUsername.setText("Usuario");
+        Email.setText("jLabel4");
+        Email.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jPanel6.setToolTipText("");
+        Password.setText("jLabel4");
+        Password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        DescriptionBox.setEditable(false);
-        DescriptionBox.setBackground(new java.awt.Color(255, 255, 255));
-        DescriptionBox.setColumns(20);
-        DescriptionBox.setLineWrap(true);
-        DescriptionBox.setRows(5);
-        jScrollPane1.setViewportView(DescriptionBox);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 273, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
-        );
-
-        jButton25.setBackground(new java.awt.Color(0, 0, 0));
-        jButton25.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton25.setForeground(new java.awt.Color(255, 255, 255));
-        jButton25.setText("comentarios");
-        jButton25.setInheritsPopupMenu(true);
-        jButton25.setPreferredSize(new java.awt.Dimension(108, 23));
-        jButton25.addActionListener(new java.awt.event.ActionListener() {
+        CreatePublicationButton.setBackground(new java.awt.Color(0, 0, 0));
+        CreatePublicationButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        CreatePublicationButton.setForeground(new java.awt.Color(255, 255, 255));
+        CreatePublicationButton.setText("Crear Publicacion");
+        CreatePublicationButton.setInheritsPopupMenu(true);
+        CreatePublicationButton.setPreferredSize(new java.awt.Dimension(108, 23));
+        CreatePublicationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton25ActionPerformed(evt);
-            }
-        });
-
-        LikeButton.setBackground(new java.awt.Color(0, 0, 0));
-        LikeButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        LikeButton.setForeground(new java.awt.Color(255, 255, 255));
-        LikeButton.setText("me gusta");
-        LikeButton.setInheritsPopupMenu(true);
-        LikeButton.setPreferredSize(new java.awt.Dimension(108, 23));
-        LikeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LikeButtonActionPerformed(evt);
-            }
-        });
-
-        nextPublicationButton.setBackground(new java.awt.Color(204, 204, 204));
-        nextPublicationButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        nextPublicationButton.setText(">");
-        nextPublicationButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        nextPublicationButton.setInheritsPopupMenu(true);
-        nextPublicationButton.setPreferredSize(new java.awt.Dimension(108, 23));
-        nextPublicationButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextPublicationButtonActionPerformed(evt);
-            }
-        });
-
-        PrevPublicationButton.setBackground(new java.awt.Color(204, 204, 204));
-        PrevPublicationButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        PrevPublicationButton.setText("<");
-        PrevPublicationButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        PrevPublicationButton.setInheritsPopupMenu(true);
-        PrevPublicationButton.setPreferredSize(new java.awt.Dimension(108, 23));
-        PrevPublicationButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PrevPublicationButtonActionPerformed(evt);
+                CreatePublicationButtonActionPerformed(evt);
             }
         });
 
@@ -337,7 +229,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -347,44 +239,34 @@ public class PrincipalFeed extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(PublicationUsername))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(LikeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(0, 0, Short.MAX_VALUE))
-                                                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(PrevPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(19, 19, 19)))
-                                                .addComponent(nextPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 699, Short.MAX_VALUE)
+                                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35))
                             .addComponent(jSeparator1))
-                        .addGap(22, 22, 22))))
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Username)
+                            .addComponent(UserType, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(School, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(258, 258, 258)
+                                .addComponent(CreatePublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(25, 25, 25))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -394,25 +276,25 @@ public class PrincipalFeed extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PublicationUsername))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Username)
+                        .addGap(18, 18, 18)
+                        .addComponent(UserType, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LikeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(71, 71, 71)
-                        .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nextPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PrevPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addComponent(School, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(CreatePublicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -441,10 +323,12 @@ public class PrincipalFeed extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+        clear();
         SC.CloseSession();
-        ViewController.GetInstance().PrincipalFeedToLogin();
-    }//GEN-LAST:event_jButton10ActionPerformed
+        
+        ViewController.GetInstance().UserToLogin();
+    }//GEN-LAST:event_ExitButtonActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -455,53 +339,22 @@ public class PrincipalFeed extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void InicioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioButtonActionPerformed
-        LoadPublications();
-        SetPublication(0);
+       clear();
+       ViewController.GetInstance().UserToFeed();
     }//GEN-LAST:event_InicioButtonActionPerformed
 
-    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton25ActionPerformed
-
-    private void LikeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LikeButtonActionPerformed
-        boolean isLiked = actualView.getUsersWhoReacted().contains(SC.ActualSession.ID);
-        if(isLiked){
-            PC.DeleteLike(actualView.getPUBLICATION_ID(), SC.ActualSession.ID);
-            
-        }
-        else{
-            PC.AddLike(actualView.getPUBLICATION_ID(), SC.ActualSession.ID);
-            
-        }
-        updateLikeButton(!isLiked);
-        int ind = actualFeed.indexOf(actualView);
-        LoadPublications();
-        SetPublication(ind);
-        
-        
-        
-    }//GEN-LAST:event_LikeButtonActionPerformed
-    private void updateLikeButton(boolean isLiked){
-        if(isLiked){
-            LikeButton.setBorder(new LineBorder(Color.RED, 3));
-            LikeButton.setBackground(Color.RED);
-            
-        }
-        else{
-            LikeButton.setBorder(new LineBorder(Color.BLACK, 3));
-            LikeButton.setBackground(Color.BLACK);
-        }
+    private void CreatePublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePublicationButtonActionPerformed
+        ViewController.GetInstance().OpenCreatePublication();
+    }//GEN-LAST:event_CreatePublicationButtonActionPerformed
+    
+    public void clear(){
+        UserType.setText("");
+        School.setText("");
+        Email.setText("");
+        ID.setText("");
+        Password.setText("");
+        Username.setText("");
     }
-    private void nextPublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextPublicationButtonActionPerformed
-        NextPublication();
-        UpdateActualView();
-    }//GEN-LAST:event_nextPublicationButtonActionPerformed
-
-    private void PrevPublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevPublicationButtonActionPerformed
-        PrevPublication();
-        UpdateActualView();
-    }//GEN-LAST:event_PrevPublicationButtonActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -519,20 +372,21 @@ public class PrincipalFeed extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalFeed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalFeed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalFeed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalFeed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrincipalFeed().setVisible(true);
+                new UserView().setVisible(true);
             }
         });
     }
@@ -540,33 +394,30 @@ public class PrincipalFeed extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea DescriptionBox;
-    private javax.swing.JLabel IMAGE_VIEWER;
+    private javax.swing.JButton CreatePublicationButton;
+    private javax.swing.JLabel Email;
+    private javax.swing.JButton ExitButton;
+    private javax.swing.JLabel ID;
     private javax.swing.JButton InicioButton;
-    private javax.swing.JButton LikeButton;
-    private javax.swing.JButton PrevPublicationButton;
-    private javax.swing.JLabel PublicationUsername;
+    private javax.swing.JLabel Password;
+    private javax.swing.JLabel School;
+    private javax.swing.JLabel UserType;
+    private javax.swing.JLabel Username;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private java.awt.Canvas canvas1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton9;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;
-    private javax.swing.JButton nextPublicationButton;
     // End of variables declaration//GEN-END:variables
 }

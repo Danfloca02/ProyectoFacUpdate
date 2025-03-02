@@ -106,7 +106,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         InicioButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        UserViewButton = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         canvas1 = new java.awt.Canvas();
         jPanel4 = new javax.swing.JPanel();
@@ -190,11 +190,11 @@ public class PrincipalFeed extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton4.setText("Usuario");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        UserViewButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        UserViewButton.setText("Usuario");
+        UserViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                UserViewButtonActionPerformed(evt);
             }
         });
 
@@ -333,7 +333,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
+                        .addComponent(UserViewButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -390,7 +390,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(InicioButton)
                     .addComponent(jButton2)
-                    .addComponent(jButton4))
+                    .addComponent(UserViewButton))
                 .addGap(10, 10, 10)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -446,9 +446,9 @@ public class PrincipalFeed extends javax.swing.JFrame {
         ViewController.GetInstance().PrincipalFeedToLogin();
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void UserViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserViewButtonActionPerformed
+        ViewController.GetInstance().FeedToUser();
+    }//GEN-LAST:event_UserViewButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -546,6 +546,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
     private javax.swing.JButton LikeButton;
     private javax.swing.JButton PrevPublicationButton;
     private javax.swing.JLabel PublicationUsername;
+    private javax.swing.JButton UserViewButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private java.awt.Canvas canvas1;
@@ -553,7 +554,6 @@ public class PrincipalFeed extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton9;
     private javax.swing.JFrame jFrame1;
