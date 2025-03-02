@@ -25,8 +25,7 @@ Im playing my role in history
 >
 2025 2 24
 Images/3.png
-1
-31080238 
+0
 0
 4
 14861479
@@ -45,6 +44,5 @@ PRUEBA
 >
 2025 3 2
 Images/5.png
-1
-31080238 
+0
 0
