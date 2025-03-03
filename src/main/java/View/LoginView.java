@@ -6,6 +6,7 @@ package View;
 
 import Controller.ViewController;
 import Controller.session.SesionController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -231,6 +232,8 @@ public class LoginView extends javax.swing.JFrame {
         }
         else{
             System.out.println("ERROR, LA CUENTA NO EXISTE O LOS DATOS SON INCORRECTOS");
+            JOptionPane.showMessageDialog(this, "Usuario no existente o Datos Inválidos", 
+        "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_EnterButtonActionPerformed
 

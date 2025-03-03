@@ -9,6 +9,7 @@ import Controller.ViewController;
 import Controller.session.SesionController;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -157,7 +158,12 @@ public class CreatePublicationView extends javax.swing.JFrame {
     private void PublicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublicarButtonActionPerformed
         String path = ShowPath.getText();
         String description = DescriptionText.getText();
-        
+        File sourceFile = new File(path);
+        if (!sourceFile.exists()) {
+            JOptionPane.showMessageDialog(this, "La imagen no fué encontrada", "Error de Ruta de Archivo", JOptionPane.ERROR_MESSAGE);
+            System.out.println("La imagen de origen no existe.");
+            return;
+        }
         PublicationController.GetInstance().addPublication(SesionController.GetInstance().ActualSession.ID,description, path);
         exit();
     }//GEN-LAST:event_PublicarButtonActionPerformed

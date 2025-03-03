@@ -1,0 +1,106 @@
+1
+31080238
+<
+Ya cree el ducto para respirar en mi lago, cosa superCientifica.
+>
+2025 2 24
+Images/1.png
+5
+12345678 1234567 31080238 30730601 28314837 
+0
+2
+31080238
+<
+Hice el proyecto de ingenieria
+>
+2025 2 24
+Images/2.png
+1
+30730601 
+0
+3
+31080238
+<
+Im playing my role in history
+>
+2025 2 24
+Images/3.png
+1
+31080238 
+1
+31080238
+<
+MADE IN HEAVEN
+>
+4
+14861479
+<
+<3
+>
+2025 2 24
+Images/4.png
+2
+31080238 30730601 
+1
+31080238
+<
+COMENTARIO
+>
+5
+31080238
+<
+PRUEBA
+>
+2025 3 2
+Images/5.png
+2
+30730601 28314837 
+5
+31080238
+<
+carlos
+>
+31080238
+<
+comentarPrueba
+>
+30730601
+<
+hola
+>
+30730601
+<
+holaaaaaaaaaa
+>
+28314837
+<
+EEEEEEEEEEE
+>
+6
+31080238
+<
+El mejor profe de AyP
+>
+2025 3 3
+Images/6.png
+1
+31080238 
+1
+28314837
+<
+Walter es sexy
+>
+7
+28314837
+<
+Orga 2 esta divertido
+>
+2025 3 3
+Images/7.png
+2
+28314837 31080238 
+1
+31080238
+<
+sobretodo la parte de logica combinacionapl
+>

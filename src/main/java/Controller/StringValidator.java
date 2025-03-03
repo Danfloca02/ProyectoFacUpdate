@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
  * @author USER
  */
 public class StringValidator {
+    
         public static boolean validateUsername(String username) {
             String regex = "^(?=.*[A-Za-z])[A-Za-z0-9._%+-]{3,20}$";
             Pattern pattern = Pattern.compile(regex);
@@ -25,7 +26,7 @@ public class StringValidator {
         }
 
         public static boolean validateIDcard(String idCard) {
-            String regex = "^[0-9]{1,9}$";
+            String regex = "^[1-9][0-9]{1,7}$";
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(idCard);
 

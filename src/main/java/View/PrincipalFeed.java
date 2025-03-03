@@ -25,6 +25,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
     private List<Publication> actualFeed;
     private SesionController SC;
     private PublicationController PC;
+    private comentView commentsScreen;
     /**
      * Creates new form PrincipalFeed
      */
@@ -68,6 +69,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
         DescriptionBox.setText(actualView.getText());
         updateLikeButton(actualView.getUsersWhoReacted().contains(SC.ActualSession.ID));
         ChangeImage(actualView.getImage_path());
+        if(commentsScreen != null)commentsScreen.setPublication(actualView);
     }
     
     void ChangeImage(String path){
@@ -116,7 +118,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         DescriptionBox = new javax.swing.JTextArea();
-        jButton25 = new javax.swing.JButton();
+        CommentsButton = new javax.swing.JButton();
         LikeButton = new javax.swing.JButton();
         nextPublicationButton = new javax.swing.JButton();
         PrevPublicationButton = new javax.swing.JButton();
@@ -273,15 +275,15 @@ public class PrincipalFeed extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
         );
 
-        jButton25.setBackground(new java.awt.Color(0, 0, 0));
-        jButton25.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton25.setForeground(new java.awt.Color(255, 255, 255));
-        jButton25.setText("comentarios");
-        jButton25.setInheritsPopupMenu(true);
-        jButton25.setPreferredSize(new java.awt.Dimension(108, 23));
-        jButton25.addActionListener(new java.awt.event.ActionListener() {
+        CommentsButton.setBackground(new java.awt.Color(0, 0, 0));
+        CommentsButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        CommentsButton.setForeground(new java.awt.Color(255, 255, 255));
+        CommentsButton.setText("comentarios");
+        CommentsButton.setInheritsPopupMenu(true);
+        CommentsButton.setPreferredSize(new java.awt.Dimension(108, 23));
+        CommentsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton25ActionPerformed(evt);
+                CommentsButtonActionPerformed(evt);
             }
         });
 
@@ -363,7 +365,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addComponent(LikeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
-                                                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(CommentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(0, 0, Short.MAX_VALUE))
                                                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -404,7 +406,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CommentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LikeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(71, 71, 71)
                         .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -443,10 +445,14 @@ public class PrincipalFeed extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         SC.CloseSession();
+        if(commentsScreen != null)commentsScreen.dispose();
+        commentsScreen = null;
         ViewController.GetInstance().PrincipalFeedToLogin();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void UserViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserViewButtonActionPerformed
+        if(commentsScreen != null)commentsScreen.dispose();
+        commentsScreen = null;
         ViewController.GetInstance().FeedToUser();
     }//GEN-LAST:event_UserViewButtonActionPerformed
 
@@ -456,12 +462,17 @@ public class PrincipalFeed extends javax.swing.JFrame {
 
     private void InicioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioButtonActionPerformed
         LoadPublications();
+        if(commentsScreen != null)commentsScreen.dispose();
+        commentsScreen = null;
         SetPublication(0);
     }//GEN-LAST:event_InicioButtonActionPerformed
 
-    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton25ActionPerformed
+    private void CommentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommentsButtonActionPerformed
+        if(commentsScreen == null){
+            commentsScreen = ViewController.GetInstance().OpenCommentsView(actualView);
+        }
+        commentsScreen.setVisible(true);
+    }//GEN-LAST:event_CommentsButtonActionPerformed
 
     private void LikeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LikeButtonActionPerformed
         boolean isLiked = actualView.getUsersWhoReacted().contains(SC.ActualSession.ID);
@@ -540,6 +551,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CommentsButton;
     private javax.swing.JTextArea DescriptionBox;
     private javax.swing.JLabel IMAGE_VIEWER;
     private javax.swing.JButton InicioButton;
@@ -552,7 +564,6 @@ public class PrincipalFeed extends javax.swing.JFrame {
     private java.awt.Canvas canvas1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton9;

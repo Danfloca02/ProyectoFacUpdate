@@ -1,7 +1,9 @@
 package View;
 
 import Controller.ViewController;
+import Controller.StringValidator;
 import Controller.session.SesionController;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -288,13 +290,31 @@ public class RegisterView extends javax.swing.JFrame {
         String ID = IDUser.getText();
         String Username = UsernameUser.getText();
         
-        if(SC.register(AccountType, Email, Password, ID, Username)){
+        if (!StringValidator.validateEmail(Email)){
+        JOptionPane.showMessageDialog(this, "El correo no cumple el formato example1@gmail.com", 
+        "Error de Registro", JOptionPane.ERROR_MESSAGE);
+        }
+        else if (!StringValidator.validateUsername(Username)){
+        JOptionPane.showMessageDialog(this, "El nombre de usuario debe contener entre 3-20 caractéres", 
+        "Error de Registro", JOptionPane.ERROR_MESSAGE);
+        }
+        else if (!StringValidator.validatePassword(Password)){
+        JOptionPane.showMessageDialog(this, "La Contraseña debe contener entre 3-20 caracteres, contener al menos un número y una letra mayúscula", 
+        "Error de Registro", JOptionPane.ERROR_MESSAGE);
+        }
+        else if (!StringValidator.validateIDcard(ID)){
+        JOptionPane.showMessageDialog(this, "El ID debe contener entre 1-8 digitos y comenzar por un valor mayor a 0", 
+        "Error de Registro", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else if(SC.register(AccountType, Email, Password, ID, Username)){
             System.out.println("TE REGISTRASTE CON USUARIO: " + Username + "Y CONTRASEÑA: " + Password);
             ClearFields();
             ViewController.GetInstance().RegisterToLogin();
         }
-        else{
-            System.out.println("ERROR, LA CUENTA YA EXISTE O LOS DATOS SON INVALIDOS");
+        else {
+            JOptionPane.showMessageDialog(this, "El usuario ya existe", 
+        "Error de Registro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_RegisterButtonActionPerformed
 

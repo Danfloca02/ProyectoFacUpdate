@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.Publication;
 import View.*;
 
 /**
@@ -53,6 +54,12 @@ public class ViewController {
     public void OpenCreatePublication(){
         CREATEPUBLICATION = new CreatePublicationView();
         CREATEPUBLICATION.setVisible(true);
+    }
+    public comentView OpenCommentsView(Publication p){
+        comentView cv = new comentView();
+        cv.setPublication(p);
+        cv.setVisible(true);
+        return cv;
     }
     public void UserToFeed(){
         USERVIEW.setVisible(false);

@@ -2,3 +2,5 @@
 14861479 STUDENT Yarlinbrito yarlinbrito@gmail.com Yarlin.123 COMPUTACION
 12345678 STUDENT PRUEBA_11 correoprueba@gmail.com Prueba.11 COMPUTACION
 1234567 STUDENT PRUEBA_2 Prueba2@gmail.com Prueba.2 COMPUTACION
+30730601 STUDENT Josue15 Josue@gmail.com Josue123 COMPUTACION
+28314837 STUDENT Danfloca02 danfloca02@gmail.com Dan2307 COMPUTACION
