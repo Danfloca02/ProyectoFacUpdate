@@ -11,4 +11,14 @@
         <exec.mainClass>FacUpdate</exec.mainClass>
     </properties>
     <name>FacUpdate</name>
+    <dependencies>
+    <!-- Dependencia de JUnit 5 (JUnit Jupiter) -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>5.9.3</version> <!-- Asegúrate de ajustar a la versión que prefieras -->
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+
 </project>
