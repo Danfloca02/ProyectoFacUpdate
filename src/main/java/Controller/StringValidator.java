@@ -25,7 +25,7 @@ public class StringValidator {
         }
 
         public static boolean validateIDcard(String idCard) {
-            String regex = "^[0-9]{1,9}$";
+            String regex = "^[0-9]{1,7}[1-9]$";
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(idCard);
 

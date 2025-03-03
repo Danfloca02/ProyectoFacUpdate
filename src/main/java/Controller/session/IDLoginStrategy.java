@@ -6,7 +6,6 @@ package Controller.session;
 
 import Controller.StringValidator;
 import Data.DatabaseUsers;
-
 import Model.User;
 
 /**
@@ -23,8 +22,9 @@ public class IDLoginStrategy implements LoginStrategy{
                 User session = DB.userSearchByID(dat);
             
                 // Verifica si la búsqueda del usuario por ID retornó nulo
-                if (session == null) return false;
-            
+                if (session == null) { 
+                    return false;
+                }
                 // Valida la contraseña usando StringValidator
                 if (StringValidator.validatePassword(Password)) {
                     // Compara las contraseñas, teniendo en cuenta valores nulos
