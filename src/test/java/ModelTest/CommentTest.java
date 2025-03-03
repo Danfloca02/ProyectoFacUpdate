@@ -15,7 +15,7 @@ public class CommentTest {
     }
 
     @Test
-    public void CommentConstructorNoParameters(){
+    public void CommentConstructorNoParametersTest(){
         Comment c2 = new Comment();
         assertEquals(0, c2.getAutorID());
         assertEquals("", c2.getText());
