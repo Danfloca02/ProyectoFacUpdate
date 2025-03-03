@@ -231,10 +231,6 @@ public class LoginView extends javax.swing.JFrame {
             ViewController.GetInstance().LoginToPrincipalFeed();
         }
         else{
-            JOptionPane.showMessageDialog(this, 
-            "Usuario no existente o Datos Incorrectos",
-            "Error de Inicio de Sesión",
-            JOptionPane.ERROR_MESSAGE);
             System.out.println("ERROR, LA CUENTA NO EXISTE O LOS DATOS SON INCORRECTOS");
             JOptionPane.showMessageDialog(this, "Usuario no existente o Datos Inválidos", 
         "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);

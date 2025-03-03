@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Event {
+class Event {
     private String title;
     private LocalDateTime date;
     private String location;

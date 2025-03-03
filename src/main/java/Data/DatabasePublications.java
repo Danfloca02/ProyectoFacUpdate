@@ -11,21 +11,21 @@ package Data;
 
 
 
+import Model.Comment;
+import Model.Publication;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import javax.imageio.ImageIO;
-
-import Model.Comment;
-import Model.Publication;
 
 
 
@@ -70,7 +70,6 @@ public class DatabasePublications {
         savePublications(publications);
         return publication;           
     }
-
     private String SaveImage(String OriginPath, long publicationID) {
         File sourceFile = new File(OriginPath);
         String destinationDirectory = "Images/";

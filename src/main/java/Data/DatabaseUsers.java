@@ -11,15 +11,16 @@ package Data;
 
 
 
-import java.io.BufferedWriter;
+import Model.Teacher;
+import Model.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import Data.FileGestor;
 
-import Model.Teacher;
-import Model.User;
 import Model.UserFactory;
+import java.io.BufferedWriter;
 
 
 
@@ -34,9 +35,8 @@ public class DatabaseUsers {
         
         path = "./USERS.txt";
     }
-
     public static DatabaseUsers GetInstance(){
-        if(instance == null) instance = new DatabaseUsers();
+        if(instance == null)instance = new DatabaseUsers();
         return instance;
     }
     
@@ -75,17 +75,17 @@ public class DatabaseUsers {
         }
         return false;
     }
-       
+    
+    
     //file structure:
     //ID UserType UserName email Password Career
     public User userSearchByID(long ID){
         String data = userSearch(String.valueOf(ID), "ID");
-        if(data == null) return null;
+        if(data == null)return null;
         String[] parts = data.split(" ");
         User ret = UserFactory.createUser(parts[1], Long.parseLong(parts[0]), parts[2], parts[3], parts[4], parts[5]);
         return ret;
     }
-
     public User userSearchByEMAIL(String EMAIL){
         String data = userSearch(EMAIL, "EMAIL");
         if(data == null)return null;
@@ -126,7 +126,7 @@ public class DatabaseUsers {
                 String[] parts = line.split(" ");
                 switch(type){
                     case "ID":
-                        if(value.equals(parts[0])){
+                        if(Integer.parseInt(parts[0]) == Integer.parseInt(value)){
                             return line;
                         }
                     case "USERNAME":
