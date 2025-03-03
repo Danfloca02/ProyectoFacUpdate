@@ -86,4 +86,43 @@ Este Repositorio contiene los diagramas y Source Code para el proyecto de red so
 ##### UC5-Create Event
 ![text](docs/logicalView/analysisView/usecaseAnalysis/collaborationDiagram/image/uc4_createEvent.png) 
  
- 
+
+## MODELO DE PRUEBAS
+
+### PRUEBAS DE MODELO
+
+#### CommentTest.java 
+CommentConstructorWithParametersTest()
+CommentConstructorNoParametersTest()
+#### EventTest.java 
+EventConstructorTest()
+#### PublicacionTest.java
+PublicationConstructorNoPublicatedTest() 
+PublicationConstructorWithLikesTest()
+PublicationWitoutParametersTest()
+convertPublicationToString() 
+#### UserTest.java
+testTeacherConstructor()
+testStudentConstructor()
+
+### PRUEBAS DE CONTROLADORES
+
+#### IDLoginStrategyTest.java 
+autenthicateNonExistentUserTest()
+autenthicateUserExistsInvalidPasswordTest()
+autenthicateUserExistsValidButIncorrectPasswordTest()
+autenthicateUserExistsValidAndCorrectPasswordTest()
+#### SessionControllerTest.java
+registerNewUserInvalidPassword()
+registeNewUserValidDataTest()
+registerExistentUserTest() 
+#### StringValidatorTest.java
+validateIDcardTest()
+validatePasswordTest()
+validateUsernameTest()
+validateEmailTest() 
+#### UsernameLoginStrategyTest.java 
+autenthicateNonExistentUserTest()
+autenthicateUserExistsInvalidPasswordTest()
+autenthicateUserExistsValidButIncorrectPasswordTest()
+autenthicateUserExistsValidAndCorrectPasswordTest()
