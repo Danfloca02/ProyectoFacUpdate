@@ -35,8 +35,8 @@ public class PublicationController {
         return publication;
         
     }
-    public void deletePublication(Publication event){
-        DB.deletePublication(event.getPUBLICATION_ID());
+    public void deletePublication(Long publicationID){
+        DB.deletePublication(publicationID);
         loadPublications();
     }
 

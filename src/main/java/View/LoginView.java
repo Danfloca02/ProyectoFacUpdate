@@ -96,7 +96,7 @@ public class LoginView extends javax.swing.JFrame {
 
         DataUser.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         DataUser.setForeground(new java.awt.Color(153, 153, 153));
-        DataUser.setText("  Cédula, usuario o correo electrónico");
+        DataUser.setText(" Cédula, Usuario o Correo electrónico");
         DataUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
         DataUser.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -114,7 +114,7 @@ public class LoginView extends javax.swing.JFrame {
 
         PasswordUsser.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         PasswordUsser.setForeground(new java.awt.Color(153, 153, 153));
-        PasswordUsser.setText("  Contraseña");
+        PasswordUsser.setText(" Contraseña");
         PasswordUsser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
         PasswordUsser.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -243,8 +243,8 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_EnterButtonMouseClicked
     
     public void ClearFields(){
-        DataUser.setText("Cedula, Usuario o correo electronico");
-        PasswordUsser.setText("contraseña");
+        DataUser.setText(" Cédula, Usuario o Correo electrónico");
+        PasswordUsser.setText(" Contraseña");
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ClearFields();
@@ -252,19 +252,19 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void PasswordUsserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PasswordUsserFocusLost
-        if(PasswordUsser.getText().equals(""))PasswordUsser.setText("Contraseña");
+        if(PasswordUsser.getText().equals(""))PasswordUsser.setText(" Contraseña");
     }//GEN-LAST:event_PasswordUsserFocusLost
 
     private void PasswordUsserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PasswordUsserFocusGained
-        PasswordUsser.setText("");
+        if(PasswordUsser.getText().equals(" Contraseña"))PasswordUsser.setText("");
     }//GEN-LAST:event_PasswordUsserFocusGained
 
     private void DataUserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DataUserFocusLost
-        if(DataUser.getText().equals(""))DataUser.setText("Cédula, Usuario o Correo electrónico");
+        if(DataUser.getText().equals(""))DataUser.setText(" Cédula, Usuario o Correo electrónico");
     }//GEN-LAST:event_DataUserFocusLost
 
     private void DataUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DataUserFocusGained
-        DataUser.setText("");
+        if(DataUser.getText().equals(" Cédula, Usuario o Correo electrónico"))DataUser.setText("");
     }//GEN-LAST:event_DataUserFocusGained
 
     

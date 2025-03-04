@@ -37,6 +37,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
         PC = PublicationController.GetInstance();
         SC = SesionController.GetInstance();
         initializeDeleteButton();
+        
     }
     
     public static PrincipalFeed GetInstance(){
@@ -46,7 +47,26 @@ public class PrincipalFeed extends javax.swing.JFrame {
     public void OpenFeed(){
         LoadPublications();
         SetPublication(0);
+        if (SC.ActualSession.userName.equals("Moderador")){
+            System.out.println("MODERADOR");
+            InicioButton.setVisible(false);
+            CalendarButton.setVisible(false);
+            UserViewButton.setVisible(false);
+            LikeButton.setVisible(false);
+            CommentsButton.setVisible(false);
+            deleteButton.setVisible(true);
+        }
+        else{
+            System.out.println("MODERADOR");
+            InicioButton.setVisible(true);
+            CalendarButton.setVisible(true);
+            UserViewButton.setVisible(true);
+            LikeButton.setVisible(true);
+            CommentsButton.setVisible(true);
+            deleteButton.setVisible(false);
+        }
         UpdateActualView();
+        
     }
     private void LoadPublications(){
         actualFeed = PC.getPublications();
@@ -74,15 +94,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
         updateLikeButton(actualView.getUsersWhoReacted().contains(SC.ActualSession.ID));
         ChangeImage(actualView.getImage_path());
         if(commentsScreen != null)commentsScreen.setPublication(actualView);
-        if (SC.ActualSession.userName.equals("Moderador")){
-            System.out.println("MODERADOR");
-            InicioButton.setVisible(false);
-            jButton2.setVisible(false);
-            UserViewButton.setVisible(false);
-            LikeButton.setVisible(false);
-            CommentsButton.setVisible(false);
-            deleteButton.setVisible(true);
-        }
+        
     
     }
     
@@ -100,14 +112,9 @@ public class PrincipalFeed extends javax.swing.JFrame {
         }
     }
     
-        private void initializeDeleteButton() {
+    private void initializeDeleteButton() {
         deleteButton.setVisible(false);
-        deleteButton.addActionListener(e -> {
-            PC.deletePublication(actualView);
-            LoadPublications();
-            SetPublication(0);
-            UpdateActualView();
-        });
+        
 
     }
     /**
@@ -132,7 +139,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         InicioButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        CalendarButton = new javax.swing.JButton();
         UserViewButton = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         canvas1 = new java.awt.Canvas();
@@ -211,11 +218,11 @@ public class PrincipalFeed extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Calendario");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        CalendarButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        CalendarButton.setText("Calendario");
+        CalendarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                CalendarButtonActionPerformed(evt);
             }
         });
 
@@ -304,7 +311,6 @@ public class PrincipalFeed extends javax.swing.JFrame {
 
         CommentsButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         CommentsButton.setForeground(new java.awt.Color(204, 51, 0));
-        CommentsButton.setBackground(Color.WHITE);
         CommentsButton.setText("COMMENTS");
         CommentsButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 0), 3, true));
         CommentsButton.setInheritsPopupMenu(true);
@@ -354,6 +360,11 @@ public class PrincipalFeed extends javax.swing.JFrame {
         deleteButton.setForeground(new java.awt.Color(204, 0, 51));
         deleteButton.setText("Borrar Publicación");
         deleteButton.setToolTipText("deleteButton");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -365,7 +376,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(CalendarButton)
                         .addGap(18, 18, 18)
                         .addComponent(UserViewButton)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -426,7 +437,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(InicioButton)
-                    .addComponent(jButton2)
+                    .addComponent(CalendarButton)
                     .addComponent(UserViewButton))
                 .addGap(10, 10, 10)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -454,7 +465,6 @@ public class PrincipalFeed extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        LikeButton.getAccessibleContext().setAccessibleName("LIKE");
         deleteButton.getAccessibleContext().setAccessibleName("deleteButton");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -502,9 +512,9 @@ public class PrincipalFeed extends javax.swing.JFrame {
         ViewController.GetInstance().FeedToUser();
     }//GEN-LAST:event_UserViewButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void CalendarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalendarButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_CalendarButtonActionPerformed
 
     private void InicioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioButtonActionPerformed
         LoadPublications();
@@ -553,6 +563,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
     }
     private void nextPublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextPublicationButtonActionPerformed
         NextPublication();
+        System.out.println(actualView.getPUBLICATION_ID());
         UpdateActualView();
     }//GEN-LAST:event_nextPublicationButtonActionPerformed
 
@@ -560,6 +571,16 @@ public class PrincipalFeed extends javax.swing.JFrame {
         PrevPublication();
         UpdateActualView();
     }//GEN-LAST:event_PrevPublicationButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        boolean yes = false;
+        System.out.print("SE ELIMINARA: ");
+        System.out.println(actualView.getPUBLICATION_ID());
+        PC.deletePublication(actualView.getPUBLICATION_ID());
+        LoadPublications();
+        SetPublication(0);
+        UpdateActualView();
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -599,6 +620,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CalendarButton;
     private javax.swing.JButton CommentsButton;
     private javax.swing.JTextArea DescriptionBox;
     private javax.swing.JLabel IMAGE_VIEWER;
@@ -612,7 +634,6 @@ public class PrincipalFeed extends javax.swing.JFrame {
     private java.awt.Canvas canvas1;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton9;
