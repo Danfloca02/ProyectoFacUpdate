@@ -304,6 +304,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
 
         CommentsButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         CommentsButton.setForeground(new java.awt.Color(204, 51, 0));
+        CommentsButton.setBackground(Color.WHITE);
         CommentsButton.setText("COMMENTS");
         CommentsButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 0), 3, true));
         CommentsButton.setInheritsPopupMenu(true);
@@ -538,15 +539,15 @@ public class PrincipalFeed extends javax.swing.JFrame {
     }//GEN-LAST:event_LikeButtonActionPerformed
     private void updateLikeButton(boolean isLiked){
         if(isLiked){
-            LikeButton.setBorder(new LineBorder(Color.RED, 3));
-            LikeButton.setBackground(Color.RED);
+            LikeButton.setBorder(new LineBorder(new java.awt.Color(204, 0, 0),3,true));
+            LikeButton.setBackground(new java.awt.Color(204, 0, 0));
             LikeButton.setForeground(Color.WHITE);
             LikeButton.setText("DISLIKE");
         }
         else{
-            LikeButton.setBorder(new LineBorder(Color.RED, 3));
+            LikeButton.setBorder(new LineBorder(new java.awt.Color(204, 0, 0),3,true));
             LikeButton.setBackground(Color.WHITE);
-            LikeButton.setForeground(Color.RED);
+            LikeButton.setForeground(new java.awt.Color(204, 0, 0));
             LikeButton.setText("LIKE");
         }
     }

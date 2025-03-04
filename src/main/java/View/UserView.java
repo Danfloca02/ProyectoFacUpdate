@@ -154,6 +154,7 @@ public class UserView extends javax.swing.JFrame {
         });
 
         jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(51, 0, 204));
         jButton4.setText("Usuario");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,20 +180,20 @@ public class UserView extends javax.swing.JFrame {
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        UserType.setText("Tipo de Usuario");
+        UserType.setText("jLabel4");
         UserType.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         UserType.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        School.setText("Carrera");
+        School.setText("jLabel4");
         School.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        ID.setText("User ID");
+        ID.setText("jLabel4");
         ID.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        Email.setText("Email");
+        Email.setText("jLabel4");
         Email.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        Password.setText("Password");
+        Password.setText("jLabel4");
         Password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         CreatePublicationButton.setBackground(new java.awt.Color(0, 0, 0));
@@ -240,7 +241,6 @@ public class UserView extends javax.swing.JFrame {
                             .addComponent(jSeparator1))
                         .addGap(22, 22, 22))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
