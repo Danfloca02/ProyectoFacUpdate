@@ -9,6 +9,7 @@ import Controller.session.SesionController;
 import Model.Publication;
 import Model.Teacher;
 import Model.User;
+import Data.DatabaseUsers;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
@@ -45,14 +46,7 @@ public class UserView extends javax.swing.JFrame {
         ID.setText(Long.toString(SC.ActualSession.ID));
         Password.setText(SC.ActualSession.Password);
         Username.setText(SC.ActualSession.userName);
-        if(SC.ActualSession instanceof Teacher){
-            UserType.setText("Docente");
-        }
-        else{
-            UserType.setText("Estudiante");
-        }
-        
-        //
+        UserType.setText(DatabaseUsers.GetInstance().userSearch(SC.ActualSession.userName, "USERNAME").split(" ")[1]);    
     }
     
     /**
@@ -185,20 +179,20 @@ public class UserView extends javax.swing.JFrame {
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        UserType.setText("jLabel4");
+        UserType.setText("Tipo de Usuario");
         UserType.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         UserType.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        School.setText("jLabel4");
+        School.setText("Carrera");
         School.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        ID.setText("jLabel4");
+        ID.setText("User ID");
         ID.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        Email.setText("jLabel4");
+        Email.setText("Email");
         Email.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        Password.setText("jLabel4");
+        Password.setText("Password");
         Password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         CreatePublicationButton.setBackground(new java.awt.Color(0, 0, 0));

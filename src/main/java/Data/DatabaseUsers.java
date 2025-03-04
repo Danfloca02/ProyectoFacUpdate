@@ -117,7 +117,7 @@ public class DatabaseUsers {
         return ret;
     }
     
-    private String userSearch(String value, String type){
+    public String userSearch(String value, String type){
         try(Scanner br = filegestor.getScanner(path)){
             //file structure:
             //ID UserType UserName email Password Career

@@ -53,8 +53,8 @@ PRUEBA
 >
 2025 3 2
 Images/5.png
-2
-30730601 28314837 
+3
+30730601 28314837 10000000 
 5
 31080238
 <
@@ -75,32 +75,4 @@ holaaaaaaaaaa
 28314837
 <
 EEEEEEEEEEE
->
-6
-31080238
-<
-El mejor profe de AyP
->
-2025 3 3
-Images/6.png
-1
-31080238 
-1
-28314837
-<
-Walter es sexy
->
-7
-28314837
-<
-Orga 2 esta divertido
->
-2025 3 3
-Images/7.png
-2
-28314837 31080238 
-1
-31080238
-<
-sobretodo la parte de logica combinacionapl
 >

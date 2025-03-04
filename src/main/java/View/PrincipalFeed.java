@@ -6,12 +6,14 @@ package View;
 import Controller.Publications.PublicationController;
 import Controller.ViewController;
 import Controller.session.SesionController;
+import Data.DatabaseUsers;
 import Model.Publication;
 import Model.User;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -26,6 +28,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
     private SesionController SC;
     private PublicationController PC;
     private comentView commentsScreen;
+    private JButton deletePublicationButton;
     /**
      * Creates new form PrincipalFeed
      */
@@ -33,6 +36,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
         initComponents();
         PC = PublicationController.GetInstance();
         SC = SesionController.GetInstance();
+        initializeDeleteButton();
     }
     
     public static PrincipalFeed GetInstance(){
@@ -70,6 +74,16 @@ public class PrincipalFeed extends javax.swing.JFrame {
         updateLikeButton(actualView.getUsersWhoReacted().contains(SC.ActualSession.ID));
         ChangeImage(actualView.getImage_path());
         if(commentsScreen != null)commentsScreen.setPublication(actualView);
+        if (SC.ActualSession.userName.equals("Moderador")){
+            System.out.println("MODERADOR");
+            InicioButton.setVisible(false);
+            jButton2.setVisible(false);
+            UserViewButton.setVisible(false);
+            LikeButton.setVisible(false);
+            CommentsButton.setVisible(false);
+            deleteButton.setVisible(true);
+        }
+    
     }
     
     void ChangeImage(String path){
@@ -84,6 +98,17 @@ public class PrincipalFeed extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+        private void initializeDeleteButton() {
+        deleteButton.setVisible(false);
+        deleteButton.addActionListener(e -> {
+            PC.deletePublication(actualView);
+            LoadPublications();
+            SetPublication(0);
+            UpdateActualView();
+        });
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,6 +147,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
         LikeButton = new javax.swing.JButton();
         nextPublicationButton = new javax.swing.JButton();
         PrevPublicationButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
 
         jButton3.setText("Calendario");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +202,8 @@ public class PrincipalFeed extends javax.swing.JFrame {
 
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
 
-        InicioButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        InicioButton.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        InicioButton.setForeground(new java.awt.Color(51, 0, 204));
         InicioButton.setText("Inicio");
         InicioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,7 +291,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 273, Short.MAX_VALUE)
+            .addGap(0, 261, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
         );
@@ -275,10 +302,10 @@ public class PrincipalFeed extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
         );
 
-        CommentsButton.setBackground(new java.awt.Color(0, 0, 0));
         CommentsButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        CommentsButton.setForeground(new java.awt.Color(255, 255, 255));
-        CommentsButton.setText("comentarios");
+        CommentsButton.setForeground(new java.awt.Color(204, 51, 0));
+        CommentsButton.setText("COMMENTS");
+        CommentsButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 0), 3, true));
         CommentsButton.setInheritsPopupMenu(true);
         CommentsButton.setPreferredSize(new java.awt.Dimension(108, 23));
         CommentsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -287,10 +314,10 @@ public class PrincipalFeed extends javax.swing.JFrame {
             }
         });
 
-        LikeButton.setBackground(new java.awt.Color(0, 0, 0));
         LikeButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        LikeButton.setForeground(new java.awt.Color(255, 255, 255));
-        LikeButton.setText("me gusta");
+        LikeButton.setForeground(new java.awt.Color(204, 0, 0));
+        LikeButton.setText("LIKE");
+        LikeButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 0), 3, true));
         LikeButton.setInheritsPopupMenu(true);
         LikeButton.setPreferredSize(new java.awt.Dimension(108, 23));
         LikeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -322,6 +349,10 @@ public class PrincipalFeed extends javax.swing.JFrame {
                 PrevPublicationButtonActionPerformed(evt);
             }
         });
+
+        deleteButton.setForeground(new java.awt.Color(204, 0, 51));
+        deleteButton.setText("Borrar Publicación");
+        deleteButton.setToolTipText("deleteButton");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -359,15 +390,6 @@ public class PrincipalFeed extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(LikeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(CommentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(0, 0, Short.MAX_VALUE))
-                                                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,7 +399,19 @@ public class PrincipalFeed extends javax.swing.JFrame {
                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                         .addComponent(PrevPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(19, 19, 19)))
-                                                .addComponent(nextPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addComponent(nextPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                            .addComponent(deleteButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addComponent(LikeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(CommentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addGap(0, 0, Short.MAX_VALUE))))))))
                             .addComponent(jSeparator1))
                         .addGap(22, 22, 22))))
         );
@@ -408,24 +442,35 @@ public class PrincipalFeed extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CommentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LikeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(71, 71, 71)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton)
+                        .addGap(42, 42, 42)
                         .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nextPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(PrevPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        LikeButton.getAccessibleContext().setAccessibleName("LIKE");
+        deleteButton.getAccessibleContext().setAccessibleName("deleteButton");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -462,6 +507,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
 
     private void InicioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioButtonActionPerformed
         LoadPublications();
+        
         if(commentsScreen != null)commentsScreen.dispose();
         commentsScreen = null;
         SetPublication(0);
@@ -478,11 +524,9 @@ public class PrincipalFeed extends javax.swing.JFrame {
         boolean isLiked = actualView.getUsersWhoReacted().contains(SC.ActualSession.ID);
         if(isLiked){
             PC.DeleteLike(actualView.getPUBLICATION_ID(), SC.ActualSession.ID);
-            
         }
         else{
-            PC.AddLike(actualView.getPUBLICATION_ID(), SC.ActualSession.ID);
-            
+            PC.AddLike(actualView.getPUBLICATION_ID(), SC.ActualSession.ID);       
         }
         updateLikeButton(!isLiked);
         int ind = actualFeed.indexOf(actualView);
@@ -496,11 +540,14 @@ public class PrincipalFeed extends javax.swing.JFrame {
         if(isLiked){
             LikeButton.setBorder(new LineBorder(Color.RED, 3));
             LikeButton.setBackground(Color.RED);
-            
+            LikeButton.setForeground(Color.WHITE);
+            LikeButton.setText("DISLIKE");
         }
         else{
-            LikeButton.setBorder(new LineBorder(Color.BLACK, 3));
-            LikeButton.setBackground(Color.BLACK);
+            LikeButton.setBorder(new LineBorder(Color.RED, 3));
+            LikeButton.setBackground(Color.WHITE);
+            LikeButton.setForeground(Color.RED);
+            LikeButton.setText("LIKE");
         }
     }
     private void nextPublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextPublicationButtonActionPerformed
@@ -562,6 +609,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private java.awt.Canvas canvas1;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

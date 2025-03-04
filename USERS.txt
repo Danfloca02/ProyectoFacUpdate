@@ -1,6 +1,8 @@
+10000000 MODERADOR Moderador moderadorfacupdate@gmail.com Moder123 COMPUTACION
 31080238 STUDENT Carlos_11 carlosmirandaucv@gmail.com Carlos.11 COMPUTACION
 14861479 STUDENT Yarlinbrito yarlinbrito@gmail.com Yarlin.123 COMPUTACION
 12345678 STUDENT PRUEBA_11 correoprueba@gmail.com Prueba.11 COMPUTACION
 1234567 STUDENT PRUEBA_2 Prueba2@gmail.com Prueba.2 COMPUTACION
 30730601 STUDENT Josue15 Josue@gmail.com Josue123 COMPUTACION
 28314837 STUDENT Danfloca02 danfloca02@gmail.com Dan2307 COMPUTACION
+mODE14500100 TEACHER DanielProfesor profe1UCV@gmail.com Profe123 COMPUTACION

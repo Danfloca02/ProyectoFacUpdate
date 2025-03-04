@@ -104,7 +104,9 @@ public class comentView extends javax.swing.JFrame {
         ComentButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         CommentsPane = new javax.swing.JTextPane();
+        noCommentsLabel = new javax.swing.JLabel();
 
+        noCommentsLabel.setVisible(false);
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
@@ -115,7 +117,10 @@ public class comentView extends javax.swing.JFrame {
         NewCommentText.setRows(5);
         jScrollPane1.setViewportView(NewCommentText);
 
+        ComentButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ComentButton.setForeground(new java.awt.Color(204, 0, 0));
         ComentButton.setText("Comentar");
+        ComentButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 0), 2, true));
         ComentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComentButtonActionPerformed(evt);
@@ -123,6 +128,9 @@ public class comentView extends javax.swing.JFrame {
         });
 
         CommentsPane.setEditable(false);
+        if(CommentsPane.getText().equals("")){
+            noCommentsLabel.setVisible(true);
+        }
         jScrollPane2.setViewportView(CommentsPane);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -161,15 +169,32 @@ public class comentView extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
+        noCommentsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        noCommentsLabel.setForeground(new java.awt.Color(102, 102, 102));
+        noCommentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        noCommentsLabel.setText("NO HAY COMENTARIOS");
+        noCommentsLabel.setToolTipText("NO HAY COMENTARIOS");
+        noCommentsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(24, 24, 24)
+                    .addComponent(noCommentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(25, 25, 25)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(175, 175, 175)
+                    .addComponent(noCommentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(176, 176, 176)))
         );
 
         pack();
@@ -225,5 +250,6 @@ public class comentView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel noCommentsLabel;
     // End of variables declaration//GEN-END:variables
 }
