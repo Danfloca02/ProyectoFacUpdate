@@ -18,12 +18,12 @@ public class SessionControllerTest {
 
     @Test
     public void registerExistentUserTest(){
-        assertFalse(sc.register("STUDENT", "carlosmirandaucv@gmail.com", "Carlos.11", "31080238", "Carlos_11"));
+        assertFalse(sc.register("STUDENT", "carlosmirandaucv@gmail.com", "Carlos.11", "31080238", "Carlos_11", "COMPUTACION"));
     }
 
     @Test
     public void registeNewUserValidDataTest(){
-        assertTrue(sc.register("STUDENT", "danfloca02@gmail.com", "Dan2307", "28314837", "danfloca02"));
+        assertTrue(sc.register("STUDENT", "danfloca02@gmail.com", "Dan2307", "28314837", "danfloca02", "COMPUTACION"));
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             if (!lines.isEmpty()) {
@@ -37,7 +37,7 @@ public class SessionControllerTest {
 
     @Test
     public void registerNewUserInvalidPassword(){
-        assertFalse(sc.register("STUDENT", "danfloca02@gmail.com", "2307", "28314837", "danfloca02"));
+        assertFalse(sc.register("STUDENT", "danfloca02@gmail.com", "2307", "28314837", "danfloca02", "COMPUTACION"));
     }
 
 }
