@@ -13,6 +13,7 @@ import View.*;
  */
 public class ViewController {
     private static ViewController instance;
+    public EventView EVENTVIEW;
     public LoginView LOGINVIEW;
     public RegisterView REGISTERVIEW;
     public PrincipalFeed PRINCIPALFEED;
@@ -24,6 +25,7 @@ public class ViewController {
         REGISTERVIEW = RegisterView.GetInstance();
         PRINCIPALFEED = PrincipalFeed.GetInstance();
         USERVIEW = UserView.GetInstance();
+        EVENTVIEW = EventView.GetInstance();
     }
     public static ViewController GetInstance(){
         if(instance==null)instance = new ViewController();
@@ -75,5 +77,33 @@ public class ViewController {
         USERVIEW.setVisible(false);
         LOGINVIEW.ClearFields();
         LOGINVIEW.setVisible(true);
+    }
+
+    public void EventsToLogin() {
+        EVENTVIEW.setVisible(false);
+        LOGINVIEW.ClearFields();
+        LOGINVIEW.setVisible(true);
+    }
+
+    public void EventsToUser() {
+        EVENTVIEW.setVisible(false);
+        USERVIEW.load();
+        USERVIEW.setVisible(true);  
+    }
+
+    public void EventsToPrincipalFeed() {
+        EVENTVIEW.setVisible(false);
+        PRINCIPALFEED.OpenFeed();
+        PRINCIPALFEED.setVisible(true);
+    }
+
+    public void FeedToEvents() {
+        PRINCIPALFEED.setVisible(false);
+        EVENTVIEW.setVisible(true);
+    }
+
+    public void UserToEvents() {
+        USERVIEW.setVisible(false);
+        EVENTVIEW.setVisible(true);
     }
 }

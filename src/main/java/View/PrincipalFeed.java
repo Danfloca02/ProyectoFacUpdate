@@ -70,6 +70,7 @@ public class PrincipalFeed extends javax.swing.JFrame {
     }
     private void LoadPublications(){
         actualFeed = PC.getPublications();
+        if(actualFeed.isEmpty())actualFeed.add(new Publication(-1, -1, "Aun no hay publicaciones, haz la tuya propia en la pestaña de usuario", ""));
     }
     private void SetPublication(int index){
         actualView = actualFeed.get(index);
@@ -85,6 +86,11 @@ public class PrincipalFeed extends javax.swing.JFrame {
         actualView = actualFeed.get(index);
     }
     private void UpdateActualView(){
+        if(actualView.getPUBLICATION_ID() == -1){
+            PublicationUsername.setText("");
+            DescriptionBox.setText(actualView.getText());
+            return;
+        }
         if(actualView == null){
             return;
         }
@@ -513,7 +519,9 @@ public class PrincipalFeed extends javax.swing.JFrame {
     }//GEN-LAST:event_UserViewButtonActionPerformed
 
     private void CalendarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalendarButtonActionPerformed
-        // TODO add your handling code here:
+        if(commentsScreen != null)commentsScreen.dispose();
+        commentsScreen = null;
+        ViewController.GetInstance().FeedToEvents();
     }//GEN-LAST:event_CalendarButtonActionPerformed
 
     private void InicioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioButtonActionPerformed
@@ -525,6 +533,9 @@ public class PrincipalFeed extends javax.swing.JFrame {
     }//GEN-LAST:event_InicioButtonActionPerformed
 
     private void CommentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommentsButtonActionPerformed
+        if(actualView.getPUBLICATION_ID() == -1){
+            return;
+        }
         if(commentsScreen == null){
             commentsScreen = ViewController.GetInstance().OpenCommentsView(actualView);
         }
@@ -532,6 +543,9 @@ public class PrincipalFeed extends javax.swing.JFrame {
     }//GEN-LAST:event_CommentsButtonActionPerformed
 
     private void LikeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LikeButtonActionPerformed
+        if(actualView.getPUBLICATION_ID() == -1){
+            return;
+        }
         boolean isLiked = actualView.getUsersWhoReacted().contains(SC.ActualSession.ID);
         if(isLiked){
             PC.DeleteLike(actualView.getPUBLICATION_ID(), SC.ActualSession.ID);
@@ -562,17 +576,26 @@ public class PrincipalFeed extends javax.swing.JFrame {
         }
     }
     private void nextPublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextPublicationButtonActionPerformed
+        if(actualView.getPUBLICATION_ID() == -1){
+            return;
+        }
         NextPublication();
-        System.out.println(actualView.getPUBLICATION_ID());
+        
         UpdateActualView();
     }//GEN-LAST:event_nextPublicationButtonActionPerformed
 
     private void PrevPublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevPublicationButtonActionPerformed
+        if(actualView.getPUBLICATION_ID() == -1){
+            return;
+        }
         PrevPublication();
         UpdateActualView();
     }//GEN-LAST:event_PrevPublicationButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        if(actualView.getPUBLICATION_ID() == -1){
+            return;
+        }
         boolean yes = false;
         System.out.print("SE ELIMINARA: ");
         System.out.println(actualView.getPUBLICATION_ID());

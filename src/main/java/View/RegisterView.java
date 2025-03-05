@@ -50,7 +50,7 @@ public class RegisterView extends javax.swing.JFrame {
         IDUser = new javax.swing.JTextField();
         UsernameUser = new javax.swing.JTextField();
         AccountTypeUser = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
+        CarreeData = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -156,8 +156,8 @@ public class RegisterView extends javax.swing.JFrame {
             }
         });
 
-        jSpinner2.setModel(new javax.swing.SpinnerListModel(new String[] {"Computacion", "Fisica", "Quimica", "Matematica", "Biologia", "Geoquimica"}));
-        jSpinner2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
+        CarreeData.setModel(new javax.swing.SpinnerListModel(new String[] {"Computacion", "Fisica", "Quimica", "Matematica", "Biologia", "Geoquimica"}));
+        CarreeData.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -172,7 +172,7 @@ public class RegisterView extends javax.swing.JFrame {
                     .addComponent(PasswordUser)
                     .addComponent(IDUser)
                     .addComponent(UsernameUser)
-                    .addComponent(jSpinner2)
+                    .addComponent(CarreeData)
                     .addComponent(AccountTypeUser))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -184,7 +184,7 @@ public class RegisterView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AccountTypeUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CarreeData, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(EmailUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -289,6 +289,7 @@ public class RegisterView extends javax.swing.JFrame {
         String Password = PasswordUser.getText();
         String ID = IDUser.getText();
         String Username = UsernameUser.getText();
+        String caree = ((String) CarreeData.getValue()).toUpperCase();
         
         if (!StringValidator.validateEmail(Email)){
         JOptionPane.showMessageDialog(this, "El correo no cumple el formato example1@gmail.com", 
@@ -307,7 +308,7 @@ public class RegisterView extends javax.swing.JFrame {
         "Error de Registro", JOptionPane.ERROR_MESSAGE);
         }
         
-        else if(SC.register(AccountType, Email, Password, ID, Username)){
+        else if(SC.register(AccountType, Email, Password, ID, Username, caree)){
             System.out.println("TE REGISTRASTE CON USUARIO: " + Username + "Y CONTRASEÑA: " + Password);
             ClearFields();
             ViewController.GetInstance().RegisterToLogin();
@@ -380,6 +381,7 @@ public class RegisterView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner AccountTypeUser;
+    private javax.swing.JSpinner CarreeData;
     private javax.swing.JTextField EmailUser;
     private javax.swing.JTextField IDUser;
     private javax.swing.JTextField PasswordUser;
@@ -391,6 +393,5 @@ public class RegisterView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JSpinner jSpinner2;
     // End of variables declaration//GEN-END:variables
 }

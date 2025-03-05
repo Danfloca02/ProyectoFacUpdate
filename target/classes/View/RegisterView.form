@@ -91,7 +91,7 @@
                           <Component id="PasswordUser" alignment="0" max="32767" attributes="0"/>
                           <Component id="IDUser" alignment="0" max="32767" attributes="0"/>
                           <Component id="UsernameUser" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSpinner2" max="32767" attributes="0"/>
+                          <Component id="CarreeData" max="32767" attributes="0"/>
                           <Component id="AccountTypeUser" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -106,7 +106,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="AccountTypeUser" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jSpinner2" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="CarreeData" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="EmailUser" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -271,7 +271,7 @@
                 <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="AccountTypeUserFocusGained"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JSpinner" name="jSpinner2">
+            <Component class="javax.swing.JSpinner" name="CarreeData">
               <Properties>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                   <SpinnerModel type="list">

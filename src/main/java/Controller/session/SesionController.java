@@ -71,13 +71,13 @@ public class SesionController {
         }
         return false;
     }
-    public boolean register(String AccountType, String Email, String Password, String ID, String Username){
+    public boolean register(String AccountType, String Email, String Password, String ID, String Username, String caree){
         
         if(!StringValidator.validateEmail(Email))return false;
         if(!StringValidator.validatePassword(Password))return false;
         if(!StringValidator.validateIDcard(ID))return false;
         if(!StringValidator.validateUsername(Username))return false;
         
-        return DB.createNewUser(UserFactory.createUser(AccountType.toUpperCase(), Long.parseLong(ID), Username, Email, Password, "COMPUTACION"));
+        return DB.createNewUser(UserFactory.createUser(AccountType.toUpperCase(), Long.parseLong(ID), Username, Email, Password, caree));
     }
 }

@@ -105,6 +105,13 @@ public class DatabasePublications {
         }
         
     }
+    private void deleteImage(Long ID){
+        String path = "Images/" + Long.toString(ID) + ".png";
+        File sourceFile = new File(path);
+        if(sourceFile.exists()){
+            sourceFile.delete();
+        }
+    }
     public boolean deletePublication (Long PublicationID){
         List<Publication> publications = this.getPublicationList();
         boolean found = false;
@@ -115,6 +122,7 @@ public class DatabasePublications {
                 break;
             }
         }
+        deleteImage(PublicationID);
         savePublications(publications);
         return found;
         
